@@ -12,8 +12,8 @@ export default function Home() {
       <ServicesPreview />
       <WhyMetro />
       <Testimonials />
-      <FAQ />
       <CTABanner />
+      <FAQ />
     </>
   );
 }

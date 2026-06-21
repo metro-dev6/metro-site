@@ -93,9 +93,9 @@ export function ServicesPreview() {
               />
 
               {/* Content */}
-              <div className="relative z-10 p-8 flex flex-col gap-3">
+              <div className="relative z-10 p-8 flex flex-col gap-3" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%)" }}>
                 <div className="flex items-start justify-between gap-4">
-                  <h3 className="text-base font-black uppercase tracking-wide text-brand-white leading-tight">
+                  <h3 className="text-base font-black uppercase tracking-wide text-brand-white leading-tight" style={{ textShadow: "0 1px 4px rgba(0,0,0,1), 0 2px 16px rgba(0,0,0,0.9)" }}>
                     {service.name}
                   </h3>
                   <svg
@@ -109,11 +109,11 @@ export function ServicesPreview() {
                   </svg>
                 </div>
 
-                <p className="text-sm text-white/60 leading-relaxed">
+                <p className="text-sm text-white/80 leading-relaxed" style={{ textShadow: "0 1px 4px rgba(0,0,0,1), 0 1px 12px rgba(0,0,0,0.9)" }}>
                   {service.description}
                 </p>
 
-                <p className="text-2xl font-black text-brand-yellow font-dm-sans">
+                <p className="text-2xl font-black text-brand-yellow font-dm-sans" style={{ textShadow: "0 1px 4px rgba(0,0,0,1), 0 2px 16px rgba(0,0,0,0.8)" }}>
                   Starting at {service.price}
                 </p>
               </div>

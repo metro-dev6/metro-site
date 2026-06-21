@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat, DM_Sans } from "next/font/google";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -37,6 +38,7 @@ export default function RootLayout({
         {/* AnnouncementBar h-9 (36px) + Header h-16 (64px) = 100px */}
         <div className="h-[100px]" aria-hidden="true" />
         <main className="flex-1">{children}</main>
+        <Footer />
       </body>
     </html>
   );

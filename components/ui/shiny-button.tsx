@@ -1,35 +1,38 @@
 "use client";
 
 import React from "react";
-import { motion, type AnimationProps } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 
-const animationProps: AnimationProps = {
+const animationProps = {
   initial: { "--x": "100%" },
   animate: { "--x": "-100%" },
   whileHover: { y: -4 },
   whileTap: { scale: 0.97 },
   transition: {
     repeat: Infinity,
-    repeatType: "loop",
+    repeatType: "loop" as const,
     repeatDelay: 1,
-    type: "spring",
+    type: "spring" as const,
     stiffness: 20,
     damping: 15,
     mass: 2,
     y: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 300,
       damping: 20,
     },
   },
 };
 
-interface ShinyButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ShinyButtonProps {
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 export const ShinyButton: React.FC<ShinyButtonProps> = ({
@@ -40,7 +43,7 @@ export const ShinyButton: React.FC<ShinyButtonProps> = ({
   return (
     <motion.button
       {...animationProps}
-      {...props}
+      {...(props as object)}
       className={cn(
         "relative rounded-lg px-6 py-2 font-medium backdrop-blur-xl transition-shadow duration-300 ease-in-out hover:shadow dark:bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/10%)_0%,transparent_60%)] dark:hover:shadow-[0_0_20px_hsl(var(--primary)/10%)]",
         className

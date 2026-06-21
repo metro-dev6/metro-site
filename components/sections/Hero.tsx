@@ -3,24 +3,62 @@ import Image from "next/image";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import Link from "next/link";
 
+const USE_VIDEO = true;
+const VIDEO_SRC = "/hero-bg.mp4";
+const FALLBACK_IMG = "/hero-car-enhanced.jpg";
+
 export function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex flex-col bg-zinc-950 overflow-hidden">
+    <section className="relative min-h-screen flex flex-col bg-zinc-950 overflow-hidden">
 
-      {/* Background photo */}
-      <Image
-        src="/hero-car-enhanced.jpg"
-        alt=""
-        fill
-        priority
-        style={{ objectFit: "cover", objectPosition: "center 30%" }}
-      />
+      {/* Background — video or photo */}
+      {USE_VIDEO ? (
+        <>
+          <style>{`
+            @keyframes heroZoomOut {
+              0%   { transform: scale(1.15); }
+              40%  { transform: scale(1.07); }
+              70%  { transform: scale(1.03); }
+              100% { transform: scale(1.00); }
+            }
+            .hero-dim-layer { transition: background-color 0.5s ease; }
+            section:has(.hero-cta:hover) .hero-dim-layer {
+              background-color: rgba(0,0,0,0.35);
+            }
+          `}</style>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster="/hero-poster.jpg"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              objectPosition: "center",
+              animation: "heroZoomOut 4s ease-out forwards",
+            }}
+          >
+            <source src={VIDEO_SRC} type="video/mp4" />
+          </video>
+        </>
+      ) : (
+        <Image
+          src={FALLBACK_IMG}
+          alt=""
+          fill
+          priority
+          style={{ objectFit: "cover", objectPosition: "center 30%" }}
+        />
+      )}
 
       {/* Dark overlay — heavier left (text side) fading lighter right (car side) */}
       <div
         className="absolute inset-0"
-        style={{ background: "linear-gradient(to right, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0.70) 40%, rgba(0,0,0,0.40) 100%)" }}
+        style={{ background: "linear-gradient(to right, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0.50) 40%, rgba(0,0,0,0.20) 100%)" }}
       />
+      {/* Dim layer — activates when CTA button is hovered */}
+      <div className="hero-dim-layer absolute inset-0" />
 
       {/* Main content */}
       <div className="relative z-10 flex-1 flex items-center justify-center mx-auto w-full max-w-7xl px-6 lg:px-8 pt-16 md:pt-0">
@@ -32,18 +70,24 @@ export function Hero() {
             </span>
           </div>
 
-          <h1 className="text-[2.6rem] sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1] tracking-tight uppercase mb-6">
+          <h1
+            className="text-[2.6rem] sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1] tracking-tight uppercase mb-6"
+            style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8)" }}
+          >
             <span className="text-brand-white">Bakersfield&apos;s Premier</span><br />
             <span className="text-brand-yellow">Mobile Detailing</span>
             <span className="text-brand-white"> Service</span>
           </h1>
 
-          <p className="text-base md:text-lg text-brand-white/60 max-w-md mx-auto mb-10 leading-relaxed">
+          <p
+            className="text-base md:text-lg text-brand-white/70 max-w-md mx-auto mb-10 leading-relaxed"
+            style={{ textShadow: "0 1px 10px rgba(0,0,0,0.9)" }}
+          >
             Professional detailing at your door because your time is worth it.
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/estimate">
+            <Link href="/estimate" className="hero-cta">
               <ShinyButton
                 className="bg-brand-yellow text-brand-black font-black tracking-widest h-12 px-7"
                 style={{ "--primary": "46 96% 50%" } as React.CSSProperties}

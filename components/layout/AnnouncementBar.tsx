@@ -34,18 +34,23 @@ const socials = [
 
 export function AnnouncementBar() {
   return (
-    <div className="fixed inset-x-0 top-0 z-50 h-9 bg-brand-black border-b border-white/10 flex items-center">
+    <div className="fixed inset-x-0 top-0 z-50 h-11 bg-brand-black border-b border-white/10 flex items-center">
       <div className="mx-auto w-full max-w-7xl px-6 lg:px-8 flex items-center justify-between">
-        <p className="hidden sm:block text-[11px] font-bold tracking-[0.18em] uppercase text-brand-white/60">
-          24/7 Online Estimates&nbsp;&nbsp;·&nbsp;&nbsp;Proudly Serving Bakersfield, CA
-        </p>
-        <p className="sm:hidden text-[11px] font-bold tracking-[0.18em] uppercase text-brand-white/60">
-          Bakersfield, CA
-        </p>
+        <Link href="/estimate" className="group flex items-center gap-2 hover:opacity-80 transition-opacity">
+          <span className="hidden sm:block text-sm font-bold tracking-[0.12em] uppercase text-brand-yellow">
+            10% Off Your First Detail
+          </span>
+          <span className="hidden sm:block text-sm font-bold tracking-[0.12em] uppercase text-brand-white/40">
+            ·&nbsp;&nbsp;Book Online to Redeem
+          </span>
+          <span className="sm:hidden text-sm font-bold tracking-[0.12em] uppercase text-brand-yellow">
+            10% Off First Detail
+          </span>
+        </Link>
         <div className="flex items-center gap-4">
           <a
             href="tel:6613685165"
-            className="text-[11px] font-bold tracking-wide hover:text-brand-white transition-colors"
+            className="text-sm font-bold tracking-wide hover:text-brand-white transition-colors"
           >
             <span className="text-brand-white/60">Call or Text:&nbsp;</span><span className="text-brand-yellow font-bold">(661) 368-5165</span>
           </a>

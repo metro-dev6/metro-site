@@ -77,13 +77,14 @@ export function ServicesPreview() {
                   src={service.photo}
                   alt=""
                   fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   style={service.imageStyle}
                   className="transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
 
               {/* Dark gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/20 group-hover:from-black group-hover:via-black/75 transition-colors duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black/0 group-hover:from-black group-hover:via-black/75 transition-colors duration-300" />
 
               {/* Border */}
               <div

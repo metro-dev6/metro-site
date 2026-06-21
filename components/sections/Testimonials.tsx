@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BGPattern } from "@/components/bg-pattern";
 
 const GOOGLE_PROFILE_URL = "https://share.google/ggiBdFRwhkILjiw87"; // TODO: replace with real URL
 
@@ -45,8 +46,9 @@ function GoogleIcon() {
 
 export function Testimonials() {
   return (
-    <section className="bg-black py-20 px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+    <section className="relative bg-black py-20 px-6 lg:px-8">
+      <BGPattern variant="dots" mask="none" fill="rgba(250,194,5,0.08)" size={20} className="z-0" />
+      <div className="relative z-[1] mx-auto max-w-7xl">
 
         <div className="text-center mb-12">
           <span className="inline-flex items-center text-brand-yellow text-xs font-bold tracking-[0.25em] uppercase border border-brand-yellow/50 rounded-full px-5 py-1.5 mb-4">
@@ -57,9 +59,10 @@ export function Testimonials() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.06] rounded-xl overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {reviews.map((review) => (
-            <div key={review.name} className="bg-zinc-950 p-8 flex flex-col gap-4">
+            <div key={review.name} className="bg-white/[0.04] border border-white/[0.08] rounded-xl p-8 flex flex-col gap-4">
+              <div className="text-5xl font-black text-brand-yellow leading-none -mb-2">"</div>
               <div className="flex items-center justify-between">
                 <Stars />
                 <div className="flex items-center gap-1.5 text-white/30">

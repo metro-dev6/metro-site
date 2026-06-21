@@ -1,3 +1,5 @@
+import { BGPattern } from "@/components/bg-pattern";
+
 const reasons = [
   {
     icon: (
@@ -45,8 +47,9 @@ const reasons = [
 
 export function WhyMetro() {
   return (
-    <section className="bg-zinc-950 py-20 px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+    <section className="relative bg-zinc-950 py-20 px-6 lg:px-8">
+      <BGPattern variant="dots" mask="fade-edges" fill="rgba(255,255,255,0.05)" size={24} className="z-0" />
+      <div className="relative z-[1] mx-auto max-w-7xl">
 
         <div className="text-center mb-14">
           <span className="inline-flex items-center text-brand-yellow text-xs font-bold tracking-[0.25em] uppercase border border-brand-yellow/50 rounded-full px-5 py-1.5 mb-4">

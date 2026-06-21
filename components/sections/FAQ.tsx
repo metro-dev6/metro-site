@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { BGPattern } from "@/components/bg-pattern";
 
 const faqs = [
   {
@@ -53,8 +54,9 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="bg-zinc-950 py-20 px-6 lg:px-8">
-      <div className="mx-auto max-w-3xl">
+    <section className="relative bg-zinc-950 py-20 px-6 lg:px-8">
+      <BGPattern variant="grid" mask="fade-center" fill="rgba(255,255,255,0.05)" size={32} className="z-0" />
+      <div className="relative z-[1] mx-auto max-w-3xl">
 
         <div className="text-center mb-12">
           <span className="inline-flex items-center text-brand-yellow text-xs font-bold tracking-[0.25em] uppercase border border-brand-yellow/50 rounded-full px-5 py-1.5 mb-4">
@@ -65,15 +67,19 @@ export function FAQ() {
           </h2>
         </div>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-2">
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="border-b border-white/[0.06] py-5 cursor-pointer"
+              className={`rounded-xl border px-6 py-5 cursor-pointer transition-colors duration-200 ${
+                openIndex === index
+                  ? "border-brand-yellow/40 bg-white/[0.03]"
+                  : "border-white/[0.06] bg-white/[0.02] hover:border-white/[0.12]"
+              }`}
               onClick={() => setOpenIndex(openIndex === index ? null : index)}
             >
               <div className="flex items-center justify-between gap-6">
-                <h3 className="text-base font-bold text-brand-white">
+                <h3 className={`text-base font-bold transition-colors duration-200 ${openIndex === index ? "text-brand-yellow" : "text-brand-white"}`}>
                   {faq.q}
                 </h3>
                 <svg

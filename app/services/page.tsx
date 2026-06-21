@@ -1,117 +1,124 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { CTABanner } from "@/components/sections/CTABanner";
+import { PackageCardGrid, type MetroPlan } from "@/components/sections/PackageCardGrid";
+import { AddonCard } from "@/components/sections/AddonCard";
+import { EstimateCartBar } from "@/components/EstimateCartBar";
+import { BGPattern } from "@/components/bg-pattern";
 
 export const metadata: Metadata = {
   title: "Services | Metro Auto Detailing",
   description: "Professional mobile detailing services in Bakersfield, CA. View packages, add-ons, fleet pricing, and book online.",
 };
 
-function CheckIcon() {
-  return (
-    <svg
-      className="w-4 h-4 text-brand-yellow mt-0.5 shrink-0"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      viewBox="0 0 24 24"
-    >
-      <polyline points="20 6 9 17 4 12" />
-    </svg>
-  );
-}
+const essentialsPlans: MetroPlan[] = [
+  {
+    name: "Signature Wash",
+    description: "Routine maintenance. In and out.",
+    price: 80,
+    largerVehicle: "+$20",
+    features: [
+      "Hand wash & dry",
+      "Wheel & rim clean",
+      "Tire dressing",
+      "Window clean (exterior)",
+      "Door jambs wiped",
+      "Interior vacuum (quick)",
+    ],
+    buttonText: "Add to Estimate",
+    href: "/estimate",
+  },
+  {
+    name: "Refresh Detail",
+    description: "Deep clean without the full package price.",
+    price: 250,
+    largerVehicle: "+$40",
+    featured: true,
+    features: [
+      "Hand wash & dry",
+      "Wheel & rim clean",
+      "Tire dressing",
+      "Full interior vacuum (thorough)",
+      "Dashboard, console & door panels wiped down",
+      "Carpet & seat shampoo with extraction",
+      "UV interior dressing",
+      "Windows (interior & exterior)",
+      "Door jambs cleaned",
+    ],
+    buttonText: "Add to Estimate",
+    href: "/estimate",
+  },
+  {
+    name: "Full Detail",
+    description: "Complete reset. Inside and out.",
+    price: 400,
+    largerVehicle: "+$40",
+    features: [
+      "Everything in Exterior Detail",
+      "Full interior vacuum (thorough)",
+      "Dashboard, console & door panels wiped down",
+      "Carpet & seat shampoo with extraction",
+      "UV interior dressing",
+      "Windows (interior & exterior)",
+      "Door jambs cleaned",
+      "Complete vehicle reset",
+    ],
+    buttonText: "Add to Estimate",
+    href: "/estimate",
+  },
+];
+
+const protectionPlans: MetroPlan[] = [
+  {
+    name: "Exterior Detail",
+    description: "Decon, clay bar, and ceramic protection. Built for paint that needs real work.",
+    price: 150,
+    largerVehicle: "+$20",
+    features: [
+      "Hand wash & dry",
+      "Decontamination treatment (iron or acid wash, selected based on paint condition)",
+      "Clay bar: removes bonded contamination, leaves paint smooth to the touch",
+      "Koch Chemie S003 Hydro Foam: hydrophobic wash topper applied during rinse",
+      "Stinger 918 Ceramic Spray Sealant: ceramic protection layer bonded to dry paint",
+      "Wheel & fender well deep clean",
+      "Bug & tar removal",
+      "Tire dressing",
+      "Door jambs cleaned",
+      "Windows (interior & exterior)",
+    ],
+    buttonText: "Add to Estimate",
+    href: "/estimate",
+  },
+  {
+    name: "Full Detail",
+    description: "Full exterior protection plus a complete interior clean.",
+    price: 400,
+    largerVehicle: "+$40",
+    featured: true,
+    note: "The same ceramic protection as the Exterior Detail, combined with a full interior reset.",
+    features: [
+      "Complete exterior decontamination (iron or acid wash)",
+      "Clay bar treatment",
+      "Koch Chemie S003 + Stinger 918 ceramic protection",
+      "Full interior vacuum, shampoo & extraction",
+      "UV interior dressing",
+      "Everything protected inside and out",
+    ],
+    buttonText: "Add to Estimate",
+    href: "/estimate",
+  },
+];
 
 function SectionLabel({ label, subheadline }: { label: string; subheadline: string }) {
   return (
     <div className="mb-10">
-      <span className="inline-flex items-center text-brand-yellow text-xs font-bold tracking-[0.25em] uppercase border border-brand-yellow/50 rounded-full px-5 py-1.5 mb-3">
+      <span className="inline-flex items-center text-brand-yellow text-xs font-bold tracking-[0.25em] uppercase border border-brand-yellow/50 rounded-full px-5 py-1.5 mb-4">
         {label}
       </span>
-      <p className="text-2xl sm:text-3xl font-black uppercase text-white/60 tracking-tight">
+      <h2 className="text-3xl sm:text-4xl font-black uppercase text-white tracking-tight leading-tight">
         {subheadline}
-      </p>
-    </div>
-  );
-}
-
-interface PackageCardProps {
-  name: string;
-  tagline: string;
-  price: string;
-  largerPrice?: string;
-  includes: string[];
-  featured?: boolean;
-  note?: string;
-}
-
-function PackageCard({ name, tagline, price, largerPrice, includes, featured, note }: PackageCardProps) {
-  return (
-    <div
-      className={`relative flex flex-col rounded-2xl border p-8 gap-6 ${
-        featured ? "border-brand-yellow" : "border-white/[0.08]"
-      } bg-white/[0.02]`}
-    >
-      {featured && (
-        <span className="absolute -top-3 right-6 bg-brand-yellow text-brand-black text-xs font-black tracking-widest uppercase px-3 py-1 rounded-full">
-          Best Value
-        </span>
-      )}
-      <div>
-        <h3 className="text-xl font-black uppercase text-brand-white tracking-tight">{name}</h3>
-        <p className="text-sm text-white/50 mt-1.5 leading-snug">{tagline}</p>
-      </div>
-      <div className="flex items-baseline gap-2 flex-wrap">
-        <span className="text-4xl font-bold text-brand-yellow font-numeric">{price}</span>
-        {largerPrice && (
-          <span className="text-sm text-white/40">{largerPrice} larger vehicles</span>
-        )}
-      </div>
-      <ul className="flex flex-col gap-2.5 flex-1">
-        {includes.map((item) => (
-          <li key={item} className="flex items-start gap-3 text-sm text-white/70 leading-snug">
-            <CheckIcon />
-            {item}
-          </li>
-        ))}
-      </ul>
-      {note && (
-        <p className="text-xs text-white/40 leading-relaxed border-t border-white/[0.06] pt-4">
-          {note}
-        </p>
-      )}
-      <Link
-        href="/estimate"
-        className={`block w-full py-3 rounded-xl text-sm font-bold tracking-wide text-center transition-colors mt-auto ${
-          featured
-            ? "bg-brand-yellow text-brand-black hover:bg-brand-yellow/90"
-            : "border border-brand-yellow/40 text-brand-yellow hover:bg-brand-yellow hover:text-black"
-        }`}
-      >
-        Book This Service
-      </Link>
-    </div>
-  );
-}
-
-interface AddonCardProps {
-  name: string;
-  price: string;
-  description: string;
-}
-
-function AddonCard({ name, price, description }: AddonCardProps) {
-  return (
-    <div className="flex flex-col gap-3 rounded-xl border border-white/[0.08] bg-white/[0.02] p-6">
-      <div className="flex items-start justify-between gap-4">
-        <h3 className="text-base font-black uppercase text-brand-white leading-tight">{name}</h3>
-        <span className="text-brand-yellow font-bold text-xl shrink-0 font-numeric">{price}</span>
-      </div>
-      <p className="text-sm text-white/55 leading-relaxed flex-1">{description}</p>
-      <p className="text-xs text-white/35 pt-3 border-t border-white/[0.06]">
-        Add to your detail — text (661) 368-5165
-      </p>
+      </h2>
     </div>
   );
 }
@@ -121,138 +128,70 @@ export default function ServicesPage() {
     <main className="bg-black text-white">
 
       {/* Page Header */}
-      <section className="bg-black pt-36 pb-16 px-6 lg:px-8 border-b border-white/[0.06]">
-        <div className="mx-auto max-w-7xl">
-          <h1 className="text-5xl sm:text-7xl font-black uppercase text-brand-white tracking-tight mb-4">
-            Services
-          </h1>
-          <p className="text-lg text-white/55">
-            Mobile detailing in Bakersfield, CA. We come to you.
-          </p>
+      <section className="relative bg-black pt-36 pb-16 px-6 lg:px-8 border-b border-white/[0.06] overflow-hidden">
+        <BGPattern variant="dots" mask="fade-bottom" fill="rgba(255,255,255,0.04)" size={28} className="z-0" />
+        <div className="relative z-[1] mx-auto max-w-7xl flex items-end justify-between gap-8">
+          <div>
+            <h1 className="text-5xl sm:text-7xl font-black uppercase text-white tracking-tight mb-4">
+              Services
+            </h1>
+            <p className="text-lg text-white/55">
+              Mobile detailing in Bakersfield, CA. We come to you.
+            </p>
+          </div>
+          <Image
+            src="/1.png"
+            alt="Metro Auto Detailing"
+            width={200}
+            height={200}
+            className="shrink-0 opacity-90 h-36 w-auto"
+          />
         </div>
       </section>
 
       {/* Section 1 — The Essentials */}
-      <section className="py-24 px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
+      <section className="relative py-24 px-6 lg:px-8 overflow-hidden">
+        <BGPattern variant="grid" mask="fade-edges" fill="rgba(255,255,255,0.03)" size={40} className="z-0" />
+        <div className="relative z-[1] mx-auto max-w-7xl">
           <SectionLabel label="The Essentials" subheadline="Clean, refreshed, or completely reset." />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <PackageCard
-              name="Signature Wash"
-              tagline="Routine maintenance. In and out."
-              price="$80"
-              largerPrice="+$20"
-              includes={[
-                "Hand wash & dry",
-                "Wheel & rim clean",
-                "Tire dressing",
-                "Window clean (exterior)",
-                "Door jambs wiped",
-                "Interior vacuum (quick)",
-              ]}
-            />
-            <PackageCard
-              name="Refresh Detail"
-              tagline="Deep clean without the full package price."
-              price="$250"
-              largerPrice="+$40"
-              includes={[
-                "Hand wash & dry",
-                "Wheel & rim clean",
-                "Tire dressing",
-                "Full interior vacuum (thorough)",
-                "Dashboard, console & door panels wiped down",
-                "Carpet & seat shampoo with extraction",
-                "UV interior dressing",
-                "Windows (interior & exterior)",
-                "Door jambs cleaned",
-              ]}
-            />
-            <PackageCard
-              name="Full Detail"
-              tagline="Complete reset. Inside and out."
-              price="$400"
-              largerPrice="+$40"
-              featured
-              includes={[
-                "Everything in Exterior Detail",
-                "Full interior vacuum (thorough)",
-                "Dashboard, console & door panels wiped down",
-                "Carpet & seat shampoo with extraction",
-                "UV interior dressing",
-                "Windows (interior & exterior)",
-                "Door jambs cleaned",
-                "Complete vehicle reset",
-              ]}
-            />
-          </div>
+          <PackageCardGrid plans={essentialsPlans} columns={3} />
         </div>
       </section>
 
       {/* Section 2 — Protection */}
-      <section className="py-24 px-6 lg:px-8 border-t border-white/[0.04]">
-        <div className="mx-auto max-w-7xl">
+      <section className="relative py-24 px-6 lg:px-8 bg-zinc-950 border-y border-white/[0.04] overflow-hidden">
+        <BGPattern variant="diagonal-stripes" mask="fade-edges" fill="rgba(250,194,5,0.04)" size={20} className="z-0" />
+        <div className="relative z-[1] mx-auto max-w-7xl">
           <SectionLabel label="Protection" subheadline="Keep the paint looking right longer." />
-          <p className="text-sm text-white/70 leading-relaxed max-w-2xl mb-10">
-            If your paint feels rough or looks dull despite being clean, it needs more than a wash. Hard water minerals, brake dust, and industrial fallout bond to paint and can't be removed with soap and water. These services break down and remove that contamination, then seal the surface so it lasts.
+          <p className="text-sm text-white/60 leading-relaxed max-w-2xl mb-10">
+            If your paint feels rough or looks dull despite being clean, it needs more than a wash. Hard water minerals, brake dust, and industrial fallout bond to paint and cannot be removed with soap and water. These services break down and remove that contamination, then seal the surface so it lasts.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <PackageCard
-              name="Exterior Detail"
-              tagline="Decon, clay bar, and ceramic protection. Built for paint that needs real work."
-              price="$150"
-              largerPrice="+$20"
-              includes={[
-                "Hand wash & dry",
-                "Decontamination treatment (iron or acid wash — selected based on paint condition)",
-                "Clay bar — removes bonded contamination, leaves paint smooth to the touch",
-                "Koch Chemie S003 Hydro Foam — hydrophobic wash topper applied during rinse",
-                "Stinger 918 Ceramic Spray Sealant — ceramic protection layer bonded to dry paint",
-                "Wheel & fender well deep clean",
-                "Bug & tar removal",
-                "Tire dressing",
-                "Door jambs cleaned",
-                "Windows (interior & exterior)",
-              ]}
-            />
-            <PackageCard
-              name="Full Detail"
-              tagline="Full exterior protection plus a complete interior clean."
-              price="$400"
-              largerPrice="+$40"
-              featured
-              note="The same ceramic protection as the Exterior Detail, combined with a full interior reset."
-              includes={[
-                "Complete exterior decontamination (iron or acid wash)",
-                "Clay bar treatment",
-                "Koch Chemie S003 + Stinger 918 ceramic protection",
-                "Full interior vacuum, shampoo & extraction",
-                "UV interior dressing",
-                "Everything protected inside and out",
-              ]}
-            />
-          </div>
+          <PackageCardGrid plans={protectionPlans} columns={2} />
         </div>
       </section>
 
       {/* Section 3 — Restoration */}
-      <section className="py-24 px-6 lg:px-8 border-t border-white/[0.04]">
-        <div className="mx-auto max-w-7xl">
+      <section className="relative py-24 px-6 lg:px-8 overflow-hidden">
+        <BGPattern variant="horizontal-lines" mask="fade-edges" fill="rgba(255,255,255,0.03)" size={32} className="z-0" />
+        <div className="relative z-[1] mx-auto max-w-7xl">
           <SectionLabel label="Restoration" subheadline="Bring back what faded or wore down." />
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             <AddonCard
               name="Headlight Restoration"
               price="$100"
+              priceValue={100}
               description="Cloudy or yellowed lenses sanded progressively, prepped with IPA, and coated with Cerakote ceramic clear coat. Restores clarity and protects against UV."
             />
             <AddonCard
               name="Trim Restoration"
               price="$100"
+              priceValue={100}
               description="Faded black plastic trim restored. Color and UV protection brought back."
             />
             <AddonCard
               name="Leather Conditioning"
               price="$40"
+              priceValue={40}
               description="Leather surfaces cleaned, conditioned, and protected. Prevents cracking and fading."
             />
           </div>
@@ -260,23 +199,27 @@ export default function ServicesPage() {
       </section>
 
       {/* Section 4 — Deep Clean */}
-      <section className="py-24 px-6 lg:px-8 border-t border-white/[0.04]">
-        <div className="mx-auto max-w-7xl">
+      <section className="relative py-24 px-6 lg:px-8 bg-zinc-950 border-y border-white/[0.04] overflow-hidden">
+        <BGPattern variant="dots" mask="fade-center" fill="rgba(255,255,255,0.04)" size={24} className="z-0" />
+        <div className="relative z-[1] mx-auto max-w-7xl">
           <SectionLabel label="Deep Clean" subheadline="For the tough stuff that needs more than a standard detail." />
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             <AddonCard
               name="Pet Hair & Sand Removal"
               price="$80"
+              priceValue={80}
               description="Full extraction of embedded pet hair and sand from carpet and seats. Priced separately because it takes significantly longer than a standard vacuum."
             />
             <AddonCard
               name="Carpet & Seat Extraction"
               price="$70"
+              priceValue={70}
               description="Hot water extraction for deep-seated stains, odors, and ground-in dirt."
             />
             <AddonCard
               name="Engine Bay Detail"
               price="$50"
+              priceValue={50}
               description="Degreased, cleaned, and dressed. Removes oil buildup and road grime."
             />
           </div>
@@ -284,8 +227,9 @@ export default function ServicesPage() {
       </section>
 
       {/* Section 5 — Fleet & Commercial */}
-      <section className="py-24 px-6 lg:px-8 border-t border-white/[0.04]">
-        <div className="mx-auto max-w-7xl">
+      <section className="relative py-24 px-6 lg:px-8 overflow-hidden">
+        <BGPattern variant="vertical-lines" mask="fade-edges" fill="rgba(250,194,5,0.03)" size={36} className="z-0" />
+        <div className="relative z-[1] mx-auto max-w-7xl">
           <SectionLabel
             label="Fleet & Commercial"
             subheadline="We come to your lot. No drop-off. No scheduling around your operations."
@@ -329,6 +273,7 @@ export default function ServicesPage() {
       </section>
 
       <CTABanner />
+      <EstimateCartBar />
 
     </main>
   );

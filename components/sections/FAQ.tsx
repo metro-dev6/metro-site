@@ -6,15 +6,15 @@ import { BGPattern } from "@/components/bg-pattern";
 const faqs = [
   {
     q: "What's the difference between a detail and a regular car wash?",
-    a: "A car wash runs your vehicle through automated equipment that scratches and swirls the paint with generic chemicals. Detailing is hands-on. We clean, protect, and preserve every surface — inside and out — at a pace that actually does the job right.",
+    a: "A car wash runs your vehicle through automated equipment that scratches and swirls the paint with generic chemicals. Detailing is hands-on. I clean, protect, and preserve every surface, inside and out, at a pace that actually does the job right.",
   },
   {
     q: "What do I need to provide?",
-    a: "Just your vehicle. We bring everything — water tank, generator, all equipment and products. You don't need to do anything except make the car accessible.",
+    a: "Just your vehicle. I bring everything: water tank, generator, all equipment and products. You don't need to do anything except make the car accessible.",
   },
   {
     q: "How should I prepare my car before the appointment?",
-    a: "Remove any personal items you want to keep out of the way. Make sure the vehicle is parked somewhere we can access it — driveway, parking lot, or street. That's it.",
+    a: "Remove any personal items you want to keep out of the way. Make sure the vehicle is parked somewhere I can access it: driveway, parking lot, or street. That's it.",
   },
   {
     q: "Do I need to be home during the appointment?",
@@ -22,15 +22,15 @@ const faqs = [
   },
   {
     q: "How long does a detail take?",
-    a: "Depends on the service and the vehicle's condition. A Signature Wash takes about an hour. A Full Detail runs 4-6 hours. We'll give you a time estimate when we confirm the booking.",
+    a: "Depends on the service and the vehicle's condition. A Signature Wash takes about an hour. A Full Detail runs 4-6 hours. I'll give you a time estimate when I confirm the booking.",
   },
   {
     q: "What areas do you service?",
-    a: "Bakersfield, CA and the greater Bakersfield area. Submit an estimate with your location — travel fees may apply for areas outside the city.",
+    a: "Bakersfield, CA and the greater Bakersfield area. Submit an estimate with your location. Travel fees may apply for areas outside the city.",
   },
   {
     q: "What payment methods do you accept?",
-    a: "We accept all major credit and debit cards, and cash. Payment is collected at the end of the appointment after you've seen the finished result.",
+    a: "I accept all major credit and debit cards, and cash. Payment is collected at the end of the appointment after you've seen the finished result.",
   },
   {
     q: "Is a deposit required to book?",
@@ -38,15 +38,15 @@ const faqs = [
   },
   {
     q: "What if my vehicle is in rough condition?",
-    a: "We handle it. If the condition calls for extra time or an upcharge after we assess the car, we tell you before we start. Nothing changes without your sign-off.",
+    a: "I handle it. If the condition calls for extra time or an upcharge after I assess the car, I'll tell you before I start. Nothing changes without your sign-off.",
   },
   {
     q: "What if it rains on my appointment day?",
-    a: "We'll reach out to reschedule. Interior work can sometimes still happen depending on conditions — we'll figure it out on a case-by-case basis.",
+    a: "I'll reach out to reschedule. Interior work can sometimes still happen depending on conditions. I'll figure it out on a case-by-case basis.",
   },
   {
     q: "Do you offer recurring appointments?",
-    a: "Yes. We can set up a recurring schedule to keep your vehicle protected and maintained year-round.",
+    a: "Yes. I can set up a recurring schedule to keep your vehicle protected and maintained year-round.",
   },
 ];
 

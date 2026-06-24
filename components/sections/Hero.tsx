@@ -31,7 +31,7 @@ export function Hero() {
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             poster="/hero-poster.jpg"
             className="absolute inset-0 w-full h-full object-cover"
             style={{
@@ -125,7 +125,7 @@ export function Hero() {
 
           {/* Years Experience */}
           <div className="flex flex-col items-center gap-3 px-6 py-6 border-r border-b md:border-b-0 border-white/[0.07]">
-            <svg className="w-6 h-6 text-brand-yellow" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" style={{ filter: "drop-shadow(0 0 8px rgba(250,194,5,0.7))" }}>
+            <svg className="w-6 h-6 text-brand-yellow" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" style={{ opacity: 0.9 }}>
               <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
             </svg>
             <span className="text-4xl font-black text-white font-dm-sans leading-none" style={{ textShadow: "0 0 24px rgba(250,194,5,0.25)" }}>5+</span>
@@ -134,7 +134,7 @@ export function Hero() {
 
           {/* Star Rating */}
           <div className="flex flex-col items-center gap-3 px-6 py-6 border-b md:border-b-0 md:border-r border-white/[0.07]">
-            <svg className="w-6 h-6 text-brand-yellow" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" style={{ filter: "drop-shadow(0 0 8px rgba(250,194,5,0.7))" }}>
+            <svg className="w-6 h-6 text-brand-yellow" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" style={{ opacity: 0.9 }}>
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
             </svg>
             <div className="flex flex-col items-center gap-1.5">
@@ -152,7 +152,7 @@ export function Hero() {
 
           {/* Mobile Service */}
           <div className="flex flex-col items-center gap-3 px-6 py-6 border-r border-white/[0.07]">
-            <svg className="w-6 h-6 text-brand-yellow" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" style={{ filter: "drop-shadow(0 0 8px rgba(250,194,5,0.7))" }}>
+            <svg className="w-6 h-6 text-brand-yellow" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" style={{ opacity: 0.9 }}>
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
             </svg>
             <span className="text-4xl font-black text-white font-dm-sans leading-none" style={{ textShadow: "0 0 24px rgba(250,194,5,0.25)" }}>100%</span>
@@ -161,7 +161,7 @@ export function Hero() {
 
           {/* Free Estimates */}
           <div className="flex flex-col items-center gap-3 px-6 py-6">
-            <svg className="w-6 h-6 text-brand-yellow" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" style={{ filter: "drop-shadow(0 0 8px rgba(250,194,5,0.7))" }}>
+            <svg className="w-6 h-6 text-brand-yellow" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" style={{ opacity: 0.9 }}>
               <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
             </svg>
             <span className="text-4xl font-black text-white font-dm-sans leading-none" style={{ textShadow: "0 0 24px rgba(250,194,5,0.25)" }}>24/7</span>

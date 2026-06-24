@@ -146,3 +146,8 @@
     font-family: var(--font-dm-sans), sans-serif;
   }
 }
+
+@keyframes shiny-sweep {
+  0% { transform: translateX(-200%) skewX(-20deg); }
+  100% { transform: translateX(500%) skewX(-20deg); }
+}

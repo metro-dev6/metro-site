@@ -5,7 +5,7 @@ import { EstimateForm } from "./EstimateForm";
 export const metadata: Metadata = {
   title: "Book a Detail | Metro Auto Detailing",
   description:
-    "Request mobile detailing in Bakersfield, CA. We come to you.",
+    "Request mobile detailing in Bakersfield, CA. I come to you.",
 };
 
 export default function EstimatePage() {
@@ -34,7 +34,7 @@ export default function EstimatePage() {
               </span>
             </h1>
             <p className="text-white/50 text-base max-w-xs mx-auto">
-              We come to you. Tell us what you need and we&apos;ll reach out to confirm.
+              I come to you. Tell me what you need and I&apos;ll reach out to confirm.
             </p>
           </div>
 

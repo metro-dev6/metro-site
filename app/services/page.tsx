@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import { CTABanner } from "@/components/sections/CTABanner";
 import { PackageCardGrid, type MetroPlan } from "@/components/sections/PackageCardGrid";
@@ -15,11 +14,12 @@ export const metadata: Metadata = {
 const essentialsPlans: MetroPlan[] = [
   {
     name: "Signature Wash",
-    description: "Routine maintenance. In and out.",
+    description: "Hand wash, wheels, tire dressing, wax coat, and interior vacuum. The right call every two weeks.",
     price: 80,
     largerVehicle: "+$20",
     features: [
       "Hand wash & dry",
+      "Formula 4 wax coat (protection between washes)",
       "Wheel & rim clean",
       "Tire dressing",
       "Window clean (exterior)",
@@ -31,18 +31,20 @@ const essentialsPlans: MetroPlan[] = [
   },
   {
     name: "Refresh Detail",
-    description: "Deep clean without the full package price.",
+    description: "Full exterior wash plus a thorough interior clean. Both done right in one visit.",
     price: 250,
     largerVehicle: "+$40",
     featured: true,
     features: [
       "Hand wash & dry",
+      "Formula 4 wax coat",
+      "Stinger 918 ceramic topper",
       "Wheel & rim clean",
       "Tire dressing",
       "Full interior vacuum (thorough)",
-      "Dashboard, console & door panels wiped down",
-      "Carpet & seat shampoo with extraction",
-      "UV interior dressing",
+      "Dashboard, console & door panels cleaned",
+      "Spot treatment on carpet and upholstery",
+      "CarPro PERL UV interior dressing",
       "Windows (interior & exterior)",
       "Door jambs cleaned",
     ],
@@ -51,18 +53,21 @@ const essentialsPlans: MetroPlan[] = [
   },
   {
     name: "Full Detail",
-    description: "Complete reset. Inside and out.",
+    description: "Complete exterior decontamination and ceramic sealant outside. Seats shampooed, carpet extracted, every surface UV protected inside.",
     price: 400,
     largerVehicle: "+$40",
     features: [
-      "Everything in Exterior Detail",
+      "Iron remover: dissolves bonded metallic contamination",
+      "Acid wash: removes mineral deposits and water spots from paint and glass",
+      "Tar and tree sap removal",
+      "Clay bar: leaves paint smooth to the touch",
+      "Stinger 918 ceramic spray sealant (4-6 months protection)",
       "Full interior vacuum (thorough)",
-      "Dashboard, console & door panels wiped down",
+      "Dashboard, console & door panels cleaned",
       "Carpet & seat shampoo with extraction",
-      "UV interior dressing",
+      "CarPro PERL UV interior dressing",
       "Windows (interior & exterior)",
       "Door jambs cleaned",
-      "Complete vehicle reset",
     ],
     buttonText: "Add to Estimate",
     href: "/estimate",
@@ -72,17 +77,17 @@ const essentialsPlans: MetroPlan[] = [
 const protectionPlans: MetroPlan[] = [
   {
     name: "Exterior Detail",
-    description: "Decon, clay bar, and ceramic protection. Built for paint that needs real work.",
+    description: "Decontamination and Stinger 918 ceramic sealant. 4-6 months of protection for paint that needs real work.",
     price: 150,
     largerVehicle: "+$20",
     features: [
       "Hand wash & dry",
-      "Decontamination treatment (iron or acid wash, selected based on paint condition)",
-      "Clay bar: removes bonded contamination, leaves paint smooth to the touch",
+      "Iron remover: dissolves bonded metallic contamination",
+      "Tar and tree sap removal",
+      "Clay bar: removes remaining contamination, leaves paint smooth to the touch",
       "Koch Chemie S003 Hydro Foam: hydrophobic wash topper applied during rinse",
       "Stinger 918 Ceramic Spray Sealant: ceramic protection layer bonded to dry paint",
       "Wheel & fender well deep clean",
-      "Bug & tar removal",
       "Tire dressing",
       "Door jambs cleaned",
       "Windows (interior & exterior)",
@@ -92,18 +97,20 @@ const protectionPlans: MetroPlan[] = [
   },
   {
     name: "Full Detail",
-    description: "Full exterior protection plus a complete interior clean.",
+    description: "Stinger 918 ceramic protection outside. Complete interior clean inside. Every surface covered.",
     price: 400,
     largerVehicle: "+$40",
     featured: true,
     note: "The same ceramic protection as the Exterior Detail, combined with a full interior reset.",
     features: [
-      "Complete exterior decontamination (iron or acid wash)",
-      "Clay bar treatment",
-      "Koch Chemie S003 + Stinger 918 ceramic protection",
-      "Full interior vacuum, shampoo & extraction",
-      "UV interior dressing",
-      "Everything protected inside and out",
+      "Iron remover: dissolves bonded metallic contamination",
+      "Acid wash: removes mineral deposits and water spots from paint and glass",
+      "Tar and tree sap removal",
+      "Clay bar: leaves paint smooth to the touch",
+      "Koch Chemie S003 + Stinger 918 ceramic protection (4-6 months)",
+      "Carpet & seat shampoo with extraction",
+      "CarPro PERL UV interior dressing",
+      "Windows (interior & exterior)",
     ],
     buttonText: "Add to Estimate",
     href: "/estimate",
@@ -136,7 +143,7 @@ export default function ServicesPage() {
               Services
             </h1>
             <p className="text-lg text-white/55">
-              Mobile detailing in Bakersfield, CA. We come to you.
+              Mobile detailing in Bakersfield, CA. I come to you.
             </p>
           </div>
           <Image
@@ -175,7 +182,7 @@ export default function ServicesPage() {
         <BGPattern variant="horizontal-lines" mask="fade-edges" fill="rgba(255,255,255,0.03)" size={32} className="z-0" />
         <div className="relative z-[1] mx-auto max-w-7xl">
           <SectionLabel label="Restoration" subheadline="Bring back what faded or wore down." />
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             <AddonCard
               name="Headlight Restoration"
               price="$100"
@@ -186,13 +193,19 @@ export default function ServicesPage() {
               name="Trim Restoration"
               price="$100"
               priceValue={100}
-              description="Faded black plastic trim restored. Color and UV protection brought back."
+              description="Solution Finish applied to faded black plastic trim. Semi-permanent bond to the plastic, not a dressing that washes off in two weeks."
+            />
+            <AddonCard
+              name="Water Spot Removal"
+              price="$100"
+              priceValue={100}
+              description="Hard water minerals bond to paint and glass and cannot be removed by washing alone. Treated and removed from both surfaces with a professional-grade acid wash."
             />
             <AddonCard
               name="Leather Conditioning"
               price="$40"
               priceValue={40}
-              description="Leather surfaces cleaned, conditioned, and protected. Prevents cracking and fading."
+              description="Leather cleaned, conditioned, and protected against drying and cracking. The step most people skip until the damage is done."
             />
           </div>
         </div>
@@ -214,61 +227,126 @@ export default function ServicesPage() {
               name="Carpet & Seat Extraction"
               price="$70"
               priceValue={70}
-              description="Hot water extraction for deep-seated stains, odors, and ground-in dirt."
+              description="Hot water extraction pulls stains, odors, and ground-in dirt out of carpet and seats. Not a surface clean. A deep pull."
             />
             <AddonCard
               name="Engine Bay Detail"
               price="$50"
               priceValue={50}
-              description="Degreased, cleaned, and dressed. Removes oil buildup and road grime."
+              description="Degreased, cleaned, and dressed. Oil buildup and road grime removed. Everything looking right under the hood."
             />
           </div>
         </div>
       </section>
 
-      {/* Section 5 — Fleet & Commercial */}
+      {/* Section 5 — Maintenance Plans */}
       <section className="relative py-24 px-6 lg:px-8 overflow-hidden">
         <BGPattern variant="vertical-lines" mask="fade-edges" fill="rgba(250,194,5,0.03)" size={36} className="z-0" />
         <div className="relative z-[1] mx-auto max-w-7xl">
           <SectionLabel
-            label="Fleet & Commercial"
-            subheadline="We come to your lot. No drop-off. No scheduling around your operations."
+            label="Maintenance Plans"
+            subheadline="The less often you clean, the more work it takes."
           />
-          <div className="rounded-2xl bg-[#0a0a0a] border border-white/[0.06] p-10 grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div>
-              <table className="w-full text-sm">
-                <tbody>
-                  {[
-                    { service: "Exterior Wash", rate: "$7/ft" },
-                    { service: "+ Roof Wash", rate: "+$3/ft" },
-                    { service: "+ Interior Detail", rate: "+$4/ft" },
-                    { service: "Wash & Wax", rate: "$10/ft" },
-                  ].map(({ service, rate }) => (
-                    <tr key={service} className="border-b border-white/[0.06]">
-                      <td className="py-4 text-white/70">{service}</td>
-                      <td className="py-4 text-right font-bold text-brand-yellow font-numeric">
-                        {rate}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className="text-xs text-white/40 mt-5 leading-relaxed">
-                A 20 ft vehicle exterior wash = $140. A 5-vehicle fleet = from $700 per cycle.
-              </p>
-            </div>
-            <div className="flex flex-col gap-6 justify-between">
-              <p className="text-base text-white/70 leading-relaxed">
-                Metro handles fleet detailing at your location on weekends. We work around your schedule, price per linear foot, and start with one vehicle so you can see the work before committing to the full fleet.
-              </p>
-              <Link
-                href="/contact"
-                className="inline-block w-full lg:w-auto px-8 py-3 rounded-xl bg-brand-yellow text-brand-black text-sm font-black tracking-wide hover:bg-brand-yellow/90 transition-colors text-center"
+          <p className="text-sm text-white/60 leading-relaxed max-w-2xl mb-10">
+            Price reflects condition at time of service. A car cleaned every two weeks stays clean. A car that goes three months between details has built-up contamination, road film, and interior grime that takes significantly longer to remove. Book a frequency that fits your schedule. The price matches the work.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+            {[
+              {
+                frequency: "Every 2 Weeks",
+                label: "Biweekly",
+                price: "$80",
+                note: "Car stays clean. Fast service.",
+                items: [
+                  "Hand wash & dry",
+                  "Wheel & rim clean",
+                  "Tire dressing",
+                  "Window clean (exterior)",
+                  "Door jambs wiped",
+                  "Interior vacuum (quick)",
+                ],
+              },
+              {
+                frequency: "Monthly",
+                label: "Monthly",
+                price: "$120",
+                note: "More buildup. More thorough.",
+                featured: true,
+                items: [
+                  "Hand wash & dry",
+                  "Wheel & rim deep clean",
+                  "Tire dressing",
+                  "Interior vacuum (thorough)",
+                  "Dashboard & console wipe",
+                  "Windows (interior & exterior)",
+                  "Door jambs cleaned",
+                ],
+              },
+              {
+                frequency: "Every 2 Months",
+                label: "Bimonthly",
+                price: "$200",
+                note: "Significant buildup. Full reset needed.",
+                items: [
+                  "Hand wash & dry",
+                  "Decontamination rinse",
+                  "Deep wheel & fender clean",
+                  "Interior vacuum (thorough)",
+                  "Dashboard, console & panels wiped",
+                  "Windows (interior & exterior)",
+                  "Door jambs & sills cleaned",
+                ],
+              },
+              {
+                frequency: "Quarterly",
+                label: "Quarterly",
+                price: "$300",
+                note: "3 months of buildup. Full detail required.",
+                items: [
+                  "Full exterior wash & decon",
+                  "Clay bar if needed",
+                  "Deep wheel & fender clean",
+                  "Full interior vacuum",
+                  "Dashboard, console & door panels",
+                  "Carpet & seat shampoo",
+                  "Windows (interior & exterior)",
+                ],
+              },
+            ].map(({ frequency, label, price, note, items, featured }) => (
+              <div
+                key={label}
+                className={`relative flex flex-col rounded-2xl p-7 gap-5 ${
+                  featured
+                    ? "border-2 border-brand-yellow bg-white/[0.03]"
+                    : "border border-white/[0.08] bg-white/[0.02]"
+                }`}
               >
-                Get a Fleet Quote
-              </Link>
-            </div>
+                {featured && (
+                  <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
+                    <div className="bg-brand-yellow py-1.5 px-4 rounded-full">
+                      <span className="text-black text-xs font-black tracking-widest uppercase">Most Common</span>
+                    </div>
+                  </div>
+                )}
+                <div className="text-center">
+                  <p className="text-xs font-bold tracking-[0.2em] uppercase text-white/40 mb-1">{frequency}</p>
+                  <div className="text-4xl font-bold text-brand-yellow font-numeric">{price}</div>
+                  <p className="text-xs text-white/40 mt-2 leading-snug">{note}</p>
+                </div>
+                <ul className="flex flex-col gap-2 flex-1 border-t border-white/[0.06] pt-5">
+                  {items.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-sm text-white/65 leading-snug">
+                      <span className="text-brand-yellow mt-0.5 shrink-0">&mdash;</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
+          <p className="text-xs text-white/30 mt-8 leading-relaxed max-w-xl">
+            Pick a frequency that fits your schedule. I hold your recurring slot and charge per visit after each job is complete. No contracts. Cancel anytime.
+          </p>
         </div>
       </section>
 

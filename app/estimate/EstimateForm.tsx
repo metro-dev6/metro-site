@@ -16,7 +16,8 @@ const PACKAGES = [
 
 const ADDONS = [
   { name: "Headlight Restoration", price: 100 },
-  { name: "Trim Restoration", price: 80 },
+  { name: "Trim Restoration", price: 100 },
+  { name: "Water Spot Removal", price: 100 },
   { name: "Pet Hair & Sand Removal", price: 80 },
   { name: "Carpet & Seat Extraction", price: 70 },
   { name: "Engine Bay", price: 50 },
@@ -27,10 +28,10 @@ const ALL_SERVICES = [...PACKAGES, ...ADDONS];
 
 // Which add-ons make sense for each package
 const RELEVANT_ADDONS: Record<string, string[]> = {
-  "Signature Wash": ["Headlight Restoration", "Trim Restoration", "Engine Bay"],
-  "Exterior Detail": ["Headlight Restoration", "Trim Restoration", "Engine Bay"],
+  "Signature Wash": ["Headlight Restoration", "Trim Restoration", "Water Spot Removal", "Engine Bay"],
+  "Exterior Detail": ["Headlight Restoration", "Trim Restoration", "Water Spot Removal", "Engine Bay"],
   "Interior Detail": ["Pet Hair & Sand Removal", "Carpet & Seat Extraction", "Leather Conditioning"],
-  "Refresh Detail": ["Headlight Restoration", "Trim Restoration", "Pet Hair & Sand Removal", "Carpet & Seat Extraction", "Engine Bay", "Leather Conditioning"],
+  "Refresh Detail": ["Headlight Restoration", "Trim Restoration", "Water Spot Removal", "Pet Hair & Sand Removal", "Carpet & Seat Extraction", "Engine Bay", "Leather Conditioning"],
   "Full Detail": ["Headlight Restoration", "Trim Restoration", "Pet Hair & Sand Removal", "Carpet & Seat Extraction", "Engine Bay", "Leather Conditioning"],
 };
 

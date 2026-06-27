@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Check, Plus, X } from "lucide-react";
 import NumberFlow from "@number-flow/react";
 import { cn } from "@/lib/utils";
@@ -23,17 +22,7 @@ function MetroPricingCard({ plan, index }: { plan: MetroPlan; index: number }) {
   const inCart = has(plan.name);
 
   return (
-    <motion.div
-      initial={{ y: 50, opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{
-        duration: 0.6,
-        type: "spring",
-        stiffness: 100,
-        damping: 20,
-        delay: index * 0.1,
-      }}
+    <div
       className={cn(
         "relative flex flex-col rounded-2xl p-8 gap-6",
         plan.featured
@@ -108,7 +97,7 @@ function MetroPricingCard({ plan, index }: { plan: MetroPlan; index: number }) {
           </>
         )}
       </button>
-    </motion.div>
+    </div>
   );
 }
 

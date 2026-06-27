@@ -1,36 +1,33 @@
-"use client";
-
-import { useState } from "react";
 import { BGPattern } from "@/components/bg-pattern";
 
 const faqs = [
   {
     q: "What's the difference between a detail and a regular car wash?",
-    a: "A car wash runs your vehicle through automated equipment that scratches and swirls the paint with generic chemicals. Detailing is hands-on. I clean, protect, and preserve every surface, inside and out, at a pace that actually does the job right.",
+    a: "A car wash is automated and surface level. It wets the car, runs generic brushes over it, and sends you out. Detailing is different. Every surface gets worked by hand, inside and out. We clean what a car wash misses and protect what a car wash leaves behind.",
   },
   {
     q: "What do I need to provide?",
-    a: "Just your vehicle. I bring everything: water tank, generator, all equipment and products. You don't need to do anything except make the car accessible.",
+    a: "Just your vehicle. We bring everything: water tank, generator, all equipment and products. You don't need to do anything except make the car accessible.",
   },
   {
     q: "How should I prepare my car before the appointment?",
-    a: "Remove any personal items you want to keep out of the way. Make sure the vehicle is parked somewhere I can access it: driveway, parking lot, or street. That's it.",
+    a: "Remove any personal items from the interior, especially anything large or valuable. Make sure the vehicle is parked somewhere we can access it: driveway, parking lot, or street. That's it.",
   },
   {
     q: "Do I need to be home during the appointment?",
-    a: "Not the whole time. You should be available at the start for a quick walk-around and at the end for the final presentation. In between, you're free to go about your day.",
+    a: "No. We just need the keys and access to the vehicle. You don't need to be present. If you want to be there for a before-and-after walkthrough, that's always welcome and a good time to talk maintenance. But it's not required.",
   },
   {
     q: "How long does a detail take?",
-    a: "Depends on the service and the vehicle's condition. A Signature Wash takes about an hour. A Full Detail runs 4-6 hours. I'll give you a time estimate when I confirm the booking.",
+    a: "Depends on the service and the condition of the vehicle. A Signature Wash takes about an hour. A Full Detail runs 4-6+ hours. We'll give you a time estimate when we confirm the booking.",
   },
   {
     q: "What areas do you service?",
-    a: "Bakersfield, CA and the greater Bakersfield area. Submit an estimate with your location. Travel fees may apply for areas outside the city.",
+    a: "Bakersfield, CA and surrounding areas within 15 miles. Submit an estimate with your location and we'll confirm availability. Travel fees apply beyond that range.",
   },
   {
     q: "What payment methods do you accept?",
-    a: "I accept all major credit and debit cards, and cash. Payment is collected at the end of the appointment after you've seen the finished result.",
+    a: "We accept all major credit and debit cards, cash, Zelle, and Apple Pay / tap to pay. Payment is collected at the end of the appointment after you've seen the finished result.",
   },
   {
     q: "Is a deposit required to book?",
@@ -38,23 +35,21 @@ const faqs = [
   },
   {
     q: "What if my vehicle is in rough condition?",
-    a: "I handle it. If the condition calls for extra time or an upcharge after I assess the car, I'll tell you before I start. Nothing changes without your sign-off.",
+    a: "We handle it. If the condition calls for extra time or an upcharge after assessing the car, we'll tell you before we start. Nothing changes without your sign-off.",
   },
   {
     q: "What if it rains on my appointment day?",
-    a: "I'll reach out to reschedule. Interior work can sometimes still happen depending on conditions. I'll figure it out on a case-by-case basis.",
+    a: "We'll reach out to reschedule. Interior work can sometimes still happen depending on conditions. We'll figure it out on a case-by-case basis.",
   },
   {
     q: "Do you offer recurring appointments?",
-    a: "Yes. I can set up a recurring schedule to keep your vehicle protected and maintained year-round.",
+    a: "Yes. We offer biweekly, monthly, bimonthly, and quarterly maintenance plans. Regular bookings keep the car in better condition between visits and cost less per service than starting from a dirty baseline. Ask about maintenance options when booking.",
   },
 ];
 
 export function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
   return (
-    <section className="relative bg-zinc-950 py-20 px-6 lg:px-8">
+    <section id="faq" className="relative bg-black py-20 px-6 lg:px-8 scroll-mt-[100px]">
       <BGPattern variant="grid" mask="fade-center" fill="rgba(255,255,255,0.05)" size={32} className="z-0" />
       <div className="relative z-[1] mx-auto max-w-3xl">
 
@@ -69,26 +64,21 @@ export function FAQ() {
 
         <div className="flex flex-col gap-2">
           {faqs.map((faq, index) => (
-            <div
+            <details
               key={index}
-              className={`rounded-xl border px-6 py-5 cursor-pointer transition-colors duration-200 ${
-                openIndex === index
-                  ? "border-brand-yellow/40 bg-white/[0.03]"
-                  : "border-white/[0.06] bg-white/[0.02] hover:border-white/[0.12]"
-              }`}
-              onClick={() => setOpenIndex(openIndex === index ? null : index)}
+              className="group rounded-xl border border-white/[0.06] bg-white/[0.02] [&[open]]:border-brand-yellow/40 [&[open]]:bg-white/[0.03] transition-colors duration-200"
             >
-              <div className="flex items-center justify-between gap-6">
-                <h3 className={`text-base font-bold transition-colors duration-200 ${openIndex === index ? "text-brand-yellow" : "text-brand-white"}`}>
+              <summary className="w-full px-6 pt-5 pb-5 flex items-center justify-between gap-6 text-left cursor-pointer list-none [&::-webkit-details-marker]:hidden touch-manipulation select-none">
+                <span className="text-base font-bold text-brand-white group-open:text-brand-yellow transition-colors duration-200">
                   {faq.q}
-                </h3>
+                </span>
                 <svg
                   width="18"
                   height="18"
                   viewBox="0 0 18 18"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className={`shrink-0 text-brand-yellow transition-transform duration-500 ease-in-out ${openIndex === index ? "rotate-180" : ""}`}
+                  className="shrink-0 text-brand-yellow transition-transform duration-500 ease-in-out group-open:rotate-180"
                 >
                   <path
                     d="m4.5 7.2 3.793 3.793a1 1 0 0 0 1.414 0L13.5 7.2"
@@ -98,17 +88,11 @@ export function FAQ() {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </div>
-              <p
-                className={`text-base text-brand-white/55 leading-relaxed transition-all duration-500 ease-in-out overflow-hidden ${
-                  openIndex === index
-                    ? "opacity-100 max-h-[300px] translate-y-0 pt-4"
-                    : "opacity-0 max-h-0 -translate-y-2"
-                }`}
-              >
+              </summary>
+              <p className="px-6 pb-5 text-base text-brand-white/55 leading-relaxed">
                 {faq.a}
               </p>
-            </div>
+            </details>
           ))}
         </div>
 

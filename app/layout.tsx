@@ -19,7 +19,7 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: "Metro Auto Detailing | Bakersfield, CA",
-  description: "Mobile auto detailing in Bakersfield, CA. I come to you.",
+  description: "Mobile auto detailing in Bakersfield, CA. We come to you.",
 };
 
 export default function RootLayout({

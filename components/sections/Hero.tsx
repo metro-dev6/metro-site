@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const USE_VIDEO = true;
 const VIDEO_SRC = "/hero-bg.mp4";
-const FALLBACK_IMG = "/hero-car-enhanced.jpg";
+const FALLBACK_IMG = "/IMG_6184.jpeg";
 
 export function Hero() {
   return (
@@ -26,6 +26,11 @@ export function Hero() {
               background-color: rgba(0,0,0,0.35);
             }
           `}</style>
+          {/* Static image on mobile — div avoids Next.js Image override on objectPosition */}
+          <div
+            className="md:hidden absolute inset-0 bg-cover"
+            style={{ backgroundImage: `url(${FALLBACK_IMG})`, backgroundPosition: "center 60%" }}
+          />
           <video
             autoPlay
             muted
@@ -33,7 +38,7 @@ export function Hero() {
             playsInline
             preload="metadata"
             poster="/hero-poster.jpg"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="hidden md:block absolute inset-0 w-full h-full object-cover"
             style={{
               objectPosition: "center",
               animation: "heroZoomOut 4s ease-out forwards",
@@ -61,17 +66,17 @@ export function Hero() {
       <div className="hero-dim-layer absolute inset-0" />
 
       {/* Main content */}
-      <div className="relative z-10 flex-1 flex items-center justify-center mx-auto w-full max-w-7xl px-6 lg:px-8 pt-16 md:pt-0">
+      <div className="relative z-10 flex-1 flex items-center justify-center mx-auto w-full max-w-7xl px-6 lg:px-8">
         <div className="max-w-4xl w-full text-center mx-auto">
 
-          <div className="flex justify-center mb-4">
-            <span className="inline-flex items-center text-brand-yellow text-xs font-bold tracking-[0.25em] uppercase border border-brand-yellow/50 rounded-full px-5 py-1.5">
+          <div className="flex justify-center mb-3 sm:mb-4">
+            <span className="inline-flex items-center text-brand-yellow text-[10px] sm:text-xs font-bold tracking-[0.2em] sm:tracking-[0.25em] uppercase border border-brand-yellow/50 rounded-full px-4 sm:px-5 py-1.5 whitespace-nowrap">
               Bakersfield, CA&nbsp;&nbsp;·&nbsp;&nbsp;Fully Mobile
             </span>
           </div>
 
           <h1
-            className="text-[2.6rem] sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1] tracking-tight uppercase mb-6"
+            className="text-[2.2rem] sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] sm:leading-[1] tracking-tight uppercase mb-4 sm:mb-6"
             style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8)" }}
           >
             <span className="text-brand-white">Bakersfield&apos;s Premier</span><br />
@@ -80,7 +85,7 @@ export function Hero() {
           </h1>
 
           <p
-            className="text-base md:text-lg text-brand-white/70 max-w-md mx-auto mb-10 leading-relaxed"
+            className="text-sm sm:text-base md:text-lg text-brand-white/70 max-w-md mx-auto mb-6 sm:mb-10 leading-relaxed"
             style={{ textShadow: "0 1px 10px rgba(0,0,0,0.9)" }}
           >
             Professional detailing at your door because your time is worth it.
@@ -124,21 +129,21 @@ export function Hero() {
         <div className="mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-4">
 
           {/* Years Experience */}
-          <div className="flex flex-col items-center gap-3 px-6 py-6 border-r border-b md:border-b-0 border-white/[0.07]">
+          <div className="flex flex-col items-center gap-2 px-6 py-4 border-r border-b md:border-b-0 border-white/[0.07]">
             <svg className="w-6 h-6 text-brand-yellow" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" style={{ opacity: 0.9 }}>
               <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
             </svg>
-            <span className="text-4xl font-black text-white font-dm-sans leading-none" style={{ textShadow: "0 0 24px rgba(250,194,5,0.25)" }}>5+</span>
+            <span className="text-3xl font-black text-white font-dm-sans leading-none" style={{ textShadow: "0 0 24px rgba(250,194,5,0.25)" }}>5+</span>
             <span className="text-[10px] font-bold uppercase tracking-widest text-white/40 text-center">Years Experience</span>
           </div>
 
           {/* Star Rating */}
-          <div className="flex flex-col items-center gap-3 px-6 py-6 border-b md:border-b-0 md:border-r border-white/[0.07]">
+          <div className="flex flex-col items-center gap-2 px-6 py-4 border-b md:border-b-0 md:border-r border-white/[0.07]">
             <svg className="w-6 h-6 text-brand-yellow" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" style={{ opacity: 0.9 }}>
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
             </svg>
             <div className="flex flex-col items-center gap-1.5">
-              <span className="text-4xl font-black text-white font-dm-sans leading-none" style={{ textShadow: "0 0 24px rgba(250,194,5,0.25)" }}>5.0</span>
+              <span className="text-3xl font-black text-white font-dm-sans leading-none" style={{ textShadow: "0 0 24px rgba(250,194,5,0.25)" }}>5.0</span>
               <div className="flex gap-0.5">
                 {[0,1,2,3,4].map((i) => (
                   <svg key={i} className="w-3 h-3 text-brand-yellow" fill="currentColor" viewBox="0 0 24 24">
@@ -151,20 +156,20 @@ export function Hero() {
           </div>
 
           {/* Mobile Service */}
-          <div className="flex flex-col items-center gap-3 px-6 py-6 border-r border-white/[0.07]">
+          <div className="flex flex-col items-center gap-2 px-6 py-4 border-r border-white/[0.07]">
             <svg className="w-6 h-6 text-brand-yellow" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" style={{ opacity: 0.9 }}>
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
             </svg>
-            <span className="text-4xl font-black text-white font-dm-sans leading-none" style={{ textShadow: "0 0 24px rgba(250,194,5,0.25)" }}>100%</span>
+            <span className="text-3xl font-black text-white font-dm-sans leading-none" style={{ textShadow: "0 0 24px rgba(250,194,5,0.25)" }}>100%</span>
             <span className="text-[10px] font-bold uppercase tracking-widest text-white/40 text-center">Mobile Service</span>
           </div>
 
           {/* Free Estimates */}
-          <div className="flex flex-col items-center gap-3 px-6 py-6">
+          <div className="flex flex-col items-center gap-2 px-6 py-4">
             <svg className="w-6 h-6 text-brand-yellow" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" style={{ opacity: 0.9 }}>
               <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
             </svg>
-            <span className="text-4xl font-black text-white font-dm-sans leading-none" style={{ textShadow: "0 0 24px rgba(250,194,5,0.25)" }}>24/7</span>
+            <span className="text-3xl font-black text-white font-dm-sans leading-none" style={{ textShadow: "0 0 24px rgba(250,194,5,0.25)" }}>24/7</span>
             <span className="text-[10px] font-bold uppercase tracking-widest text-white/40 text-center">Free Estimates</span>
           </div>
 

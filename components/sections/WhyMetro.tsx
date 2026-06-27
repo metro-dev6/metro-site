@@ -8,8 +8,8 @@ const reasons = [
         <circle cx="12" cy="10" r="3" />
       </svg>
     ),
-    headline: "I Come to You",
-    body: "No driving across town. No dropping it off and waiting. You book a time, I bring everything I need, and the car stays put until it's clean.",
+    headline: "We Come to You",
+    body: "No driving across town. No dropping it off and waiting. You book a time, we bring everything needed, and the car stays put until it's clean.",
   },
   {
     icon: (
@@ -19,7 +19,7 @@ const reasons = [
       </svg>
     ),
     headline: "No Surprise Pricing",
-    body: "Every service has a listed price. Once I assess the car, I give you the final number before I start. Nothing happens without your sign-off. No shop adding fees at the end because the car was dirtier than expected.",
+    body: "Every service has a listed price. Once we assess the car, we give you the final number before we start. Nothing happens without your sign-off. No shop adding fees at the end because the car was dirtier than expected.",
   },
   {
     icon: (
@@ -29,7 +29,7 @@ const reasons = [
       </svg>
     ),
     headline: "Not a Volume Shop",
-    body: "A full detail done right takes 3-5 hours. There's no next car waiting, no quota to hit. I take one job at a time. Your car gets the full window, not whatever's left after the rush.",
+    body: "A full detail done right takes 3-5 hours. There's no next car waiting, no quota to hit. We take one job at a time. Your car gets the full window, not whatever's left after the rush.",
   },
   {
     icon: (
@@ -41,13 +41,13 @@ const reasons = [
       </svg>
     ),
     headline: "You Know What You're Getting",
-    body: "Most clients don't know what a detail involves until they see one. I tell you what's getting done and in what order before I touch anything.",
+    body: "Most clients don't know what a detail involves until they see one. We tell you what's getting done and in what order before we touch anything.",
   },
 ];
 
 export function WhyMetro() {
   return (
-    <section className="relative bg-zinc-950 py-20 px-6 lg:px-8">
+    <section className="relative bg-black py-20 px-6 lg:px-8">
       <BGPattern variant="dots" mask="fade-edges" fill="rgba(255,255,255,0.05)" size={24} className="z-0" />
       <div className="relative z-[1] mx-auto max-w-7xl">
 

@@ -51,7 +51,7 @@ export function ServicesPreview() {
               Services
             </h2>
             <Link
-              href="/services"
+              href="/services#essentials"
               className="text-xs font-bold uppercase tracking-widest text-brand-white/40 hover:text-brand-yellow transition-colors flex items-center gap-2"
             >
               Full pricing &amp; add-ons
@@ -68,7 +68,7 @@ export function ServicesPreview() {
           {services.map((service) => (
             <Link
               key={service.name}
-              href="/services"
+              href="/services#essentials"
               className="group relative min-h-[300px] flex flex-col justify-end"
             >
               {/* Image wrapper */}
@@ -122,7 +122,7 @@ export function ServicesPreview() {
 
           {/* 6th cell — Add-ons */}
           <Link
-            href="/services"
+            href="/services#essentials"
             className="group bg-zinc-950 min-h-[300px] flex flex-col justify-start p-8 hover:bg-white/[0.03] transition-colors"
           >
             <div className="flex flex-col gap-3">

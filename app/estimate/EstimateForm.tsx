@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { useSearchParams } from "next/navigation";
 import { useEstimateCart } from "@/hooks/use-estimate-cart";
-import { X, ArrowRight, CheckCircle, Paperclip, ChevronDown } from "lucide-react";
+import { ArrowRight, CheckCircle, Paperclip, ChevronDown } from "lucide-react";
 
 const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
 
@@ -26,7 +27,6 @@ const ADDONS = [
 
 const ALL_SERVICES = [...PACKAGES, ...ADDONS];
 
-// Which add-ons make sense for each package
 const RELEVANT_ADDONS: Record<string, string[]> = {
   "Signature Wash": ["Headlight Restoration", "Trim Restoration", "Water Spot Removal", "Engine Bay"],
   "Exterior Detail": ["Headlight Restoration", "Trim Restoration", "Water Spot Removal", "Engine Bay"],
@@ -57,9 +57,14 @@ const YEARS = Array.from({ length: currentYear - 1984 }, (_, i) => currentYear -
 type FormState = "idle" | "submitting" | "success" | "error";
 
 export function EstimateForm() {
-  const { items, remove, clear, total } = useEstimateCart();
+  const { clear } = useEstimateCart();
+  const searchParams = useSearchParams();
 
-  const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [selected, setSelected] = useState<Set<string>>(() => {
+    const param = searchParams.get("services");
+    if (!param) return new Set();
+    return new Set(param.split(",").map((s) => s.trim()).filter(Boolean));
+  });
   const [largerVehicle, setLargerVehicle] = useState(false);
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -67,9 +72,6 @@ export function EstimateForm() {
   const fileRef = useRef<HTMLInputElement>(null);
   const [fileNames, setFileNames] = useState<string[]>([]);
 
-  const hasCartItems = items.length > 0;
-
-  // Derive which package (if any) is selected
   const selectedPackage = PACKAGES.find((p) => selected.has(p.name))?.name ?? null;
   const relevantAddons = selectedPackage ? new Set(RELEVANT_ADDONS[selectedPackage] ?? []) : null;
 
@@ -81,21 +83,16 @@ export function EstimateForm() {
     ? new Set(ADDONS.filter((a) => !relevantAddons.has(a.name)).map((a) => a.name))
     : new Set();
 
-  const manualBase = [...selected].reduce((sum, name) => {
+  const base = [...selected].reduce((sum, name) => {
     const svc = ALL_SERVICES.find((s) => s.name === name);
     return sum + (svc?.price ?? 0);
   }, 0);
 
-  const cartSurcharge = largerVehicle
-    ? items.reduce((sum, i) => sum + (SURCHARGES[i.name] ?? 0), 0)
-    : 0;
-
-  const manualSurcharge = largerVehicle
+  const surcharge = largerVehicle
     ? [...selected].reduce((sum, name) => sum + (SURCHARGES[name] ?? 0), 0)
     : 0;
 
-  const cartGrand = total + cartSurcharge;
-  const manualGrand = manualBase + manualSurcharge;
+  const grand = base + surcharge;
 
   function toggleService(name: string) {
     const isPackage = PACKAGES.some((p) => p.name === name);
@@ -106,10 +103,8 @@ export function EstimateForm() {
       if (next.has(name)) {
         next.delete(name);
       } else if (isPackage) {
-        // Deselect all other packages
         PACKAGES.forEach((p) => next.delete(p.name));
         next.add(name);
-        // Remove add-ons that aren't relevant to this package
         const relevant = new Set(RELEVANT_ADDONS[name] ?? []);
         ADDONS.forEach((a) => {
           if (!relevant.has(a.name)) next.delete(a.name);
@@ -134,17 +129,28 @@ export function EstimateForm() {
 
     const formData = new FormData(e.currentTarget);
 
-    const servicesList = hasCartItems
-      ? items.map((i) => `${i.name} ($${i.price})`).join(", ")
-      : [...selected].join(", ") || "Not specified";
+    const nativeSelected = formData.getAll("service_selection") as string[];
+    const effectiveSelected = selected.size > 0 ? [...selected] : nativeSelected;
+    const servicesList = effectiveSelected.join(", ") || "Not specified";
     formData.set("services", servicesList);
-    formData.set("larger_vehicle", largerVehicle ? "Yes" : "No");
 
-    const surcharge = hasCartItems ? cartSurcharge : manualSurcharge;
-    const grand = hasCartItems ? cartGrand : manualGrand;
+    const effectiveLargerVehicle = largerVehicle || formData.get("larger_vehicle_checkbox") === "on";
+    formData.set("larger_vehicle", effectiveLargerVehicle ? "Yes" : "No");
+    formData.delete("larger_vehicle_checkbox");
+
+    const effectiveSurcharge = effectiveLargerVehicle
+      ? effectiveSelected.reduce((sum, name) => sum + (SURCHARGES[name] ?? 0), 0)
+      : 0;
+    const effectiveBase = effectiveSelected.reduce((sum, name) => {
+      const svc = ALL_SERVICES.find((s) => s.name === name);
+      return sum + (svc?.price ?? 0);
+    }, 0);
+    const effectiveGrand = effectiveBase + effectiveSurcharge;
+
+    formData.delete("service_selection");
     const estTotal =
-      grand > 0
-        ? `$${grand}${surcharge > 0 ? ` (includes $${surcharge} larger vehicle surcharge)` : ""}`
+      effectiveGrand > 0
+        ? `$${effectiveGrand}${effectiveSurcharge > 0 ? ` (includes $${effectiveSurcharge} larger vehicle surcharge)` : ""}`
         : "TBD";
     formData.set("estimated_total", estTotal);
 
@@ -202,120 +208,56 @@ export function EstimateForm() {
         <p className="text-xs font-black text-brand-yellow uppercase tracking-[0.15em] mb-4">
           Services
         </p>
+        <div className="flex flex-col gap-5">
+          <p className="text-xs text-white/50">
+            Select a package, then add any relevant extras.
+          </p>
 
-        {hasCartItems ? (
-          <div className="flex flex-col gap-1">
-            {items.map((item) => (
-              <div
-                key={item.name}
-                className="flex items-center justify-between py-2.5 border-b border-white/[0.06] last:border-0"
-              >
-                <div>
-                  <span className="text-sm text-white font-medium">{item.name}</span>
-                  <span className="ml-2 text-xs text-white/50 uppercase tracking-wide">
-                    {item.type}
-                  </span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-sm font-black text-brand-yellow font-numeric">
-                    ${item.price}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => remove(item.name)}
-                    className="text-white/30 hover:text-red-400 transition-colors"
-                    aria-label={`Remove ${item.name}`}
-                  >
-                    <X className="h-3.5 w-3.5" />
-                  </button>
-                </div>
-              </div>
-            ))}
+          <ServiceGroup
+            label="Packages"
+            services={PACKAGES}
+            selected={selected}
+            disabled={disabledPackages}
+            onToggle={toggleService}
+          />
 
-            <LargerVehicleToggle
-              checked={largerVehicle}
-              onChange={setLargerVehicle}
-              surcharge={cartSurcharge}
-            />
+          <ServiceGroup
+            label="Add-ons"
+            services={ADDONS}
+            selected={selected}
+            disabled={disabledAddons}
+            onToggle={toggleService}
+          />
 
-            <div className="flex justify-between items-center pt-3">
-              <button
-                type="button"
-                onClick={clear}
-                className="text-xs text-white/40 hover:text-white/60 transition-colors"
-              >
-                Clear all
-              </button>
+          <LargerVehicleToggle
+            checked={largerVehicle}
+            onChange={setLargerVehicle}
+            surcharge={surcharge}
+          />
+
+          {selected.size > 0 && (
+            <div className="flex justify-between items-center pt-1 border-t border-white/[0.06]">
+              <span className="text-xs text-white/50">{selected.size} selected</span>
               <div className="text-right">
-                {largerVehicle && cartSurcharge > 0 ? (
+                {largerVehicle && surcharge > 0 ? (
                   <>
                     <p className="text-xs text-white/40 mb-0.5">
-                      Base ${total.toLocaleString()} + surcharge ${cartSurcharge}
+                      Base ${base.toLocaleString()} + surcharge ${surcharge}
                     </p>
                     <span className="text-sm font-black text-white font-numeric">
-                      Est. ${cartGrand.toLocaleString()}
+                      Est. ${grand.toLocaleString()}
                     </span>
                   </>
                 ) : (
                   <span className="text-sm font-black text-white font-numeric">
-                    Est. ${total.toLocaleString()}
+                    Est. ${base.toLocaleString()}
                   </span>
                 )}
                 <p className="text-xs text-white/40 mt-0.5">Final price confirmed at booking.</p>
               </div>
             </div>
-          </div>
-        ) : (
-          <div className="flex flex-col gap-5">
-            <p className="text-xs text-white/50">
-              Select a package, then add any relevant extras.
-            </p>
-
-            <ServiceGroup
-              label="Packages"
-              services={PACKAGES}
-              selected={selected}
-              disabled={disabledPackages}
-              onToggle={toggleService}
-            />
-
-            <ServiceGroup
-              label="Add-ons"
-              services={ADDONS}
-              selected={selected}
-              disabled={disabledAddons}
-              onToggle={toggleService}
-            />
-
-            <LargerVehicleToggle
-              checked={largerVehicle}
-              onChange={setLargerVehicle}
-              surcharge={manualSurcharge}
-            />
-
-            {selected.size > 0 && (
-              <div className="flex justify-between items-center pt-1 border-t border-white/[0.06]">
-                <span className="text-xs text-white/50">{selected.size} selected</span>
-                <div className="text-right">
-                  {largerVehicle && manualSurcharge > 0 ? (
-                    <>
-                      <p className="text-xs text-white/40 mb-0.5">
-                        Base ${manualBase.toLocaleString()} + surcharge ${manualSurcharge}
-                      </p>
-                      <span className="text-sm font-black text-white font-numeric">
-                        Est. ${manualGrand.toLocaleString()}
-                      </span>
-                    </>
-                  ) : (
-                    <span className="text-sm font-black text-white font-numeric">
-                      Est. ${manualBase.toLocaleString()}
-                    </span>
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
       {/* Contact + vehicle */}
@@ -375,7 +317,6 @@ export function EstimateForm() {
           />
         </Field>
 
-        {/* Vehicle — year / make / model */}
         <div className="flex flex-col gap-1.5">
           <label className="text-sm font-bold text-white/90">
             Vehicle <span className="text-brand-yellow">*</span>
@@ -427,7 +368,6 @@ export function EstimateForm() {
           />
         </Field>
 
-        {/* Photo upload */}
         <div className="flex flex-col gap-1.5">
           <label className="text-sm font-bold text-white/90">
             Condition photos{" "}
@@ -485,31 +425,28 @@ function LargerVehicleToggle({
   surcharge: number;
 }) {
   return (
-    <button
-      type="button"
-      onClick={() => onChange(!checked)}
-      className={`flex items-center gap-3 w-full px-3 py-3 mt-2 rounded-xl border text-left transition-colors ${
-        checked
-          ? "border-brand-yellow/50 bg-brand-yellow/5"
-          : "border-white/[0.06] hover:border-white/[0.12]"
-      }`}
+    <label
+      htmlFor="larger-vehicle-checkbox"
+      className="group/lv flex items-center gap-3 w-full px-3 py-3 mt-2 rounded-xl border text-left transition-colors cursor-pointer touch-manipulation has-[:checked]:border-brand-yellow/50 has-[:checked]:bg-brand-yellow/5 border-white/[0.06] hover:border-white/[0.12]"
     >
-      <div
-        className={`w-4 h-4 rounded border flex items-center justify-center shrink-0 transition-colors ${
-          checked ? "border-brand-yellow bg-brand-yellow" : "border-white/20"
-        }`}
-      >
-        {checked && (
-          <svg className="w-2.5 h-2.5 text-black" viewBox="0 0 10 10" fill="none">
-            <path
-              d="M1.5 5l2.5 2.5 4.5-4.5"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        )}
+      <input
+        type="checkbox"
+        id="larger-vehicle-checkbox"
+        name="larger_vehicle_checkbox"
+        className="sr-only"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+      />
+      <div className="w-4 h-4 rounded border border-white/20 flex items-center justify-center shrink-0 transition-colors group-has-[:checked]/lv:border-brand-yellow group-has-[:checked]/lv:bg-brand-yellow">
+        <svg className="w-2.5 h-2.5 text-black hidden group-has-[:checked]/lv:block" viewBox="0 0 10 10" fill="none">
+          <path
+            d="M1.5 5l2.5 2.5 4.5-4.5"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </div>
       <div className="flex-1">
         <span className="text-sm text-white font-medium">Larger vehicle</span>
@@ -522,7 +459,7 @@ function LargerVehicleToggle({
       ) : (
         <span className="text-xs text-white/40 shrink-0">+$20–$40</span>
       )}
-    </button>
+    </label>
   );
 }
 
@@ -554,46 +491,47 @@ function ServiceGroup({
         {label}
       </p>
       {services.map((svc) => {
-        const checked = selected.has(svc.name);
+        const isChecked = selected.has(svc.name);
         const isDisabled = disabled.has(svc.name);
+        const uid = `svc-${svc.name.replace(/\s+/g, "-").toLowerCase()}`;
         return (
-          <button
+          <label
             key={svc.name}
-            type="button"
-            onClick={() => !isDisabled && onToggle(svc.name)}
-            disabled={isDisabled}
-            className={`flex items-center justify-between w-full px-3 py-2.5 rounded-xl border text-left transition-all ${
+            htmlFor={uid}
+            className={`group/svc flex items-center justify-between w-full px-3 py-2.5 rounded-xl border text-left transition-all touch-manipulation ${
               isDisabled
-                ? "border-white/[0.04] opacity-30 cursor-not-allowed"
-                : checked
-                ? "border-brand-yellow/50 bg-brand-yellow/5"
-                : "border-white/[0.06] hover:border-white/[0.12]"
+                ? "border-white/[0.04] opacity-30 cursor-not-allowed pointer-events-none"
+                : "cursor-pointer has-[:checked]:border-brand-yellow/50 has-[:checked]:bg-brand-yellow/5 border-white/[0.06] hover:border-white/[0.12]"
             }`}
           >
+            <input
+              type="checkbox"
+              id={uid}
+              name="service_selection"
+              value={svc.name}
+              className="sr-only"
+              checked={isChecked}
+              disabled={isDisabled}
+              onChange={() => !isDisabled && onToggle(svc.name)}
+            />
             <div className="flex items-center gap-3">
-              <div
-                className={`w-4 h-4 rounded border flex items-center justify-center shrink-0 transition-colors ${
-                  checked ? "border-brand-yellow bg-brand-yellow" : "border-white/20"
-                }`}
-              >
-                {checked && (
-                  <svg className="w-2.5 h-2.5 text-black" viewBox="0 0 10 10" fill="none">
-                    <path
-                      d="M1.5 5l2.5 2.5 4.5-4.5"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                )}
+              <div className="w-4 h-4 rounded border border-white/20 flex items-center justify-center shrink-0 transition-colors group-has-[:checked]/svc:border-brand-yellow group-has-[:checked]/svc:bg-brand-yellow">
+                <svg className="w-2.5 h-2.5 text-black hidden group-has-[:checked]/svc:block" viewBox="0 0 10 10" fill="none">
+                  <path
+                    d="M1.5 5l2.5 2.5 4.5-4.5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </div>
               <span className="text-sm text-white">{svc.name}</span>
             </div>
             <span className="text-sm font-black text-brand-yellow font-numeric shrink-0">
               ${svc.price}
             </span>
-          </button>
+          </label>
         );
       })}
     </div>

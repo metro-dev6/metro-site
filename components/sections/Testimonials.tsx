@@ -73,9 +73,8 @@ export function Testimonials() {
               <p className="text-base text-brand-white/70 leading-relaxed flex-1">
                 "{review.body}"
               </p>
-              <div className="flex items-center justify-between pt-2 border-t border-white/[0.06]">
+              <div className="pt-2 border-t border-white/[0.06]">
                 <span className="text-sm font-black text-brand-white">{review.name}</span>
-                <span className="text-xs text-brand-white/30">{review.time}</span>
               </div>
             </div>
           ))}

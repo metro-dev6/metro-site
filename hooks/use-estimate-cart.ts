@@ -44,9 +44,14 @@ export function useEstimateCart() {
   const toggle = useCallback((item: EstimateItem) => {
     const current = readStorage();
     const exists = current.some((i) => i.name === item.name);
-    const next = exists
-      ? current.filter((i) => i.name !== item.name)
-      : [...current, item];
+    let next: EstimateItem[];
+    if (exists) {
+      next = current.filter((i) => i.name !== item.name);
+    } else if (item.type === "package") {
+      next = [...current.filter((i) => i.type !== "package"), item];
+    } else {
+      next = [...current, item];
+    }
     writeStorage(next);
     setItems(next);
   }, []);

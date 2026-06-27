@@ -50,11 +50,11 @@ export function AnnouncementBar() {
         <div className="flex items-center gap-4">
           <a
             href="tel:6613685165"
-            className="text-sm font-bold tracking-wide hover:text-brand-white transition-colors"
+            className="text-sm font-bold tracking-wide hover:text-brand-white transition-colors whitespace-nowrap"
           >
-            <span className="text-brand-white/60">Call or Text:&nbsp;</span><span className="text-brand-yellow font-bold">(661) 368-5165</span>
+            <span className="hidden sm:inline text-brand-white/60">Call or Text:&nbsp;</span><span className="text-brand-yellow font-bold">(661) 368-5165</span>
           </a>
-          <div className="flex items-center gap-3 text-brand-white/50">
+          <div className="hidden sm:flex items-center gap-3 text-brand-white/50">
             {socials.map(({ label, href, Icon }) => (
               <Link
                 key={label}

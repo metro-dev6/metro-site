@@ -5,7 +5,7 @@ import { ShinyButton } from "@/components/ui/shiny-button";
 
 export function CTABanner() {
   return (
-    <section className="relative bg-black pt-40 pb-40 px-6 lg:px-8 overflow-hidden">
+    <section className="relative bg-black pt-20 pb-20 sm:pt-32 sm:pb-32 px-6 lg:px-8 overflow-hidden">
       <style>{`
         .cta-dim-layer { transition: background-color 0.5s ease; }
         section:has(.cta-btn:hover) .cta-dim-layer {
@@ -40,12 +40,6 @@ export function CTABanner() {
           >
             Book online. Get 10% off your first detail.
           </h2>
-          <p
-            className="text-2x1 text-brand-white/80"
-            style={{ textShadow: "0 2px 16px rgba(0,0,0,0.9)" }}
-          >
-            Serving Bakersfield, CA. Available every Saturday.
-          </p>
         </div>
 
         <Link href="/estimate" className="cta-btn">
@@ -53,7 +47,7 @@ export function CTABanner() {
             className="bg-brand-yellow text-brand-black font-black tracking-widest h-12 px-7"
             style={{ "--primary": "46 96% 50%" } as React.CSSProperties}
           >
-            Build Your Estimate
+            Get a Free Estimate
           </ShinyButton>
         </Link>
       </div>

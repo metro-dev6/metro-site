@@ -21,6 +21,7 @@ const LOCATIONS: Record<string, {
     intro: "Metro Auto Detailing is based in Bakersfield and serves the city and surrounding areas. We are 100% mobile. No shop, no drop-off, no waiting. You book a time, we show up with everything needed, and you get your vehicle back clean.",
     note: "Serving all of Bakersfield, CA. Appointment only.",
     mapQuery: "Bakersfield,CA",
+    mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d208275.7794942053!2d-119.18691749710077!3d35.347975706519435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80ea6bc8b994cb0d%3A0x59360c0998fe74c8!2sBakersfield%2C%20CA!5e0!3m2!1sen!2sus!4v1782620069786!5m2!1sen!2sus",
   },
   "southwest-bakersfield": {
     name: "Southwest Bakersfield",
@@ -39,6 +40,7 @@ const LOCATIONS: Record<string, {
     intro: "Stockdale is one of Bakersfield's most established corridors. We work trucks, SUVs, and weekend vehicles throughout this area. You stay home. We handle the vehicle. Done right the first time.",
     note: "Serving the Stockdale Highway corridor and surrounding neighborhoods.",
     mapQuery: "Stockdale,Bakersfield,CA",
+    mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52068.45552707636!2d-119.13068334438866!3d35.348734857128086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80ea4186a15eb669%3A0xd3ce63ccc291b7be!2sStockdale%20Country%20Club%2C%20Bakersfield%2C%20CA%2093309!5e0!3m2!1sen!2sus!4v1782620104824!5m2!1sen!2sus",
   },
   "seven-oaks": {
     name: "Seven Oaks",
@@ -50,14 +52,15 @@ const LOCATIONS: Record<string, {
     mapQuery: "Seven+Oaks,Bakersfield,CA",
     mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13018.667243110227!2d-119.12882728428211!3d35.33909453774978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80ea415db5ab7c2f%3A0x9ea1344abc851444!2sSeven%20Oaks%2C%20Bakersfield%2C%20CA%2093311!5e0!3m2!1sen!2sus!4v1782619947091!5m2!1sen!2sus",
   },
-  "oleander": {
-    name: "Oleander",
-    metaTitle: "Mobile Detailing in Oleander, Bakersfield | Metro Auto Detailing",
-    metaDescription: "Mobile auto detailing in the Oleander neighborhood, Bakersfield CA. Metro Auto Detailing comes to your home. Book a detail online.",
-    headline: "Mobile Detailing in Oleander, Bakersfield",
-    intro: "Oleander is one of Bakersfield's older established neighborhoods. Long-term homeowners who want their vehicles treated right, not rushed through. We take the time to do it properly.",
-    note: "Serving Oleander and the Sunset neighborhood.",
-    mapQuery: "Oleander,Bakersfield,CA",
+  "terra-vista": {
+    name: "Terra Vista",
+    metaTitle: "Mobile Detailing in Terra Vista, Bakersfield | Metro Auto Detailing",
+    metaDescription: "Mobile auto detailing in Terra Vista, Bakersfield CA. Metro Auto Detailing comes to your home. Book a detail online.",
+    headline: "Mobile Detailing in Terra Vista, Bakersfield",
+    intro: "Terra Vista is a residential neighborhood in southwest Bakersfield. We cover this area regularly — close to home base, fast availability, and no driving anywhere on your end.",
+    note: "Serving Terra Vista and surrounding southwest neighborhoods.",
+    mapQuery: "Terra+Vista,Bakersfield,CA",
+    mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26048.359926109435!2d-119.13153787446845!3d35.304863551648495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80ea4120f9ec042b%3A0x4abf36087afc3e0a!2sTerra%20Vista%2C%20Bakersfield%2C%20CA%2093311!5e0!3m2!1sen!2sus!4v1782620285736!5m2!1sen!2sus",
   },
 };
 

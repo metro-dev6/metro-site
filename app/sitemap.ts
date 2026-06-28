@@ -7,7 +7,7 @@ const LOCATION_SLUGS = [
   "southwest-bakersfield",
   "stockdale",
   "seven-oaks",
-  "oleander",
+  "terra-vista",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

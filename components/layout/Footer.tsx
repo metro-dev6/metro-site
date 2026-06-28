@@ -98,7 +98,7 @@ export function Footer() {
               { label: "Southwest Bakersfield", href: "/locations/southwest-bakersfield" },
               { label: "Stockdale", href: "/locations/stockdale" },
               { label: "Seven Oaks", href: "/locations/seven-oaks" },
-              { label: "Oleander", href: "/locations/oleander" },
+              { label: "Terra Vista", href: "/locations/terra-vista" },
             ].map((loc) => (
               <Link
                 key={loc.href}

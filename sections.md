@@ -42,11 +42,13 @@ Signature Wash: $80 / $100
 Exterior Detail: $150 / $170
 Interior Detail: $200 / $240
 Refresh Detail: $250 / $290
-Full Detail: $350 / $390
+Full Detail: $400 / $440
 
 Add-ons:
 Engine Bay Detail: $50
-Trim Restoration: $50
+Headlight Restoration: $80
+Water Spot Removal: $100
+Trim Restoration: $100
 Leather Conditioning: $40
 Pet Hair & Sand Removal: $80
 Carpet & Seat Extraction: $70

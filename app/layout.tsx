@@ -51,9 +51,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": ["LocalBusiness", "AutoRepair"],
+              "@type": ["LocalBusiness", "AutomotiveRepair"],
               "name": "Metro Auto Detailing",
-              "description": "Mobile auto detailing in Bakersfield, CA. We come to you.",
+              "description": "Fully mobile auto detailing in Bakersfield, CA. We come to you — home, office, or anywhere your car is parked. No drop-off required.",
               "url": "https://metroautodetailing.pro",
               "telephone": "+16613685165",
               "email": "metrodetailing661@gmail.com",
@@ -61,14 +61,22 @@ export default function RootLayout({
                 "@type": "PostalAddress",
                 "addressLocality": "Bakersfield",
                 "addressRegion": "CA",
+                "postalCode": "93301",
                 "addressCountry": "US"
               },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 35.3733,
+                "longitude": -119.0187
+              },
+              "openingHours": "Mo-Su 08:00-20:00",
               "areaServed": [
-                "Southwest Bakersfield", "Stockdale", "Seven Oaks",
-                "Oleander", "Bakersfield"
+                "Bakersfield", "Southwest Bakersfield", "Stockdale",
+                "Seven Oaks", "Terra Vista", "Rosedale", "Oleander"
               ],
               "priceRange": "$$",
               "image": "https://metroautodetailing.pro/hero-car-enhanced.jpg",
+              "hasMap": "https://maps.google.com/?q=Bakersfield,CA",
               "sameAs": [
                 "https://instagram.com/metroautodetailing",
                 "https://facebook.com/metroautodetailing"

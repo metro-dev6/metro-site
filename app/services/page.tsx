@@ -264,29 +264,14 @@ export default function ServicesPage() {
             subheadline="The longer you wait, the more work it takes."
           />
           <p className="text-sm text-white/60 leading-relaxed max-w-2xl mb-10">
-            Price reflects condition at time of service. A car cleaned every two weeks stays clean. A car that goes three months between details has built-up contamination, road film, and interior grime that takes significantly longer to remove. Book a frequency that fits your schedule. The price matches the work.
+            Price reflects condition at time of service. A car cleaned every two weeks stays clean. A car that goes three months between details has built-up contamination, road film, and interior grime that takes significantly longer to remove. Book a frequency that fits your schedule.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
             {[
-              {
-                frequency: "Every 2 Weeks",
-                label: "Biweekly",
-                price: "$80",
-                note: "Car stays clean. Fast service.",
-                items: [
-                  "Hand wash & dry",
-                  "Wheels, rims, & fender wells cleaned",
-                  "Tire dressing",
-                  "Windows (interior & exterior)",
-                  "Door jambs cleaned",
-                  "Interior vacuum (thorough)",
-                  "All interior panels, compartments, and console cleaned",
-                ],
-              },
               {
                 frequency: "Monthly",
                 label: "Monthly",
-                price: "$120",
+                price: "$110",
                 note: "More buildup. More thorough.",
                 featured: true,
                 items: [
@@ -302,7 +287,7 @@ export default function ServicesPage() {
               {
                 frequency: "Every 2 Months",
                 label: "Bimonthly",
-                price: "$200",
+                price: "$180",
                 note: "Significant buildup. Refresh needed.",
                 items: [
                   "Hand wash & dry",
@@ -318,7 +303,7 @@ export default function ServicesPage() {
               {
                 frequency: "Quarterly",
                 label: "Quarterly",
-                price: "$300",
+                price: "$225",
                 note: "3 months of buildup. Refresh needed.",
                 items: [
                   "Hand wash & dry",

@@ -40,7 +40,7 @@ const LOCATIONS: Record<string, {
     intro: "Stockdale is one of Bakersfield's most established corridors. We work trucks, SUVs, and weekend vehicles throughout this area. You stay home. We handle the vehicle. Done right the first time.",
     note: "Serving the Stockdale Highway corridor and surrounding neighborhoods.",
     mapQuery: "Stockdale,Bakersfield,CA",
-    mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52068.45552707636!2d-119.13068334438866!3d35.348734857128086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80ea4186a15eb669%3A0xd3ce63ccc291b7be!2sStockdale%20Country%20Club%2C%20Bakersfield%2C%20CA%2093309!5e0!3m2!1sen!2sus!4v1782620104824!5m2!1sen!2sus",
+    mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6508.490660225239!2d-119.09071843114134!3d35.34955744032876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80ea4186a15eb669%3A0xd3ce63ccc291b7be!2sStockdale%20Country%20Club%2C%20Bakersfield%2C%20CA%2093309!5e0!3m2!1sen!2sus!4v1782620402640!5m2!1sen!2sus",
   },
   "seven-oaks": {
     name: "Seven Oaks",

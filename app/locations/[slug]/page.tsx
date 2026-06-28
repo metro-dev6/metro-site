@@ -11,6 +11,7 @@ const LOCATIONS: Record<string, {
   intro: string;
   note: string;
   mapQuery: string;
+  mapSrc?: string;
 }> = {
   "bakersfield": {
     name: "Bakersfield",
@@ -47,6 +48,7 @@ const LOCATIONS: Record<string, {
     intro: "Seven Oaks clients usually want the Full Detail or Refresh Detail. We show up, do the work, and leave the vehicle looking the way it should. No upselling on the driveway. Just the job you booked.",
     note: "Serving Seven Oaks and the surrounding southwest area.",
     mapQuery: "Seven+Oaks,Bakersfield,CA",
+    mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13018.667243110227!2d-119.12882728428211!3d35.33909453774978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80ea415db5ab7c2f%3A0x9ea1344abc851444!2sSeven%20Oaks%2C%20Bakersfield%2C%20CA%2093311!5e0!3m2!1sen!2sus!4v1782619947091!5m2!1sen!2sus",
   },
   "oleander": {
     name: "Oleander",
@@ -157,7 +159,7 @@ export default async function LocationPage({ params }: Props) {
           </p>
           <div className="rounded-2xl overflow-hidden border border-white/[0.07]">
             <iframe
-              src={`https://maps.google.com/maps?q=${location.mapQuery}&output=embed&z=13`}
+              src={location.mapSrc ?? `https://maps.google.com/maps?q=${location.mapQuery}&output=embed&z=13`}
               width="100%"
               height="320"
               style={{ border: 0 }}

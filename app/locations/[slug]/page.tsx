@@ -10,6 +10,7 @@ const LOCATIONS: Record<string, {
   headline: string;
   intro: string;
   note: string;
+  mapQuery: string;
 }> = {
   "bakersfield": {
     name: "Bakersfield",
@@ -18,6 +19,7 @@ const LOCATIONS: Record<string, {
     headline: "Mobile Auto Detailing in Bakersfield, CA",
     intro: "Metro Auto Detailing is based in Bakersfield and serves the city and surrounding areas. We are 100% mobile. No shop, no drop-off, no waiting. You book a time, we show up with everything needed, and you get your vehicle back clean.",
     note: "Serving all of Bakersfield, CA. Appointment only.",
+    mapQuery: "Bakersfield,CA",
   },
   "southwest-bakersfield": {
     name: "Southwest Bakersfield",
@@ -26,6 +28,7 @@ const LOCATIONS: Record<string, {
     headline: "Mobile Detailing in Southwest Bakersfield",
     intro: "Southwest Bakersfield is our home base. If you're in the Gosford, White Lane, or Coffee Road corridor, we can be at your door faster than anyone else in the city. No driving anywhere. We come to you.",
     note: "Home base area — fastest availability in Southwest Bakersfield.",
+    mapQuery: "Southwest+Bakersfield,CA",
   },
   "stockdale": {
     name: "Stockdale",
@@ -34,6 +37,7 @@ const LOCATIONS: Record<string, {
     headline: "Mobile Detailing in Stockdale, Bakersfield",
     intro: "Stockdale is one of Bakersfield's most established corridors. We work trucks, SUVs, and weekend vehicles throughout this area. You stay home. We handle the vehicle. Done right the first time.",
     note: "Serving the Stockdale Highway corridor and surrounding neighborhoods.",
+    mapQuery: "Stockdale,Bakersfield,CA",
   },
   "seven-oaks": {
     name: "Seven Oaks",
@@ -42,6 +46,7 @@ const LOCATIONS: Record<string, {
     headline: "Mobile Detailing in Seven Oaks, Bakersfield",
     intro: "Seven Oaks clients usually want the Full Detail or Refresh Detail. We show up, do the work, and leave the vehicle looking the way it should. No upselling on the driveway. Just the job you booked.",
     note: "Serving Seven Oaks and the surrounding southwest area.",
+    mapQuery: "Seven+Oaks,Bakersfield,CA",
   },
   "oleander": {
     name: "Oleander",
@@ -50,6 +55,7 @@ const LOCATIONS: Record<string, {
     headline: "Mobile Detailing in Oleander, Bakersfield",
     intro: "Oleander is one of Bakersfield's older established neighborhoods. Long-term homeowners who want their vehicles treated right, not rushed through. We take the time to do it properly.",
     note: "Serving Oleander and the Sunset neighborhood.",
+    mapQuery: "Oleander,Bakersfield,CA",
   },
 };
 
@@ -142,6 +148,25 @@ export default async function LocationPage({ params }: Props) {
           <p className="text-xs text-white/30 text-center mt-4">
             Larger vehicles (trucks, SUVs, vans) add $20–$40. Add-ons available at booking.
           </p>
+        </div>
+
+        {/* Map */}
+        <div className="mb-14">
+          <p className="text-xs font-black text-brand-yellow uppercase tracking-[0.2em] mb-6 text-center">
+            Service Area
+          </p>
+          <div className="rounded-2xl overflow-hidden border border-white/[0.07]">
+            <iframe
+              src={`https://maps.google.com/maps?q=${location.mapQuery}&output=embed&z=13`}
+              width="100%"
+              height="320"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title={`${location.name} service area map`}
+            />
+          </div>
         </div>
 
         {/* CTA */}

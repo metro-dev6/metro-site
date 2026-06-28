@@ -2,12 +2,10 @@
 
 import { useState, useRef } from "react";
 import { useSearchParams } from "next/navigation";
-import Script from "next/script";
 import { useEstimateCart } from "@/hooks/use-estimate-cart";
 import { ArrowRight, CheckCircle, Paperclip, ChevronDown } from "lucide-react";
 
 const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
-const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "";
 
 const PACKAGES = [
   { name: "Signature Wash", price: 80 },
@@ -203,12 +201,6 @@ export function EstimateForm() {
   }
 
   return (
-    <>
-      <Script
-        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-        async
-        defer
-      />
     <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-6">
 
       {/* Services */}
@@ -407,13 +399,6 @@ export function EstimateForm() {
         <p className="text-red-400 text-sm">{errorMsg}</p>
       )}
 
-      <div
-        className="cf-turnstile"
-        data-sitekey={TURNSTILE_SITE_KEY}
-        data-action="turnstile-spin-v1"
-        data-theme="dark"
-      />
-
       <button
         type="submit"
         disabled={formState === "submitting"}
@@ -427,7 +412,6 @@ export function EstimateForm() {
         Or call / text directly: (661) 368-5165.
       </p>
     </form>
-    </>
   );
 }
 

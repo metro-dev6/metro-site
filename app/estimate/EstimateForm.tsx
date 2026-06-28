@@ -16,7 +16,7 @@ const PACKAGES = [
 ] as const;
 
 const ADDONS = [
-  { name: "Headlight Restoration", price: 100 },
+  { name: "Headlight Restoration", price: 80 },
   { name: "Trim Restoration", price: 100 },
   { name: "Water Spot Removal", price: 100 },
   { name: "Pet Hair & Sand Removal", price: 80 },

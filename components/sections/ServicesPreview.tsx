@@ -132,7 +132,7 @@ export function ServicesPreview() {
 
               <ul className="flex flex-col gap-2">
                 {[
-                  { name: "Headlight Restoration", price: "$100" },
+                  { name: "Headlight Restoration", price: "$80" },
                   { name: "Trim Restoration", price: "$100" },
                   { name: "Water Spot Removal", price: "$100" },
                   { name: "Pet Hair and/or Sand Removal", price: "$80" },

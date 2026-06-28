@@ -201,8 +201,8 @@ export default function ServicesPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             <AddonCard
               name="Headlight Restoration"
-              price="$100"
-              priceValue={100}
+              price="$80"
+              priceValue={80}
               description="Lenses sanded progressively, polished to remove surface scratches, prepped with IPA, and coated with a ceramic clear coat. Restores clarity and protects against UV."
             />
             <AddonCard

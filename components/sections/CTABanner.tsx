@@ -38,7 +38,7 @@ export function CTABanner() {
             className="text-2xl sm:text-4xl font-black uppercase text-brand-white tracking-tight"
             style={{ textShadow: "0 2px 16px rgba(0,0,0,0.9)" }}
           >
-            Book online. Get 10% off your first detail.
+            Book online. Get 15% off your first detail.
           </h2>
         </div>
 

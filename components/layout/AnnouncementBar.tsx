@@ -38,13 +38,13 @@ export function AnnouncementBar() {
       <div className="mx-auto w-full max-w-7xl px-6 lg:px-8 flex items-center justify-between">
         <Link href="/estimate" className="group flex items-center gap-2 hover:opacity-80 transition-opacity">
           <span className="hidden sm:block text-sm font-bold tracking-[0.12em] uppercase text-brand-yellow">
-            10% Off Your First Detail
+            15% Off Your First Detail
           </span>
           <span className="hidden sm:block text-sm font-bold tracking-[0.12em] uppercase text-brand-white/40">
             ·&nbsp;&nbsp;Book Online to Redeem
           </span>
           <span className="sm:hidden text-sm font-bold tracking-[0.12em] uppercase text-brand-yellow">
-            10% Off First Detail
+            15% Off First Detail
           </span>
         </Link>
         <div className="flex items-center gap-4">

@@ -18,8 +18,21 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Metro Auto Detailing | Bakersfield, CA",
-  description: "Mobile auto detailing in Bakersfield, CA. We come to you.",
+  title: {
+    default: "Metro Auto Detailing | Bakersfield, CA",
+    template: "%s | Metro Auto Detailing",
+  },
+  description: "Mobile auto detailing in Bakersfield, CA. We come to you — no drop-off, no shop. Book online.",
+  metadataBase: new URL("https://metroautodetailing.pro"),
+  openGraph: {
+    siteName: "Metro Auto Detailing",
+    type: "website",
+    locale: "en_US",
+    images: [{ url: "/hero-car-enhanced.jpg", width: 1200, height: 630, alt: "Metro Auto Detailing — Bakersfield, CA" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({
@@ -33,6 +46,36 @@ export default function RootLayout({
       className={`${montserrat.variable} ${dmSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": ["LocalBusiness", "AutoRepair"],
+              "name": "Metro Auto Detailing",
+              "description": "Mobile auto detailing in Bakersfield, CA. We come to you.",
+              "url": "https://metroautodetailing.pro",
+              "telephone": "+16613685165",
+              "email": "metrodetailing661@gmail.com",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Bakersfield",
+                "addressRegion": "CA",
+                "addressCountry": "US"
+              },
+              "areaServed": [
+                "Southwest Bakersfield", "Stockdale", "Seven Oaks",
+                "Oleander", "Bakersfield"
+              ],
+              "priceRange": "$$",
+              "image": "https://metroautodetailing.pro/hero-car-enhanced.jpg",
+              "sameAs": [
+                "https://instagram.com/metroautodetailing",
+                "https://facebook.com/metroautodetailing"
+              ]
+            })
+          }}
+        />
         <AnnouncementBar />
         <Header />
         {/* AnnouncementBar h-9 (36px) + Header h-16 (64px) = 100px */}

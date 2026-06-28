@@ -9,6 +9,11 @@ import { BGPattern } from "@/components/bg-pattern";
 export const metadata: Metadata = {
   title: "Services | Metro Auto Detailing",
   description: "Professional mobile detailing services in Bakersfield, CA. View packages, add-ons, fleet pricing, and book online.",
+  openGraph: {
+    title: "Detailing Services in Bakersfield, CA | Metro Auto Detailing",
+    description: "Mobile detailing packages starting at $80. We come to you — no drop-off required.",
+    url: "https://metroautodetailing.pro/services",
+  },
 };
 
 const essentialsPlans: MetroPlan[] = [

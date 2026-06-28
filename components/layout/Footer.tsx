@@ -91,11 +91,23 @@ export function Footer() {
           {/* Right — area + social */}
           <div className="flex flex-col gap-3">
             <p className="text-xs font-bold tracking-[0.2em] uppercase text-brand-yellow/100 mb-1">
-              Service Area
+              Areas We Serve
             </p>
-            <p className="text-sm text-brand-white/50 leading-relaxed">
-              Bakersfield, CA and the greater Bakersfield area. Mobile only, travel fees may apply. Appointment Only.
-            </p>
+            {[
+              { label: "Bakersfield, CA", href: "/locations/bakersfield" },
+              { label: "Southwest Bakersfield", href: "/locations/southwest-bakersfield" },
+              { label: "Stockdale", href: "/locations/stockdale" },
+              { label: "Seven Oaks", href: "/locations/seven-oaks" },
+              { label: "Oleander", href: "/locations/oleander" },
+            ].map((loc) => (
+              <Link
+                key={loc.href}
+                href={loc.href}
+                className="text-sm text-brand-white/50 hover:text-brand-white transition-colors w-fit"
+              >
+                {loc.label}
+              </Link>
+            ))}
             <div className="flex items-center gap-4 mt-2">
               {socialLinks.map((s) => (
                 <a

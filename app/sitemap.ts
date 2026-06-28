@@ -8,6 +8,7 @@ const LOCATION_SLUGS = [
   "stockdale",
   "seven-oaks",
   "terra-vista",
+  "rosedale",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

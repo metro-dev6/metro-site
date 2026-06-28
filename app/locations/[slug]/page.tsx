@@ -31,6 +31,7 @@ const LOCATIONS: Record<string, {
     intro: "Southwest Bakersfield is our home base. If you're in the Gosford, White Lane, or Coffee Road corridor, we can be at your door faster than anyone else in the city. No driving anywhere. We come to you.",
     note: "Home base area — fastest availability in Southwest Bakersfield.",
     mapQuery: "Southwest+Bakersfield,CA",
+    mapSrc: "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d52070.84648308407!2d-119.11089740270364!3d35.34502549844985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1782620534036!5m2!1sen!2sus",
   },
   "stockdale": {
     name: "Stockdale",
@@ -51,6 +52,16 @@ const LOCATIONS: Record<string, {
     note: "Serving Seven Oaks and the surrounding southwest area.",
     mapQuery: "Seven+Oaks,Bakersfield,CA",
     mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13018.667243110227!2d-119.12882728428211!3d35.33909453774978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80ea415db5ab7c2f%3A0x9ea1344abc851444!2sSeven%20Oaks%2C%20Bakersfield%2C%20CA%2093311!5e0!3m2!1sen!2sus!4v1782619947091!5m2!1sen!2sus",
+  },
+  "rosedale": {
+    name: "Rosedale",
+    metaTitle: "Mobile Detailing in Rosedale, Bakersfield | Metro Auto Detailing",
+    metaDescription: "Mobile auto detailing in Rosedale, Bakersfield CA. Metro Auto Detailing comes to your home. Full detail, interior cleaning, and more. Book online.",
+    headline: "Mobile Detailing in Rosedale, Bakersfield",
+    intro: "Rosedale is a growing area in northwest Bakersfield. Newer homes, families, multiple vehicles — we handle all of it. You stay home, we take care of the car.",
+    note: "Serving Rosedale and northwest Bakersfield.",
+    mapQuery: "Rosedale,Bakersfield,CA",
+    mapSrc: "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d52049.57906851327!2d-119.14254000931352!3d35.37800815020915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1782620599920!5m2!1sen!2sus",
   },
   "terra-vista": {
     name: "Terra Vista",

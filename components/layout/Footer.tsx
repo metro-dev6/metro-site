@@ -99,6 +99,7 @@ export function Footer() {
               { label: "Stockdale", href: "/locations/stockdale" },
               { label: "Seven Oaks", href: "/locations/seven-oaks" },
               { label: "Terra Vista", href: "/locations/terra-vista" },
+              { label: "Rosedale", href: "/locations/rosedale" },
             ].map((loc) => (
               <Link
                 key={loc.href}

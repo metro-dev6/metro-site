@@ -154,9 +154,6 @@ export default async function LocationPage({ params }: Props) {
 
         {/* Map */}
         <div className="mb-14">
-          <p className="text-xs font-black text-brand-yellow uppercase tracking-[0.2em] mb-6 text-center">
-            Service Area
-          </p>
           <div className="rounded-2xl overflow-hidden border border-white/[0.07]">
             <iframe
               src={location.mapSrc ?? `https://maps.google.com/maps?q=${location.mapQuery}&output=embed&z=13`}

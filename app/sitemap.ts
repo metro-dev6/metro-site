@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const BASE = "https://metroautodetailing.pro";
+const BASE = "https://www.metroautodetailing.pro";
 
 const LOCATION_SLUGS = [
   "bakersfield",
@@ -14,15 +14,13 @@ const LOCATION_SLUGS = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const locationPages = LOCATION_SLUGS.map((slug) => ({
     url: `${BASE}/locations/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
+    lastModified: new Date("2026-06-28"),
   }));
 
   return [
-    { url: BASE, lastModified: new Date(), changeFrequency: "monthly", priority: 1.0 },
-    { url: `${BASE}/services`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE}/estimate`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+    { url: BASE, lastModified: new Date("2026-06-28") },
+    { url: `${BASE}/services`, lastModified: new Date("2026-06-28") },
+    { url: `${BASE}/estimate`, lastModified: new Date("2026-06-28") },
     ...locationPages,
   ];
 }

@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | Metro Auto Detailing",
   },
   description: "Mobile auto detailing in Bakersfield, CA. We come to you — no drop-off, no shop. Book online.",
-  metadataBase: new URL("https://metroautodetailing.pro"),
+  metadataBase: new URL("https://www.metroautodetailing.pro"),
   openGraph: {
     siteName: "Metro Auto Detailing",
     type: "website",
@@ -51,10 +51,11 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": ["LocalBusiness", "AutomotiveRepair"],
+              "@type": ["LocalBusiness", "AutomotiveBusiness"],
+              "@id": "https://www.metroautodetailing.pro/#business",
               "name": "Metro Auto Detailing",
               "description": "Fully mobile auto detailing in Bakersfield, CA. We come to you — home, office, or anywhere your car is parked. No drop-off required.",
-              "url": "https://metroautodetailing.pro",
+              "url": "https://www.metroautodetailing.pro",
               "telephone": "+16613685165",
               "email": "metrodetailing661@gmail.com",
               "address": {

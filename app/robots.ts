@@ -11,6 +11,6 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: "CCBot", allow: "/" },
       { userAgent: "Googlebot-Extended", allow: "/" },
     ],
-    sitemap: "https://metroautodetailing.pro/sitemap.xml",
+    sitemap: "https://www.metroautodetailing.pro/sitemap.xml",
   };
 }

@@ -7,12 +7,13 @@ import { EstimateCartBar } from "@/components/EstimateCartBar";
 import { BGPattern } from "@/components/bg-pattern";
 
 export const metadata: Metadata = {
-  title: "Services | Metro Auto Detailing",
-  description: "Professional mobile detailing services in Bakersfield, CA. View packages, add-ons, fleet pricing, and book online.",
+  title: { absolute: "Mobile Detailing Services in Bakersfield, CA | Metro Auto Detailing" },
+  description: "Professional mobile detailing services in Bakersfield, CA. View packages, add-ons, and book online.",
+  alternates: { canonical: "https://www.metroautodetailing.pro/services" },
   openGraph: {
-    title: "Detailing Services in Bakersfield, CA | Metro Auto Detailing",
+    title: "Mobile Detailing Services in Bakersfield, CA | Metro Auto Detailing",
     description: "Mobile detailing packages starting at $80. We come to you — no drop-off required.",
-    url: "https://metroautodetailing.pro/services",
+    url: "https://www.metroautodetailing.pro/services",
   },
 };
 
@@ -160,7 +161,7 @@ export default function ServicesPage() {
           <div className="flex items-end justify-between gap-8">
             <div>
               <h1 className="text-5xl sm:text-7xl font-black uppercase text-white tracking-normal mb-4">
-                Services
+                Mobile Detailing Services
               </h1>
               <p className="text-lg text-white/55 max-w-xl leading-relaxed">
                 No shop. No drop-off. We bring everything needed to clean, protect, and restore. Wherever the vehicle is parked.

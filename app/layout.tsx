@@ -79,7 +79,7 @@ export default function RootLayout({
               "image": "https://metroautodetailing.pro/hero-car-enhanced.jpg",
               "hasMap": "https://maps.google.com/?q=Bakersfield,CA",
               "sameAs": [
-                "https://instagram.com/metroautodetailing",
+                "https://instagram.com/metroautodetailingca",
                 "https://facebook.com/metroautodetailing"
               ]
             })

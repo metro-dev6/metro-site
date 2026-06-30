@@ -90,14 +90,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const location = LOCATIONS[slug];
   if (!location) return {};
   return {
-    title: location.metaTitle,
+    title: { absolute: location.metaTitle },
     description: location.metaDescription,
+    alternates: { canonical: `https://www.metroautodetailing.pro/locations/${slug}` },
     openGraph: {
       title: location.metaTitle,
       description: location.metaDescription,
-      url: `https://metroautodetailing.pro/locations/${slug}`,
+      url: `https://www.metroautodetailing.pro/locations/${slug}`,
       siteName: "Metro Auto Detailing",
-      images: [{ url: "https://metroautodetailing.pro/hero-car-enhanced.jpg", width: 1200, height: 630 }],
+      images: [{ url: "https://www.metroautodetailing.pro/hero-car-enhanced.jpg", width: 1200, height: 630 }],
       type: "website",
     },
   };

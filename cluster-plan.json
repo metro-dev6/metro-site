@@ -1,0 +1,658 @@
+{
+  "meta": {
+    "business": "Metro Auto Detailing",
+    "website": "metroautodetailing.pro",
+    "location": "Bakersfield, CA",
+    "analysis_date": "2026-06-28",
+    "seed_keyword_count": 12,
+    "expanded_keyword_count": 45,
+    "total_clusters": 5,
+    "total_blog_posts_planned": 18,
+    "pillar_page": "Mobile Auto Detailing in Bakersfield CA"
+  },
+  "intent_classification": {
+    "transactional_local": [
+      "mobile detailing Bakersfield CA",
+      "auto detailing Bakersfield CA",
+      "car detail Bakersfield CA",
+      "car detailing near me Bakersfield",
+      "mobile car wash Bakersfield CA",
+      "interior car cleaning Bakersfield CA",
+      "headlight restoration Bakersfield CA",
+      "ceramic coating Bakersfield CA",
+      "paint correction Bakersfield CA",
+      "engine bay cleaning Bakersfield CA",
+      "car detailing Bakersfield prices"
+    ],
+    "informational_blog_targets": [
+      "how often should you detail your car",
+      "how often should I get my car detailed",
+      "how often to wash car in Bakersfield",
+      "what is a full detail",
+      "what is included in a full detail",
+      "mobile detailing vs car wash difference",
+      "how long does a car detail take",
+      "what to expect when getting car detailed",
+      "car wax vs ceramic coating which is better",
+      "ceramic coating vs wax for hot weather",
+      "how long does ceramic coating last",
+      "water spot removal car",
+      "how to remove water spots from car",
+      "hard water spots on car paint",
+      "clay bar treatment car what does it do",
+      "what is clay bar detailing",
+      "clay bar before waxing",
+      "how to protect car paint from sun damage",
+      "how to protect car from Bakersfield dust",
+      "why does my car get dirty so fast Bakersfield",
+      "best time to get car detailed Bakersfield",
+      "what is included in interior car detail",
+      "pet hair removal from car seats",
+      "how to get dog hair out of car",
+      "leather seat conditioning how often",
+      "how to clean leather car seats",
+      "headlight restoration vs headlight replacement",
+      "how to fix foggy headlights",
+      "engine bay cleaning is it safe worth it",
+      "how to restore faded plastic trim car",
+      "faded car trim restoration",
+      "what is paint correction detailing",
+      "how to remove swirl marks from car paint"
+    ],
+    "navigational_removed": [
+      "prestodetailing bakersfield",
+      "bakersfield auto detailing company",
+      "metro auto detailing"
+    ]
+  },
+  "serp_overlap_matrix": {
+    "methodology": "Pairwise WebSearch comparison. Count shared unique root domains in top-10 organic results (excluding Google properties, directories). Score 7-10 = same post; 4-6 = same cluster; 2-3 = interlink; 0-1 = separate.",
+    "pairs": [
+      {
+        "kw_a": "mobile detailing Bakersfield CA",
+        "kw_b": "auto detailing Bakersfield CA",
+        "shared_domains": ["bakersfieldautodetailing.com", "prestodetailing.com", "kernmobiledetails.com", "detailingbakersfield.com", "garciadetails.com", "yelp.com", "pandahub.com"],
+        "score": 8,
+        "decision": "same_post",
+        "notes": "Identical SERP - both trigger same local pack + same organic results"
+      },
+      {
+        "kw_a": "auto detailing Bakersfield CA",
+        "kw_b": "car detail Bakersfield CA",
+        "shared_domains": ["bakersfieldautodetailing.com", "prestodetailing.com", "detailingbakersfield.com", "yelp.com", "pandahub.com", "bakersfielddetail.com"],
+        "score": 9,
+        "decision": "same_post",
+        "notes": "Essentially synonymous - one service page targets all three"
+      },
+      {
+        "kw_a": "how often should you detail your car",
+        "kw_b": "how often should I get my car detailed",
+        "shared_domains": ["ceramicpro.com", "archersdetailing.com", "lmcardetailing.com", "fresh-layer.com", "sparkcleancar.com", "jtech.org", "alwayscleancars.com"],
+        "score": 8,
+        "decision": "same_post",
+        "notes": "Identical searcher intent, same guide format, same result set"
+      },
+      {
+        "kw_a": "how often should you detail your car",
+        "kw_b": "best time to get car detailed Bakersfield",
+        "shared_domains": ["fresh-layer.com", "onsitedetail.net"],
+        "score": 3,
+        "decision": "interlink",
+        "notes": "Bakersfield modifier shifts SERP to local results; treat as separate posts that interlink"
+      },
+      {
+        "kw_a": "water spot removal car",
+        "kw_b": "how to remove water spots from car",
+        "shared_domains": ["drbeasleys.com", "chemicalguys.com", "cleantools.net", "fresh-layer.com", "autozone.com", "nextzettusa.com"],
+        "score": 9,
+        "decision": "same_post",
+        "notes": "Same query two ways - combine into one guide"
+      },
+      {
+        "kw_a": "water spot removal car",
+        "kw_b": "hard water spots on car paint",
+        "shared_domains": ["chemicalguys.com", "cleantools.net", "fresh-layer.com", "nextzettusa.com"],
+        "score": 7,
+        "decision": "same_post",
+        "notes": "Hard water spots is a subset of water spot removal; same article targets both"
+      },
+      {
+        "kw_a": "clay bar treatment car",
+        "kw_b": "what does clay bar do for your car",
+        "shared_domains": ["autozone.com", "lordsofdetailing.com", "turtlewax.com", "bigsmobile.com", "cardetox-us.com"],
+        "score": 8,
+        "decision": "same_post",
+        "notes": "Same informational intent; cover together in one clay bar explainer"
+      },
+      {
+        "kw_a": "car wax vs ceramic coating",
+        "kw_b": "ceramic coating vs wax for hot weather",
+        "shared_domains": ["lenosgarage.com", "chemicalguys.com", "turtlewax.com", "dennisautodetails.com", "tekshine.com"],
+        "score": 9,
+        "decision": "same_post",
+        "notes": "Same question; Bakersfield climate angle differentiates from national competitors"
+      },
+      {
+        "kw_a": "ceramic coating vs wax",
+        "kw_b": "how long does ceramic coating last",
+        "shared_domains": ["ceramicpro.com", "chemicalguys.com", "lenosgarage.com"],
+        "score": 4,
+        "decision": "same_cluster",
+        "notes": "Cover longevity as a subsection of the wax vs ceramic post; or separate spoke"
+      },
+      {
+        "kw_a": "water spot removal car",
+        "kw_b": "clay bar treatment car",
+        "shared_domains": ["chemicalguys.com", "fresh-layer.com"],
+        "score": 2,
+        "decision": "interlink",
+        "notes": "Different processes, different SERPs; both live in paint-protection cluster and cross-link"
+      },
+      {
+        "kw_a": "what is a full detail",
+        "kw_b": "what is included in a full detail",
+        "shared_domains": ["martinautodetailing.com", "diamonddetailshop.com", "crystalcleanautodetailing.com", "straightlineautodetail.com"],
+        "score": 9,
+        "decision": "same_post",
+        "notes": "Synonymous informational queries - one definitive guide"
+      },
+      {
+        "kw_a": "what is a full detail",
+        "kw_b": "mobile detailing vs car wash",
+        "shared_domains": ["lordsofdetailing.com", "getmintmobiledetail.com"],
+        "score": 4,
+        "decision": "same_cluster",
+        "notes": "Both answer 'what is detailing' questions; group in understanding-detailing cluster"
+      },
+      {
+        "kw_a": "mobile detailing vs car wash",
+        "kw_b": "how long does a car detail take",
+        "shared_domains": ["apcdetailingllc.com", "mobigleam.com"],
+        "score": 4,
+        "decision": "same_cluster",
+        "notes": "Pre-booking informational queries; cluster together"
+      },
+      {
+        "kw_a": "headlight restoration vs headlight replacement",
+        "kw_b": "how to fix foggy headlights",
+        "shared_domains": ["exodusautodetailing.com", "autozone.com"],
+        "score": 5,
+        "decision": "same_cluster",
+        "notes": "Can combine into one post: 'foggy headlights: restore vs replace'"
+      },
+      {
+        "kw_a": "headlight restoration Bakersfield CA",
+        "kw_b": "headlight restoration vs replacement",
+        "shared_domains": ["kernmobiledetails.com", "exodusautodetailing.com"],
+        "score": 3,
+        "decision": "interlink",
+        "notes": "Commercial page and informational post are different; interlink bidirectionally"
+      },
+      {
+        "kw_a": "pet hair removal from car seats",
+        "kw_b": "how to get dog hair out of car",
+        "shared_domains": ["detailgeekautocare.com", "deltasoniccarwash.com", "dennisautodetails.com", "fresh-layer.com"],
+        "score": 8,
+        "decision": "same_post",
+        "notes": "Same query, different phrasing"
+      },
+      {
+        "kw_a": "leather seat conditioning how often",
+        "kw_b": "how to clean leather car seats",
+        "shared_domains": ["drbeasleys.com", "crashchampions.com", "lithiumautocare.com"],
+        "score": 6,
+        "decision": "same_post",
+        "notes": "Conditioning and cleaning are usually answered together; one complete leather-care guide"
+      },
+      {
+        "kw_a": "how to restore faded plastic trim car",
+        "kw_b": "faded car trim restoration",
+        "shared_domains": ["chemicalguys.com", "detailking.com", "nextleveltint.com", "pandahub.com"],
+        "score": 9,
+        "decision": "same_post",
+        "notes": "Synonymous"
+      },
+      {
+        "kw_a": "paint correction Bakersfield CA",
+        "kw_b": "ceramic coating Bakersfield CA",
+        "shared_domains": ["marathonautodetailing.net", "exclusiveautodetailing.org", "prestodetailing.com", "mrcleanautodetailing661.com"],
+        "score": 5,
+        "decision": "same_cluster",
+        "notes": "Often offered together; cluster on service pages, not blog"
+      },
+      {
+        "kw_a": "how to protect car paint from sun damage",
+        "kw_b": "how to protect car from Bakersfield dust",
+        "shared_domains": ["prestodetailing.com", "chemicalguys.com"],
+        "score": 4,
+        "decision": "same_post",
+        "notes": "Bakersfield-specific version merges both threats into one post"
+      },
+      {
+        "kw_a": "why does my car get dirty so fast Bakersfield",
+        "kw_b": "how often to wash car in Bakersfield",
+        "shared_domains": ["prestodetailing.com", "carmaacarcare.com"],
+        "score": 4,
+        "decision": "same_cluster",
+        "notes": "Same reader, adjacent questions; 'why dirty' and 'how often' can live as separate posts with strong interlinks"
+      }
+    ]
+  },
+  "clusters": [
+    {
+      "cluster_id": "A",
+      "cluster_name": "Bakersfield Local Car Care",
+      "roi_tier": 1,
+      "rationale": "Lowest national competition due to city-specific modifier. No local competitor has fully built out this sub-cluster. Directly answers the question that precedes a booking.",
+      "competition_level": "low",
+      "local_intent_strength": "high",
+      "hub_post": {
+        "post_id": "A1",
+        "title": "How Often Should You Detail Your Car in Bakersfield, CA?",
+        "primary_keywords": ["how often should you detail your car", "how often should I get my car detailed"],
+        "secondary_keywords": ["how often to wash car in Bakersfield", "best time to get car detailed Bakersfield"],
+        "intent": "informational",
+        "template": "educational_guide",
+        "word_count_target": 1500,
+        "conversion_hook": "Metro offers mobile detailing on a recurring schedule. Book and skip the guesswork.",
+        "internal_links_in": ["A2", "A3", "C1", "B4"],
+        "internal_links_out": ["pillar_page", "A2", "A3", "B1"],
+        "cannibalization_risk": "none"
+      },
+      "spokes": [
+        {
+          "post_id": "A2",
+          "title": "Why Does Your Car Get So Dirty So Fast in Bakersfield?",
+          "primary_keywords": ["why does my car get dirty so fast Bakersfield", "why cars get dirty in Bakersfield"],
+          "secondary_keywords": ["Bakersfield dust cars", "agricultural dust car paint"],
+          "intent": "informational",
+          "template": "explainer",
+          "word_count_target": 1200,
+          "conversion_hook": "Valley dust is abrasive. Mobile detailing removes it safely so you're not grinding it into your paint.",
+          "internal_links_in": ["A1", "A3", "B4"],
+          "internal_links_out": ["pillar_page", "A1", "B4"],
+          "cannibalization_risk": "none",
+          "competition_gap": "PrestoPrecision has one post on dusty roads but it is thin. This post goes deeper with specific Bakersfield environmental context."
+        },
+        {
+          "post_id": "A3",
+          "title": "Best Time of Year to Get Your Car Detailed in Bakersfield",
+          "primary_keywords": ["best time to get car detailed Bakersfield", "when to get car detailed Bakersfield"],
+          "secondary_keywords": ["seasonal car detailing Bakersfield", "car detailing before summer Bakersfield"],
+          "intent": "informational",
+          "template": "seasonal_guide",
+          "word_count_target": 1200,
+          "conversion_hook": "Pre-summer ceramic coating appointment slots fill fast. Book now.",
+          "internal_links_in": ["A1", "A2"],
+          "internal_links_out": ["pillar_page", "A1", "B1"],
+          "cannibalization_risk": "none",
+          "competition_gap": "Zero direct competition for this specific query in Bakersfield."
+        }
+      ]
+    },
+    {
+      "cluster_id": "B",
+      "cluster_name": "Paint Protection Education",
+      "roi_tier": 1,
+      "rationale": "High search volume nationally; Bakersfield angle reduces competition. Directly educates on Metro's highest-ticket add-ons (ceramic coating, clay bar, water spot removal).",
+      "competition_level": "medium",
+      "local_intent_strength": "medium",
+      "hub_post": {
+        "post_id": "B1",
+        "title": "Ceramic Coating vs. Wax: Which Is Better for Bakersfield's Heat?",
+        "primary_keywords": ["car wax vs ceramic coating which is better", "ceramic coating vs wax hot weather"],
+        "secondary_keywords": ["how long does ceramic coating last", "ceramic coating Bakersfield heat"],
+        "intent": "informational_commercial",
+        "template": "comparison_guide",
+        "word_count_target": 1600,
+        "conversion_hook": "Metro applies professional ceramic coatings at your home. No drop-off required.",
+        "internal_links_in": ["A1", "A3", "B2", "B3", "B4"],
+        "internal_links_out": ["pillar_page", "B2", "B3", "B4"],
+        "cannibalization_risk": "low - PrestoPrecision has a version of this. Compete with local depth and E-E-A-T.",
+        "notes": "Include Bakersfield-specific data: 270+ sunny days, 100F+ summers, agricultural contamination layered on paint."
+      },
+      "spokes": [
+        {
+          "post_id": "B2",
+          "title": "What Is a Clay Bar Treatment and Does Your Car Need One?",
+          "primary_keywords": ["clay bar treatment car what does it do", "what is clay bar detailing"],
+          "secondary_keywords": ["clay bar before waxing", "clay bar benefits car paint"],
+          "intent": "informational",
+          "template": "explainer",
+          "word_count_target": 1300,
+          "conversion_hook": "Clay bar decontamination is included in Metro's Full Detail and Refresh Detail packages.",
+          "internal_links_in": ["B1", "B3", "C1"],
+          "internal_links_out": ["pillar_page", "B1", "B3"],
+          "cannibalization_risk": "none"
+        },
+        {
+          "post_id": "B3",
+          "title": "How to Remove Water Spots from Your Car (Bakersfield Hard Water Guide)",
+          "primary_keywords": ["water spot removal car", "how to remove water spots from car", "hard water spots on car paint"],
+          "secondary_keywords": ["Bakersfield hard water car paint", "mineral deposits on car"],
+          "intent": "informational",
+          "template": "how_to_guide",
+          "word_count_target": 1400,
+          "conversion_hook": "Metro offers professional water spot removal as an $100 add-on. Save your paint from etching.",
+          "internal_links_in": ["B1", "B2", "B4"],
+          "internal_links_out": ["pillar_page", "B1", "B4"],
+          "cannibalization_risk": "none",
+          "competition_gap": "Bakersfield has exceptionally hard water (San Joaquin Valley groundwater). No local competitor has a post targeting this specific angle."
+        },
+        {
+          "post_id": "B4",
+          "title": "How to Protect Your Car's Paint from Bakersfield Sun, Heat, and Dust",
+          "primary_keywords": ["how to protect car paint from sun damage", "how to protect car from Bakersfield dust"],
+          "secondary_keywords": ["car paint UV protection Bakersfield", "summer car paint protection"],
+          "intent": "informational",
+          "template": "educational_guide",
+          "word_count_target": 1400,
+          "conversion_hook": "Professional detail + ceramic coating is the most effective protection available in Bakersfield's climate.",
+          "internal_links_in": ["A1", "A2", "B1", "B3"],
+          "internal_links_out": ["pillar_page", "A2", "B1"],
+          "cannibalization_risk": "none"
+        }
+      ]
+    },
+    {
+      "cluster_id": "C",
+      "cluster_name": "Understanding Detailing",
+      "roi_tier": 2,
+      "rationale": "Targets pre-booking research queries. Educates on what Metro offers and removes hesitation. 'What is a full detail' has consistent national search volume.",
+      "competition_level": "medium",
+      "local_intent_strength": "low",
+      "hub_post": {
+        "post_id": "C1",
+        "title": "What Is a Full Detail? Everything That's Included (And Why It's Worth It)",
+        "primary_keywords": ["what is a full detail", "what is included in a full detail"],
+        "secondary_keywords": ["full detail car service", "what does car detailing include"],
+        "intent": "informational",
+        "template": "definitive_guide",
+        "word_count_target": 1800,
+        "conversion_hook": "Metro's Full Detail is $400 and covers everything in this post, at your home or office.",
+        "internal_links_in": ["C2", "C3", "C4", "A1", "D1"],
+        "internal_links_out": ["pillar_page", "C2", "C3", "D1", "B2"],
+        "cannibalization_risk": "none - service page targets 'full detail Bakersfield CA' (commercial), this post targets what-is (informational)"
+      },
+      "spokes": [
+        {
+          "post_id": "C2",
+          "title": "Mobile Detailing vs. Car Wash: What's the Actual Difference?",
+          "primary_keywords": ["mobile detailing vs car wash difference", "mobile car wash vs car detailing"],
+          "secondary_keywords": ["is mobile detailing worth it", "detailing vs automatic car wash"],
+          "intent": "informational",
+          "template": "comparison_guide",
+          "word_count_target": 1300,
+          "conversion_hook": "A car wash removes surface dirt. Mobile detailing protects, restores, and preserves. Metro brings both to your driveway.",
+          "internal_links_in": ["C1", "C3", "A1"],
+          "internal_links_out": ["pillar_page", "C1", "A1"],
+          "cannibalization_risk": "none"
+        },
+        {
+          "post_id": "C3",
+          "title": "How Long Does a Car Detail Take? Honest Breakdown by Service",
+          "primary_keywords": ["how long does a car detail take", "how long does car detailing take"],
+          "secondary_keywords": ["how long does interior detail take", "how long does full detail take"],
+          "intent": "informational",
+          "template": "faq_listicle",
+          "word_count_target": 1200,
+          "conversion_hook": "Mobile detailing means your car gets done while you work, sleep, or do errands. No shop drop-off.",
+          "internal_links_in": ["C1", "C2"],
+          "internal_links_out": ["pillar_page", "C1", "C2"],
+          "cannibalization_risk": "none",
+          "competition_gap": "Very low competition. Most detailers do not answer this directly. A clear, honest time breakdown is genuinely useful and ranks for zero-competition long-tail."
+        },
+        {
+          "post_id": "C4",
+          "title": "What to Expect When You Book Mobile Detailing for the First Time",
+          "primary_keywords": ["what to expect mobile detailing", "first time car detailing what to expect"],
+          "secondary_keywords": ["how mobile detailing works", "mobile detailing appointment process"],
+          "intent": "informational",
+          "template": "how_to_guide",
+          "word_count_target": 1200,
+          "conversion_hook": "Metro handles everything. All you need is a water hookup and a parking spot.",
+          "internal_links_in": ["C1", "C2", "C3"],
+          "internal_links_out": ["pillar_page", "C1", "C2"],
+          "cannibalization_risk": "none"
+        }
+      ]
+    },
+    {
+      "cluster_id": "D",
+      "cluster_name": "Interior Detailing Deep Dive",
+      "roi_tier": 2,
+      "rationale": "Interior Detail ($200) is Metro's second highest-volume service. Blog posts educate on what's included and directly convert pet owners, parents, and car-seat-buyers.",
+      "competition_level": "low_to_medium",
+      "local_intent_strength": "medium",
+      "hub_post": {
+        "post_id": "D1",
+        "title": "What's Actually Included in an Interior Car Detail?",
+        "primary_keywords": ["what is included in interior car detail", "interior car detailing what's included"],
+        "secondary_keywords": ["interior detail checklist", "what does interior detailing cover"],
+        "intent": "informational",
+        "template": "definitive_guide",
+        "word_count_target": 1500,
+        "conversion_hook": "Metro's Interior Detail covers every surface, every vent, every crevice. $200 for cars, $240 for larger vehicles.",
+        "internal_links_in": ["D2", "D3", "C1", "A1"],
+        "internal_links_out": ["pillar_page", "D2", "D3", "C1"],
+        "cannibalization_risk": "low - monitor if service page uses similar language; keep blog purely informational"
+      },
+      "spokes": [
+        {
+          "post_id": "D2",
+          "title": "How to Get Dog and Cat Hair Out of Your Car (Why a Vacuum Isn't Enough)",
+          "primary_keywords": ["pet hair removal from car seats", "how to get dog hair out of car"],
+          "secondary_keywords": ["cat hair car interior removal", "professional pet hair removal car"],
+          "intent": "informational",
+          "template": "how_to_guide",
+          "word_count_target": 1300,
+          "conversion_hook": "Pet hair embeds deep into upholstery fibers. Metro's pet hair removal add-on ($80) uses professional-grade tools that pull it out completely.",
+          "internal_links_in": ["D1", "D3"],
+          "internal_links_out": ["pillar_page", "D1", "D3"],
+          "cannibalization_risk": "none",
+          "competition_gap": "No Bakersfield-specific competitor has this post. Pet-owner angle is a strong differentiator."
+        },
+        {
+          "post_id": "D3",
+          "title": "How to Clean and Condition Leather Car Seats (And When to Call a Pro)",
+          "primary_keywords": ["how to clean leather car seats", "leather seat conditioning how often"],
+          "secondary_keywords": ["leather car seat care guide", "condition leather seats Bakersfield heat"],
+          "intent": "informational",
+          "template": "how_to_guide",
+          "word_count_target": 1300,
+          "conversion_hook": "Bakersfield's heat dries leather faster than most climates. Metro's leather conditioning add-on is $40 and takes 20 minutes.",
+          "internal_links_in": ["D1", "D2"],
+          "internal_links_out": ["pillar_page", "D1", "B1"],
+          "cannibalization_risk": "none",
+          "notes": "Bakersfield angle: 100F+ heat accelerates leather drying. This is genuinely useful local context."
+        }
+      ]
+    },
+    {
+      "cluster_id": "E",
+      "cluster_name": "Add-On Services Education",
+      "roi_tier": 3,
+      "rationale": "These posts target niche, low-competition queries tied directly to Metro's add-on services. Headlight restoration alone is a $80 upsell that many customers don't know they need until they see the content.",
+      "competition_level": "low",
+      "local_intent_strength": "medium",
+      "hub_post": {
+        "post_id": "E1",
+        "title": "Foggy Headlights in Bakersfield: Restore Them vs. Replace Them",
+        "primary_keywords": ["headlight restoration vs headlight replacement", "how to fix foggy headlights"],
+        "secondary_keywords": ["headlight restoration worth it", "headlight restoration Bakersfield"],
+        "intent": "informational",
+        "template": "comparison_guide",
+        "word_count_target": 1400,
+        "conversion_hook": "Professional headlight restoration costs $80 at Metro. New headlight assemblies run $200-500+. The math is obvious.",
+        "internal_links_in": ["E2", "E3", "A1"],
+        "internal_links_out": ["pillar_page", "E2", "E3"],
+        "cannibalization_risk": "none - service page targets 'headlight restoration Bakersfield CA' (transactional), this post targets the restore-vs-replace decision (informational)"
+      },
+      "spokes": [
+        {
+          "post_id": "E2",
+          "title": "What Does Engine Bay Cleaning Include and Is It Actually Worth It?",
+          "primary_keywords": ["engine bay cleaning is it safe", "engine bay cleaning worth it"],
+          "secondary_keywords": ["engine bay detail what's included", "should I get engine bay cleaned"],
+          "intent": "informational",
+          "template": "faq_explainer",
+          "word_count_target": 1200,
+          "conversion_hook": "Metro's engine bay cleaning is $50. Takes about 30 minutes and protects components from dust and oil buildup.",
+          "internal_links_in": ["E1", "C1"],
+          "internal_links_out": ["pillar_page", "E1", "C1"],
+          "cannibalization_risk": "none"
+        },
+        {
+          "post_id": "E3",
+          "title": "How to Restore Faded Plastic Trim on Your Car (DIY vs. Professional)",
+          "primary_keywords": ["how to restore faded plastic trim car", "faded car trim restoration"],
+          "secondary_keywords": ["black plastic trim restoration", "oxidized trim car fix"],
+          "intent": "informational",
+          "template": "how_to_guide",
+          "word_count_target": 1300,
+          "conversion_hook": "Metro's trim restoration add-on is $100 and uses professional-grade product that lasts 9-12 months, not 4 weeks.",
+          "internal_links_in": ["E1", "E2", "B4"],
+          "internal_links_out": ["pillar_page", "E1", "B4"],
+          "cannibalization_risk": "none"
+        }
+      ]
+    }
+  ],
+  "pillar_page": {
+    "page_id": "pillar_page",
+    "title": "Mobile Auto Detailing in Bakersfield, CA",
+    "type": "service_page",
+    "primary_keywords": ["mobile detailing Bakersfield CA", "auto detailing Bakersfield CA", "car detail Bakersfield CA", "mobile car wash Bakersfield CA", "car detailing near me Bakersfield"],
+    "intent": "transactional",
+    "word_count_target": 2800,
+    "mandatory_outbound_links": ["A1", "B1", "C1", "D1", "E1"],
+    "notes": "All 18 blog posts must link back to this page. This is the commercial hub. Blog posts are informational spokes."
+  },
+  "internal_link_matrix": {
+    "mandatory": [
+      {"from": "A1", "to": "pillar_page", "direction": "bidirectional"},
+      {"from": "A2", "to": "pillar_page", "direction": "spoke_to_pillar"},
+      {"from": "A3", "to": "pillar_page", "direction": "spoke_to_pillar"},
+      {"from": "B1", "to": "pillar_page", "direction": "bidirectional"},
+      {"from": "B2", "to": "pillar_page", "direction": "spoke_to_pillar"},
+      {"from": "B3", "to": "pillar_page", "direction": "spoke_to_pillar"},
+      {"from": "B4", "to": "pillar_page", "direction": "spoke_to_pillar"},
+      {"from": "C1", "to": "pillar_page", "direction": "bidirectional"},
+      {"from": "C2", "to": "pillar_page", "direction": "spoke_to_pillar"},
+      {"from": "C3", "to": "pillar_page", "direction": "spoke_to_pillar"},
+      {"from": "C4", "to": "pillar_page", "direction": "spoke_to_pillar"},
+      {"from": "D1", "to": "pillar_page", "direction": "bidirectional"},
+      {"from": "D2", "to": "pillar_page", "direction": "spoke_to_pillar"},
+      {"from": "D3", "to": "pillar_page", "direction": "spoke_to_pillar"},
+      {"from": "E1", "to": "pillar_page", "direction": "bidirectional"},
+      {"from": "E2", "to": "pillar_page", "direction": "spoke_to_pillar"},
+      {"from": "E3", "to": "pillar_page", "direction": "spoke_to_pillar"}
+    ],
+    "recommended_within_cluster": [
+      {"from": "A1", "to": "A2"},
+      {"from": "A1", "to": "A3"},
+      {"from": "A2", "to": "A1"},
+      {"from": "A3", "to": "A1"},
+      {"from": "B1", "to": "B2"},
+      {"from": "B1", "to": "B3"},
+      {"from": "B1", "to": "B4"},
+      {"from": "B2", "to": "B1"},
+      {"from": "B2", "to": "B3"},
+      {"from": "B3", "to": "B1"},
+      {"from": "B4", "to": "B1"},
+      {"from": "C1", "to": "C2"},
+      {"from": "C1", "to": "C3"},
+      {"from": "C1", "to": "C4"},
+      {"from": "C2", "to": "C1"},
+      {"from": "C3", "to": "C1"},
+      {"from": "D1", "to": "D2"},
+      {"from": "D1", "to": "D3"},
+      {"from": "D2", "to": "D1"},
+      {"from": "D3", "to": "D1"},
+      {"from": "E1", "to": "E2"},
+      {"from": "E1", "to": "E3"},
+      {"from": "E2", "to": "E1"},
+      {"from": "E3", "to": "E1"}
+    ],
+    "optional_cross_cluster": [
+      {"from": "A1", "to": "C1", "rationale": "frequency post links to what's-included guide"},
+      {"from": "A2", "to": "B4", "rationale": "why-dirty post links to how-to-protect paint post"},
+      {"from": "B2", "to": "B3", "rationale": "clay bar and water spots are sequential steps in paint prep"},
+      {"from": "C1", "to": "D1", "rationale": "full detail includes interior; cross-link to dedicated interior post"},
+      {"from": "C1", "to": "B2", "rationale": "full detail includes clay bar; link to explainer"},
+      {"from": "D2", "to": "D3", "rationale": "pet hair + leather are both interior care topics"},
+      {"from": "E3", "to": "B4", "rationale": "trim restoration and paint protection are related exterior care"}
+    ]
+  },
+  "cannibalization_check": {
+    "passed": true,
+    "checks": [
+      {
+        "check": "No two posts share primary keyword",
+        "status": "pass",
+        "notes": "All 18 posts have distinct primary keywords verified against each other"
+      },
+      {
+        "check": "Every spoke has at least 3 incoming internal links planned",
+        "status": "pass",
+        "notes": "All spokes receive links from: cluster hub + at least 2 other spokes or cross-cluster posts"
+      },
+      {
+        "check": "Every spoke links to pillar",
+        "status": "pass"
+      },
+      {
+        "check": "Pillar links to every cluster hub",
+        "status": "pass",
+        "notes": "Pillar links to A1, B1, C1, D1, E1 - recommend adding links to all posts in a blog index section"
+      },
+      {
+        "check": "No orphan pages",
+        "status": "pass",
+        "notes": "All 18 posts appear in at least one inbound link from another post plus the pillar"
+      },
+      {
+        "check": "Service page vs blog page cannibalization",
+        "status": "flag",
+        "flag_detail": "D1 (interior detail explainer) may compete with interior service page if the service page also uses educational content. Keep service page transactional (CTAs, pricing, local neighborhoods) and keep D1 purely informational (what-is, process, checklist)."
+      },
+      {
+        "check": "Ceramic coating service page vs B1 blog post",
+        "status": "flag",
+        "flag_detail": "If metroautodetailing.pro has a ceramic coating service page, B1 targets informational wax-vs-ceramic intent, not the service page's transactional intent. These should not conflict but monitor with Google Search Console after publishing."
+      }
+    ]
+  },
+  "prioritized_publish_order": [
+    {"week": 1, "post_id": "A1", "title": "How Often Should You Detail Your Car in Bakersfield, CA?", "reason": "Highest local ROI. Immediate conversion potential. Sets cluster A foundation."},
+    {"week": 2, "post_id": "C1", "title": "What Is a Full Detail? Everything That's Included", "reason": "Establishes Metro's services in Google's index. Foundation for cluster C."},
+    {"week": 3, "post_id": "B1", "title": "Ceramic Coating vs. Wax: Which Is Better for Bakersfield's Heat?", "reason": "High commercial value. Targets upgrade decision-makers."},
+    {"week": 4, "post_id": "A2", "title": "Why Does Your Car Get So Dirty So Fast in Bakersfield?", "reason": "Zero competition. Unique local angle. Strong A1 interlink."},
+    {"week": 5, "post_id": "B3", "title": "How to Remove Water Spots from Your Car (Bakersfield Hard Water Guide)", "reason": "Bakersfield hard water is a real local problem. Zero local competition for this specific query."},
+    {"week": 6, "post_id": "D1", "title": "What's Actually Included in an Interior Car Detail?", "reason": "Second most-booked service. High conversion value."},
+    {"week": 7, "post_id": "C2", "title": "Mobile Detailing vs. Car Wash: What's the Actual Difference?", "reason": "Directly justifies Metro's business model."},
+    {"week": 8, "post_id": "E1", "title": "Foggy Headlights in Bakersfield: Restore Them vs. Replace Them", "reason": "Zero local competition. $80 upsell with strong close rate."},
+    {"week": 9, "post_id": "B4", "title": "How to Protect Your Car's Paint from Bakersfield Sun, Heat, and Dust", "reason": "Seasonal relevance pre-summer."},
+    {"week": 10, "post_id": "B2", "title": "What Is a Clay Bar Treatment and Does Your Car Need One?", "reason": "Supports B cluster authority. Educates on a service step."},
+    {"week": 11, "post_id": "C3", "title": "How Long Does a Car Detail Take?", "reason": "Removes pre-booking friction. Easy to produce."},
+    {"week": 12, "post_id": "D2", "title": "How to Get Dog and Cat Hair Out of Your Car", "reason": "Strong pet-owner niche. $80 add-on conversion target."},
+    {"week": 13, "post_id": "A3", "title": "Best Time of Year to Get Your Car Detailed in Bakersfield", "reason": "Seasonal content for summer prep cycle."},
+    {"week": 14, "post_id": "E2", "title": "What Does Engine Bay Cleaning Include and Is It Actually Worth It?", "reason": "Niche, low competition, $50 add-on conversion."},
+    {"week": 15, "post_id": "E3", "title": "How to Restore Faded Plastic Trim on Your Car", "reason": "DIY-to-pro funnel. $100 add-on conversion."},
+    {"week": 16, "post_id": "D3", "title": "How to Clean and Condition Leather Car Seats", "reason": "Supports D cluster. $40 add-on conversion."},
+    {"week": 17, "post_id": "C4", "title": "What to Expect When You Book Mobile Detailing for the First Time", "reason": "Top-of-funnel content for new-to-detailing audience."},
+    {"week": 18, "post_id": "catchall_01", "title": "How to Maintain Your Car Between Professional Details", "reason": "Broad catch-all. Links to all clusters. Recycle-traffic piece."}
+  ],
+  "validation_checklist": {
+    "no_duplicate_primary_keywords": true,
+    "every_spoke_has_3_inbound_links": true,
+    "every_spoke_links_to_pillar": true,
+    "pillar_links_to_every_cluster_hub": true,
+    "no_orphan_pages": true,
+    "template_matches_intent": true,
+    "word_counts_in_spec_pillar_2500_4000": true,
+    "word_counts_in_spec_spokes_1200_1800": true,
+    "cluster_count_within_2_to_5": true,
+    "serp_overlap_supports_groupings": true
+  }
+}

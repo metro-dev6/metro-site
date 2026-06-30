@@ -3,9 +3,9 @@ import { Suspense } from "react";
 import { EstimateForm } from "./EstimateForm";
 
 export const metadata: Metadata = {
-  title: "Book a Detail | Metro Auto Detailing",
-  description:
-    "Request mobile detailing in Bakersfield, CA. We come to you.",
+  title: { absolute: "Book Mobile Detailing in Bakersfield, CA | Metro Auto Detailing" },
+  description: "Request mobile detailing in Bakersfield, CA. We come to you — no drop-off required.",
+  alternates: { canonical: "https://www.metroautodetailing.pro/estimate" },
 };
 
 export default function EstimatePage() {

@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { useEstimateCart } from "@/hooks/use-estimate-cart";
-import { ArrowRight, CheckCircle, Paperclip, ChevronDown } from "lucide-react";
+import { ArrowRight, CheckCircle, Paperclip, ChevronDown, Plus, X } from "lucide-react";
 
 const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
 
@@ -56,6 +56,24 @@ const YEARS = Array.from({ length: currentYear - 1984 }, (_, i) => currentYear -
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
+type Vehicle = {
+  id: string;
+  year: string;
+  make: string;
+  model: string;
+  largerVehicle: boolean;
+};
+
+function newVehicle(): Vehicle {
+  return {
+    id: Math.random().toString(36).slice(2),
+    year: "",
+    make: "",
+    model: "",
+    largerVehicle: false,
+  };
+}
+
 export function EstimateForm() {
   const { clear } = useEstimateCart();
   const searchParams = useSearchParams();
@@ -65,7 +83,8 @@ export function EstimateForm() {
     if (!param) return new Set();
     return new Set(param.split(",").map((s) => s.trim()).filter(Boolean));
   });
-  const [largerVehicle, setLargerVehicle] = useState(false);
+
+  const [vehicles, setVehicles] = useState<Vehicle[]>(() => [newVehicle()]);
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
@@ -83,16 +102,29 @@ export function EstimateForm() {
     ? new Set(ADDONS.filter((a) => !relevantAddons.has(a.name)).map((a) => a.name))
     : new Set();
 
-  const base = [...selected].reduce((sum, name) => {
+  const perVehicleBase = [...selected].reduce((sum, name) => {
     const svc = ALL_SERVICES.find((s) => s.name === name);
     return sum + (svc?.price ?? 0);
   }, 0);
 
-  const surcharge = largerVehicle
-    ? [...selected].reduce((sum, name) => sum + (SURCHARGES[name] ?? 0), 0)
-    : 0;
+  const grandTotal = vehicles.reduce((sum, v) => {
+    const vehicleSurcharge = v.largerVehicle
+      ? [...selected].reduce((s, name) => s + (SURCHARGES[name] ?? 0), 0)
+      : 0;
+    return sum + perVehicleBase + vehicleSurcharge;
+  }, 0);
 
-  const grand = base + surcharge;
+  function updateVehicle(id: string, patch: Partial<Omit<Vehicle, "id">>) {
+    setVehicles((prev) => prev.map((v) => (v.id === id ? { ...v, ...patch } : v)));
+  }
+
+  function addVehicle() {
+    setVehicles((prev) => [...prev, newVehicle()]);
+  }
+
+  function removeVehicle(id: string) {
+    setVehicles((prev) => prev.filter((v) => v.id !== id));
+  }
 
   function toggleService(name: string) {
     const isPackage = PACKAGES.some((p) => p.name === name);
@@ -124,6 +156,14 @@ export function EstimateForm() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    const incomplete = vehicles.some((v) => !v.year || !v.make || !v.model.trim());
+    if (incomplete) {
+      setErrorMsg("Please complete all vehicle fields before submitting.");
+      setFormState("error");
+      return;
+    }
+
     setFormState("submitting");
     setErrorMsg("");
 
@@ -133,25 +173,34 @@ export function EstimateForm() {
     const effectiveSelected = selected.size > 0 ? [...selected] : nativeSelected;
     const servicesList = effectiveSelected.join(", ") || "Not specified";
     formData.set("services", servicesList);
+    formData.delete("service_selection");
 
-    const effectiveLargerVehicle = largerVehicle || formData.get("larger_vehicle_checkbox") === "on";
-    formData.set("larger_vehicle", effectiveLargerVehicle ? "Yes" : "No");
-    formData.delete("larger_vehicle_checkbox");
+    const vehiclesText = vehicles
+      .map((v, i) => {
+        const prefix = vehicles.length > 1 ? `Vehicle ${i + 1}: ` : "";
+        const size = v.largerVehicle ? " (larger vehicle)" : "";
+        return `${prefix}${v.year} ${v.make} ${v.model}${size}`;
+      })
+      .join("\n");
+    formData.set("vehicles", vehiclesText);
+    if (vehicles.length > 1) {
+      formData.set("vehicle_count", String(vehicles.length));
+    }
+    formData.delete("vehicle_year");
+    formData.delete("vehicle_make");
+    formData.delete("vehicle_model");
 
-    const effectiveSurcharge = effectiveLargerVehicle
-      ? effectiveSelected.reduce((sum, name) => sum + (SURCHARGES[name] ?? 0), 0)
-      : 0;
-    const effectiveBase = effectiveSelected.reduce((sum, name) => {
+    const basePerVehicle = effectiveSelected.reduce((sum, name) => {
       const svc = ALL_SERVICES.find((s) => s.name === name);
       return sum + (svc?.price ?? 0);
     }, 0);
-    const effectiveGrand = effectiveBase + effectiveSurcharge;
-
-    formData.delete("service_selection");
-    const estTotal =
-      effectiveGrand > 0
-        ? `$${effectiveGrand}${effectiveSurcharge > 0 ? ` (includes $${effectiveSurcharge} larger vehicle surcharge)` : ""}`
-        : "TBD";
+    const effectiveGrand = vehicles.reduce((sum, v) => {
+      const vehicleSurcharge = v.largerVehicle
+        ? effectiveSelected.reduce((s, name) => s + (SURCHARGES[name] ?? 0), 0)
+        : 0;
+      return sum + basePerVehicle + vehicleSurcharge;
+    }, 0);
+    const estTotal = effectiveGrand > 0 ? `$${effectiveGrand}` : "TBD";
     formData.set("estimated_total", estTotal);
 
     const files = fileRef.current?.files;
@@ -171,7 +220,7 @@ export function EstimateForm() {
         setFormState("success");
         clear();
         setSelected(new Set());
-        setLargerVehicle(false);
+        setVehicles([newVehicle()]);
         setFileNames([]);
         formRef.current?.reset();
       } else {
@@ -229,30 +278,16 @@ export function EstimateForm() {
             onToggle={toggleService}
           />
 
-          <LargerVehicleToggle
-            checked={largerVehicle}
-            onChange={setLargerVehicle}
-            surcharge={surcharge}
-          />
-
           {selected.size > 0 && (
             <div className="flex justify-between items-center pt-1 border-t border-white/[0.06]">
-              <span className="text-xs text-white/50">{selected.size} selected</span>
+              <span className="text-xs text-white/50">
+                {selected.size} selected
+                {vehicles.length > 1 && ` · ${vehicles.length} vehicles`}
+              </span>
               <div className="text-right">
-                {largerVehicle && surcharge > 0 ? (
-                  <>
-                    <p className="text-xs text-white/40 mb-0.5">
-                      Base ${base.toLocaleString()} + surcharge ${surcharge}
-                    </p>
-                    <span className="text-sm font-black text-white font-numeric">
-                      Est. ${grand.toLocaleString()}
-                    </span>
-                  </>
-                ) : (
-                  <span className="text-sm font-black text-white font-numeric">
-                    Est. ${base.toLocaleString()}
-                  </span>
-                )}
+                <span className="text-sm font-black text-white font-numeric">
+                  Est. ${grandTotal.toLocaleString()}
+                </span>
                 <p className="text-xs text-white/40 mt-0.5">Final price confirmed at booking.</p>
               </div>
             </div>
@@ -260,7 +295,7 @@ export function EstimateForm() {
         </div>
       </div>
 
-      {/* Contact + vehicle */}
+      {/* Contact + vehicles */}
       <div className="rounded-2xl bg-white/[0.04] border border-white/[0.08] p-5 flex flex-col gap-5">
         <p className="text-xs font-black text-brand-yellow uppercase tracking-[0.15em]">
           Your Info
@@ -317,35 +352,37 @@ export function EstimateForm() {
           />
         </Field>
 
-        <div className="flex flex-col gap-1.5">
-          <label className="text-sm font-bold text-white/90">
+        {/* Vehicles */}
+        <div className="flex flex-col gap-3">
+          <p className="text-sm font-bold text-white/90">
             Vehicle <span className="text-brand-yellow">*</span>
-          </label>
-          <div className="grid grid-cols-2 gap-2">
-            <SelectWrapper>
-              <select name="vehicle_year" required className={selectClass}>
-                <option value="" className="text-black bg-white">Year</option>
-                {YEARS.map((y) => (
-                  <option key={y} value={y} className="text-black bg-white">{y}</option>
-                ))}
-              </select>
-            </SelectWrapper>
-            <SelectWrapper>
-              <select name="vehicle_make" required className={selectClass}>
-                <option value="" className="text-black bg-white">Make</option>
-                {MAKES.map((m) => (
-                  <option key={m} value={m} className="text-black bg-white">{m}</option>
-                ))}
-              </select>
-            </SelectWrapper>
+          </p>
+
+          <div className="flex flex-col gap-4">
+            {vehicles.map((vehicle, i) => (
+              <VehicleEntry
+                key={vehicle.id}
+                vehicle={vehicle}
+                index={i}
+                showLabel={vehicles.length > 1}
+                showRemove={vehicles.length > 1}
+                selectedServices={selected}
+                onUpdate={(patch) => updateVehicle(vehicle.id, patch)}
+                onRemove={() => removeVehicle(vehicle.id)}
+              />
+            ))}
           </div>
-          <input
-            name="vehicle_model"
-            type="text"
-            required
-            placeholder="Model — e.g. Tacoma, F-150, Civic"
-            className={inputClass}
-          />
+
+          {vehicles.length < 5 && (
+            <button
+              type="button"
+              onClick={addVehicle}
+              className="flex items-center gap-2 px-4 py-3 rounded-xl border border-dashed border-white/[0.12] text-sm text-white/50 hover:border-brand-yellow/40 hover:text-white/70 transition-colors"
+            >
+              <Plus className="h-4 w-4" />
+              Add another vehicle
+            </button>
+          )}
         </div>
 
         <Field label="Preferred date" htmlFor="preferred_date">
@@ -415,6 +452,91 @@ export function EstimateForm() {
   );
 }
 
+function VehicleEntry({
+  vehicle,
+  index,
+  showLabel,
+  showRemove,
+  selectedServices,
+  onUpdate,
+  onRemove,
+}: {
+  vehicle: Vehicle;
+  index: number;
+  showLabel: boolean;
+  showRemove: boolean;
+  selectedServices: Set<string>;
+  onUpdate: (patch: Partial<Omit<Vehicle, "id">>) => void;
+  onRemove: () => void;
+}) {
+  const surcharge = vehicle.largerVehicle
+    ? [...selectedServices].reduce((sum, name) => sum + (SURCHARGES[name] ?? 0), 0)
+    : 0;
+
+  return (
+    <div className={showLabel ? "rounded-xl border border-white/[0.08] p-4 flex flex-col gap-3" : "flex flex-col gap-3"}>
+      {showLabel && (
+        <div className="flex items-center justify-between">
+          <p className="text-xs font-bold text-white/50 uppercase tracking-[0.12em]">
+            Vehicle {index + 1}
+          </p>
+          {showRemove && (
+            <button
+              type="button"
+              onClick={onRemove}
+              className="flex items-center gap-1 text-xs text-white/30 hover:text-red-400 transition-colors"
+            >
+              <X className="h-3 w-3" />
+              Remove
+            </button>
+          )}
+        </div>
+      )}
+
+      <div className="grid grid-cols-2 gap-2">
+        <SelectWrapper>
+          <select
+            value={vehicle.year}
+            onChange={(e) => onUpdate({ year: e.target.value })}
+            className={selectClass}
+          >
+            <option value="" className="text-black bg-white">Year</option>
+            {YEARS.map((y) => (
+              <option key={y} value={y} className="text-black bg-white">{y}</option>
+            ))}
+          </select>
+        </SelectWrapper>
+        <SelectWrapper>
+          <select
+            value={vehicle.make}
+            onChange={(e) => onUpdate({ make: e.target.value })}
+            className={selectClass}
+          >
+            <option value="" className="text-black bg-white">Make</option>
+            {MAKES.map((m) => (
+              <option key={m} value={m} className="text-black bg-white">{m}</option>
+            ))}
+          </select>
+        </SelectWrapper>
+      </div>
+
+      <input
+        type="text"
+        value={vehicle.model}
+        onChange={(e) => onUpdate({ model: e.target.value })}
+        placeholder="Model — e.g. Tacoma, F-150, Civic"
+        className={inputClass}
+      />
+
+      <LargerVehicleToggle
+        checked={vehicle.largerVehicle}
+        onChange={(val) => onUpdate({ largerVehicle: val })}
+        surcharge={surcharge}
+      />
+    </div>
+  );
+}
+
 function LargerVehicleToggle({
   checked,
   onChange,
@@ -426,13 +548,10 @@ function LargerVehicleToggle({
 }) {
   return (
     <label
-      htmlFor="larger-vehicle-checkbox"
-      className="group/lv flex items-center gap-3 w-full px-3 py-3 mt-2 rounded-xl border text-left transition-colors cursor-pointer touch-manipulation has-[:checked]:border-brand-yellow/50 has-[:checked]:bg-brand-yellow/5 border-white/[0.06] hover:border-white/[0.12]"
+      className="group/lv flex items-center gap-3 w-full px-3 py-3 rounded-xl border text-left transition-colors cursor-pointer touch-manipulation has-[:checked]:border-brand-yellow/50 has-[:checked]:bg-brand-yellow/5 border-white/[0.06] hover:border-white/[0.12]"
     >
       <input
         type="checkbox"
-        id="larger-vehicle-checkbox"
-        name="larger_vehicle_checkbox"
         className="sr-only"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}

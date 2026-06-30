@@ -67,7 +67,7 @@ export function Hero() {
 
       {/* Main content */}
       <div className="relative z-10 flex-1 flex items-center justify-center mx-auto w-full max-w-7xl px-6 lg:px-8">
-        <div className="max-w-4xl w-full text-center mx-auto">
+        <div className="max-w-4xl w-full text-center mx-auto pt-24 md:pt-0">
 
           <div className="flex justify-center mb-3 sm:mb-4">
             <span className="inline-flex items-center text-brand-yellow text-[10px] sm:text-xs font-bold tracking-[0.2em] sm:tracking-[0.25em] uppercase border border-brand-yellow/50 rounded-full px-4 sm:px-5 py-1.5 whitespace-nowrap">

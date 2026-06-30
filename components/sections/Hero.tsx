@@ -92,15 +92,7 @@ export function Hero() {
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center">
-            {/* Mobile: single outline CTA */}
-            <Link
-              href="/estimate"
-              className="hero-cta md:hidden inline-flex h-12 items-center rounded-md border border-white/20 px-7 text-xs font-bold text-brand-white uppercase tracking-widest transition-colors hover:border-white/50 hover:bg-white/5"
-            >
-              Get a Free Estimate
-            </Link>
-            {/* Desktop: yellow primary + outline secondary */}
-            <Link href="/estimate" className="hero-cta hidden md:block">
+            <Link href="/estimate" className="hero-cta">
               <ShinyButton
                 className="bg-brand-yellow text-brand-black font-black tracking-widest h-12 px-7"
                 style={{ "--primary": "46 96% 50%" } as React.CSSProperties}

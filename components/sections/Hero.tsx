@@ -91,7 +91,7 @@ export function Hero() {
             Professional detailing at your door because your time is worth it.
           </p>
 
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div className="flex flex-wrap gap-4 justify-center mt-16 md:mt-0">
             <Link href="/estimate" className="hero-cta">
               <ShinyButton
                 className="bg-brand-yellow text-brand-black font-black tracking-widest h-12 px-7"

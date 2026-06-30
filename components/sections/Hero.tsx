@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const USE_VIDEO = true;
 const VIDEO_SRC = "/hero-bg.mp4";
-const FALLBACK_IMG = "/IMG_6184.JPEG";
+const FALLBACK_IMG = "/exterior-bg.JPEG";
 
 export function Hero() {
   return (

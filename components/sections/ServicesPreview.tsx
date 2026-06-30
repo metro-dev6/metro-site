@@ -13,7 +13,7 @@ const services = [
     name: "Exterior Detail",
     price: "$150",
     description: "Full paint decontamination and ceramic sealant. 4-6 months of protection bonded to dry paint.",
-    photo: "/exterior-bg.JPEG",
+    photo: "/IMG_6184.JPEG",
     imageStyle: { objectFit: "cover" as const, objectPosition: "center" },
   },
   {

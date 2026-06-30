@@ -29,7 +29,7 @@ export function Hero() {
           {/* Static image on mobile — div avoids Next.js Image override on objectPosition */}
           <div
             className="md:hidden absolute inset-0"
-            style={{ backgroundImage: `url(${FALLBACK_IMG})`, backgroundSize: "contain", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+            style={{ backgroundImage: `url(${FALLBACK_IMG})`, backgroundSize: "contain", backgroundPosition: "center top", backgroundRepeat: "no-repeat" }}
           />
           <video
             autoPlay

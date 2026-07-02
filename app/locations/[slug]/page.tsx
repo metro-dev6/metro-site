@@ -92,6 +92,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: { absolute: location.metaTitle },
     description: location.metaDescription,
+    robots: { index: true, follow: true },
     alternates: { canonical: `https://www.metroautodetailing.pro/locations/${slug}` },
     openGraph: {
       title: location.metaTitle,

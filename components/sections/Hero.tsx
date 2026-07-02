@@ -66,49 +66,61 @@ export function Hero() {
       <div className="hero-dim-layer absolute inset-0" />
 
       {/* Main content */}
-      <div className="relative z-10 flex-1 flex items-center justify-center mx-auto w-full max-w-7xl px-6 lg:px-8">
-        <div className="max-w-4xl w-full text-center mx-auto pt-24 md:pt-0">
+      <div className="relative z-10 flex-1 flex flex-col md:items-center md:justify-center mx-auto w-full max-w-7xl px-6 lg:px-8">
 
-          <div className="flex justify-center mb-3 sm:mb-4">
-            <span className="inline-flex items-center text-brand-yellow text-[10px] sm:text-xs font-bold tracking-[0.2em] sm:tracking-[0.25em] uppercase border border-brand-yellow/50 rounded-full px-4 sm:px-5 py-1.5 whitespace-nowrap">
-              Bakersfield, CA&nbsp;&nbsp;·&nbsp;&nbsp;Fully Mobile
-            </span>
-          </div>
+        {/* Text block — fills space on mobile, centers within that zone */}
+        <div className="flex-1 md:flex-none flex items-center justify-center w-full">
+          <div className="max-w-4xl w-full text-center mx-auto -mt-4 md:mt-0">
 
-          <h1
-            className="text-[2.2rem] sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] sm:leading-[1] tracking-tight uppercase mb-4 sm:mb-6"
-            style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8)" }}
-          >
-            <span className="text-brand-white">Bakersfield&apos;s Premier</span><br />
-            <span className="text-brand-yellow">Mobile Detailing</span>
-            <span className="text-brand-white"> Service</span>
-          </h1>
-
-          <p
-            className="text-sm sm:text-base md:text-lg text-brand-white/70 max-w-md mx-auto mb-6 sm:mb-10 leading-relaxed"
-            style={{ textShadow: "0 1px 10px rgba(0,0,0,0.9)" }}
-          >
-            Professional detailing at your door because your time is worth it.
-          </p>
-
-          <div className="flex flex-wrap gap-4 justify-center mt-16 md:mt-0">
-            <Link href="/estimate" className="hero-cta">
-              <ShinyButton
-                className="bg-brand-yellow text-brand-black font-black tracking-widest h-12 px-7"
-                style={{ "--primary": "46 96% 50%" } as React.CSSProperties}
-              >
-                Get a Free Estimate
-              </ShinyButton>
-            </Link>
-            <Link
-              href="/services"
-              className="hidden md:inline-flex h-12 items-center rounded-md border border-white/20 px-7 text-xs font-bold text-brand-white uppercase tracking-widest transition-colors hover:border-white/50 hover:bg-white/5"
+            <h1
+              className="text-[2.2rem] sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] sm:leading-[1] tracking-tight uppercase mb-4 sm:mb-6"
+              style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8)" }}
             >
-              Our Services
-            </Link>
-          </div>
+              <span className="text-brand-white">Bakersfield&apos;s Premier</span><br />
+              <span className="text-brand-yellow">Mobile Detailing</span>
+              <span className="text-brand-white"> Service</span>
+            </h1>
 
+            <p
+              className="text-sm sm:text-base md:text-lg text-brand-white/70 max-w-md mx-auto mb-6 sm:mb-10 leading-relaxed"
+              style={{ textShadow: "0 1px 10px rgba(0,0,0,0.9)" }}
+            >
+              Professional detailing at your door because your time is worth it.
+            </p>
+
+            {/* Desktop CTA — inline with text */}
+            <div className="hidden md:flex flex-wrap gap-4 justify-center">
+              <Link href="/estimate" className="hero-cta">
+                <ShinyButton
+                  className="bg-brand-yellow text-brand-black font-black tracking-widest h-12 px-7"
+                  style={{ "--primary": "46 96% 50%" } as React.CSSProperties}
+                >
+                  Get a Free Estimate
+                </ShinyButton>
+              </Link>
+              <Link
+                href="/services"
+                className="inline-flex h-12 items-center rounded-md border border-white/20 px-7 text-xs font-bold text-brand-white uppercase tracking-widest transition-colors hover:border-white/50 hover:bg-white/5"
+              >
+                Our Services
+              </Link>
+            </div>
+
+          </div>
         </div>
+
+        {/* Mobile CTA — separate zone, pinned below text */}
+        <div className="md:hidden flex justify-center pb-20">
+          <Link href="/estimate" className="hero-cta">
+            <ShinyButton
+              className="bg-brand-yellow text-brand-black font-black tracking-widest h-12 px-7"
+              style={{ "--primary": "46 96% 50%" } as React.CSSProperties}
+            >
+              Get a Free Estimate
+            </ShinyButton>
+          </Link>
+        </div>
+
       </div>
 
       {/* Stat bar */}

@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { useEstimateCart } from "@/hooks/use-estimate-cart";
-import { ArrowRight, CheckCircle, Paperclip, ChevronDown, Plus, X } from "lucide-react";
+import { ArrowRight, Paperclip, ChevronDown, Plus, X } from "lucide-react";
 
 const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
 
@@ -75,6 +76,7 @@ function newVehicle(): Vehicle {
 }
 
 export function EstimateForm() {
+  const router = useRouter();
   const { clear } = useEstimateCart();
   const searchParams = useSearchParams();
 
@@ -217,12 +219,12 @@ export function EstimateForm() {
       });
 
       if (res.ok) {
-        setFormState("success");
         clear();
         setSelected(new Set());
         setVehicles([newVehicle()]);
         setFileNames([]);
         formRef.current?.reset();
+        router.push("/thank-you");
       } else {
         const data = await res.json().catch(() => ({}));
         setErrorMsg(data?.error ?? "Something went wrong. Call or text (661) 368-5165.");
@@ -232,21 +234,6 @@ export function EstimateForm() {
       setErrorMsg("Could not send. Call or text (661) 368-5165.");
       setFormState("error");
     }
-  }
-
-  if (formState === "success") {
-    return (
-      <div className="rounded-2xl bg-white/[0.04] border border-white/[0.08] p-10 text-center">
-        <CheckCircle className="mx-auto mb-4 h-10 w-10 text-brand-yellow" />
-        <h2 className="text-2xl font-black text-white mb-2">Got it.</h2>
-        <p className="text-white/50 text-sm">
-          We&apos;ll reach out within a few hours to confirm and get you on the schedule.
-        </p>
-        <p className="mt-4 text-white/40 text-xs">
-          Questions? Call or text (661) 368-5165.
-        </p>
-      </div>
-    );
   }
 
   return (

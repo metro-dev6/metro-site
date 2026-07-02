@@ -54,9 +54,6 @@ export function FAQ() {
       <div className="relative z-[1] mx-auto max-w-3xl">
 
         <div className="text-center mb-12">
-          <span className="inline-flex items-center text-brand-yellow text-xs font-bold tracking-[0.25em] uppercase border border-brand-yellow/50 rounded-full px-5 py-1.5 mb-4">
-            FAQ
-          </span>
           <h2 className="text-4xl sm:text-5xl font-black uppercase text-brand-white tracking-tight">
             Common Questions
           </h2>

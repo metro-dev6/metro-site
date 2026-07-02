@@ -155,9 +155,6 @@ export default function ServicesPage() {
       <section className="relative pt-20 pb-14 px-6 lg:px-8 border-b border-white/[0.06] overflow-hidden">
         <BGPattern variant="diagonal-stripes" mask="fade-bottom" fill="rgba(250,194,5,0.04)" size={20} className="z-0" />
         <div className="relative z-[1] mx-auto max-w-7xl">
-          <span className="inline-flex items-center text-brand-yellow text-[10px] font-bold tracking-[0.15em] uppercase border border-brand-yellow/50 rounded-full px-3 py-1 mb-6">
-            Mobile Detailing - Bakersfield, CA
-          </span>
           <div className="flex items-end justify-between gap-8">
             <div>
               <h1 className="text-5xl sm:text-7xl font-black uppercase text-white tracking-normal mb-4">

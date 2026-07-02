@@ -52,9 +52,6 @@ export function WhyMetro() {
       <div className="relative z-[1] mx-auto max-w-7xl">
 
         <div className="text-center mb-14">
-          <span className="inline-flex items-center text-brand-yellow text-xs font-bold tracking-[0.25em] uppercase border border-brand-yellow/50 rounded-full px-5 py-1.5 mb-4">
-            Why Metro
-          </span>
           <h2 className="text-4xl sm:text-5xl font-black uppercase text-brand-white tracking-tight">
             A Car Wash Rinses.<br />
             <span className="text-brand-yellow">A Detail Cleans.</span>

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import Image from "next/image";
 import { EstimateForm } from "./EstimateForm";
 
 export const metadata: Metadata = {
@@ -67,35 +66,6 @@ export default function EstimatePage() {
             <EstimateForm />
           </Suspense>
 
-        </div>
-
-        {/* Recent work gallery */}
-        <div className="mx-auto max-w-2xl mt-20">
-          <div
-            className="h-px w-full mb-10"
-            style={{ background: "linear-gradient(to right, transparent 0%, #fac205 25%, #fac205 75%, transparent 100%)" }}
-          />
-          <p className="text-xs font-black text-brand-yellow uppercase tracking-[0.2em] mb-6 text-center">
-            Recent Work
-          </p>
-          <div className="grid grid-cols-2 gap-3">
-            {[
-              { src: "/IMG_6184.JPEG",       alt: "Exterior detail" },
-              { src: "/full-detail-bg.JPEG", alt: "Full detail" },
-              { src: "/interior-bg.JPEG",    alt: "Interior detail" },
-              { src: "/refresh-bg.JPEG",     alt: "Refresh detail" },
-            ].map((img) => (
-              <div key={img.src} className="relative aspect-[4/3] rounded-xl overflow-hidden">
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 50vw, 400px"
-                />
-              </div>
-            ))}
-          </div>
         </div>
 
       </div>

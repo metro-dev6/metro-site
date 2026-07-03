@@ -4,7 +4,6 @@ import { CTABanner } from "@/components/sections/CTABanner";
 import { PackageCardGrid, type MetroPlan } from "@/components/sections/PackageCardGrid";
 import { AddonCard } from "@/components/sections/AddonCard";
 import { EstimateCartBar } from "@/components/EstimateCartBar";
-import { BGPattern } from "@/components/bg-pattern";
 
 export const metadata: Metadata = {
   title: { absolute: "Mobile Detailing Services in Bakersfield, CA | Metro Auto Detailing" },
@@ -149,12 +148,11 @@ function SectionLabel({ label, subheadline }: { label: string; subheadline: stri
 
 export default function ServicesPage() {
   return (
-    <main className="bg-zinc-950 text-white">
+    <main className="bg-site-bg text-white">
 
       {/* Page Header */}
-      <section className="relative pt-20 pb-14 px-6 lg:px-8 border-b border-white/[0.06] overflow-hidden">
-        <BGPattern variant="diagonal-stripes" mask="fade-bottom" fill="rgba(250,194,5,0.04)" size={20} className="z-0" />
-        <div className="relative z-[1] mx-auto max-w-7xl">
+      <section className="pt-20 pb-14 px-6 lg:px-8 border-b border-white/[0.06]">
+        <div className="mx-auto max-w-7xl">
           <div className="flex items-end justify-between gap-8">
             <div>
               <h1 className="text-5xl sm:text-7xl font-black uppercase text-white tracking-normal mb-4">
@@ -176,18 +174,16 @@ export default function ServicesPage() {
       </section>
 
       {/* Section 1 — The Essentials */}
-      <section id="essentials" className="relative py-24 px-6 lg:px-8 overflow-hidden scroll-mt-[108px]">
-        <BGPattern variant="grid" mask="fade-edges" fill="rgba(250,194,5,0.03)" size={40} className="z-0" />
-        <div className="relative z-[1] mx-auto max-w-7xl">
+      <section id="essentials" className="py-24 px-6 lg:px-8 scroll-mt-[108px]">
+        <div className="mx-auto max-w-7xl">
           <SectionLabel label="The Essentials" subheadline="Clean, refreshed, or completely reset." />
           <PackageCardGrid plans={essentialsPlans} columns={3} />
         </div>
       </section>
 
       {/* Section 2 — Protection */}
-      <section className="relative py-24 px-6 lg:px-8 border-y border-white/[0.04] overflow-hidden">
-        <BGPattern variant="diagonal-stripes" mask="fade-edges" fill="rgba(250,194,5,0.04)" size={20} className="z-0" />
-        <div className="relative z-[1] mx-auto max-w-7xl">
+      <section className="py-24 px-6 lg:px-8 border-y border-white/[0.04]">
+        <div className="mx-auto max-w-7xl">
           <SectionLabel label="Protection" subheadline="Keep your paint looking sharp longer." />
           <p className="text-sm text-white/60 leading-relaxed max-w-2xl mb-10">
             If your paint feels rough or looks dull despite being clean, it needs more than a wash. Hard water minerals, brake dust, and industrial fallout bond to paint and cannot be removed with soap and water. These services break down and remove that contamination, then seal the surface so it lasts.
@@ -197,9 +193,8 @@ export default function ServicesPage() {
       </section>
 
       {/* Section 3 — Restoration */}
-      <section className="relative py-24 px-6 lg:px-8 overflow-hidden">
-        <BGPattern variant="diagonal-stripes" mask="fade-edges" fill="rgba(250,194,5,0.04)" size={20} className="z-0" />
-        <div className="relative z-[1] mx-auto max-w-7xl">
+      <section className="py-24 px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
           <SectionLabel label="Restoration" subheadline="Bring back what faded or wore down." />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             <AddonCard
@@ -231,9 +226,8 @@ export default function ServicesPage() {
       </section>
 
       {/* Section 4 — Deep Clean */}
-      <section className="relative py-24 px-6 lg:px-8 border-y border-white/[0.04] overflow-hidden">
-        <BGPattern variant="grid" mask="fade-edges" fill="rgba(250,194,5,0.03)" size={40} className="z-0" />
-        <div className="relative z-[1] mx-auto max-w-7xl">
+      <section className="py-24 px-6 lg:px-8 border-y border-white/[0.04]">
+        <div className="mx-auto max-w-7xl">
           <SectionLabel label="Deep Clean" subheadline="For the tough stuff that needs more than a standard detail." />
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             <AddonCard
@@ -259,9 +253,8 @@ export default function ServicesPage() {
       </section>
 
       {/* Section 5 — Maintenance Plans */}
-      <section className="relative py-24 px-6 lg:px-8 overflow-hidden">
-        <BGPattern variant="diagonal-stripes" mask="fade-edges" fill="rgba(250,194,5,0.04)" size={20} className="z-0" />
-        <div className="relative z-[1] mx-auto max-w-7xl">
+      <section className="py-24 px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
           <SectionLabel
             label="Maintenance Plans"
             subheadline="The longer you wait, the more work it takes."

@@ -28,7 +28,7 @@ function TikTokIcon() {
 
 const socials = [
   { label: "Instagram", href: "https://instagram.com/metroautodetailingca", Icon: InstagramIcon },
-  { label: "Facebook",  href: "https://facebook.com/metroautodetailing",  Icon: FacebookIcon  },
+  { label: "Facebook",  href: "https://www.facebook.com/profile.php?id=61586613950253",  Icon: FacebookIcon  },
   { label: "TikTok",    href: "https://tiktok.com/@metroautodetailing",   Icon: TikTokIcon    },
 ];
 

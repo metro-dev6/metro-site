@@ -64,6 +64,6 @@ export default async function ServicePage({ params }: Props) {
   if (!service) notFound();
 
   return (
-    <main className="min-h-screen bg-black" />
+    <main className="min-h-screen bg-site-bg" />
   );
 }

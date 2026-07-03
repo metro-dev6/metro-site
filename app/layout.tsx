@@ -80,7 +80,7 @@ export default function RootLayout({
               "hasMap": "https://maps.google.com/?q=Bakersfield,CA",
               "sameAs": [
                 "https://instagram.com/metroautodetailingca",
-                "https://facebook.com/metroautodetailing"
+                "https://www.facebook.com/profile.php?id=61586613950253"
               ]
             })
           }}

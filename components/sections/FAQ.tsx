@@ -1,4 +1,3 @@
-import { BGPattern } from "@/components/bg-pattern";
 
 const faqs = [
   {
@@ -49,9 +48,8 @@ const faqs = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="relative bg-black py-20 px-6 lg:px-8 scroll-mt-[100px]">
-      <BGPattern variant="grid" mask="fade-center" fill="rgba(255,255,255,0.05)" size={32} className="z-0" />
-      <div className="relative z-[1] mx-auto max-w-3xl">
+    <section id="faq" className="bg-site-bg py-20 px-6 lg:px-8 scroll-mt-[100px]">
+      <div className="mx-auto max-w-3xl">
 
         <div className="text-center mb-12">
           <h2 className="text-4xl sm:text-5xl font-black uppercase text-brand-white tracking-tight">

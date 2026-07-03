@@ -5,7 +5,7 @@ import { ShinyButton } from "@/components/ui/shiny-button";
 
 export function CTABanner() {
   return (
-    <section className="relative bg-black pt-20 pb-20 sm:pt-32 sm:pb-32 px-6 lg:px-8 overflow-hidden">
+    <section className="relative bg-site-bg pt-20 pb-20 sm:pt-32 sm:pb-32 px-6 lg:px-8 overflow-hidden">
       <style>{`
         .cta-dim-layer { transition: background-color 0.5s ease; }
         section:has(.cta-btn:hover) .cta-dim-layer {

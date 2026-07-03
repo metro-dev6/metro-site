@@ -41,7 +41,7 @@ const services = [
 
 export function ServicesPreview() {
   return (
-    <section className="bg-black pt-14 pb-20 px-6 lg:px-8">
+    <section className="bg-site-bg pt-14 pb-20 px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
 
         {/* Header */}

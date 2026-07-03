@@ -124,7 +124,7 @@ export function Hero() {
       </div>
 
       {/* Stat bar */}
-      <div className="relative z-10 overflow-hidden bg-black">
+      <div className="relative z-10 overflow-hidden bg-site-bg">
 
         {/* Yellow accent line — top, fades at edges */}
         <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "linear-gradient(to right, transparent 0%, #fac205 25%, #fac205 75%, transparent 100%)" }} />

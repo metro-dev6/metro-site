@@ -115,11 +115,8 @@ export default async function LocationPage({ params }: Props) {
   if (!location) notFound();
 
   return (
-    <div className="relative min-h-screen bg-zinc-950 overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 [background-image:radial-gradient(circle,rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:32px_32px]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_30%_at_50%_0%,rgba(250,194,5,0.05),transparent)]" />
-
-      <div className="relative mx-auto max-w-4xl px-6 lg:px-8 pt-16 pb-24">
+    <div className="min-h-screen bg-site-bg">
+      <div className="mx-auto max-w-4xl px-6 lg:px-8 pt-16 pb-24">
 
         {/* Badge */}
         <div className="flex justify-center mb-8">

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { BGPattern } from "@/components/bg-pattern";
 
 const GOOGLE_PROFILE_URL = "https://share.google/ggiBdFRwhkILjiw87"; // TODO: replace with real URL
 
@@ -46,14 +45,28 @@ function GoogleIcon() {
 
 export function Testimonials() {
   return (
-    <section className="relative bg-black py-20 px-6 lg:px-8">
-      <BGPattern variant="dots" mask="none" fill="rgba(250,194,5,0.08)" size={20} className="z-0" />
-      <div className="relative z-[1] mx-auto max-w-7xl">
+    <section className="bg-site-bg py-20 px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
 
-        <div className="text-center mb-12">
-          <h2 className="text-4xl sm:text-5xl font-black uppercase text-brand-white tracking-tight">
-            What Our Clients Say
-          </h2>
+        {/* Header */}
+        <div className="mb-12">
+          <div className="flex items-end justify-between gap-4 flex-wrap">
+            <h2 className="text-3xl sm:text-4xl font-black uppercase text-brand-white leading-tight">
+              Straight From Our Clients
+            </h2>
+            <Link
+              href={GOOGLE_PROFILE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-bold uppercase tracking-widest text-brand-white/40 hover:text-brand-yellow transition-colors flex items-center gap-2"
+            >
+              See all on Google
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
+          <div className="mt-4 h-px bg-white/[0.07]" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -68,28 +81,13 @@ export function Testimonials() {
                 </div>
               </div>
               <p className="text-base text-brand-white/70 leading-relaxed flex-1">
-                "{review.body}"
+                &ldquo;{review.body}&rdquo;
               </p>
               <div className="pt-2 border-t border-white/[0.06]">
                 <span className="text-sm font-black text-brand-white">{review.name}</span>
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="flex justify-center mt-8">
-          <Link
-            href={GOOGLE_PROFILE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-bold text-brand-white/50 hover:text-brand-white transition-colors"
-          >
-            <GoogleIcon />
-            See all reviews on Google
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
         </div>
 
       </div>

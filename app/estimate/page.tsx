@@ -10,11 +10,7 @@ export const metadata: Metadata = {
 
 export default function EstimatePage() {
   return (
-    <div className="relative min-h-screen bg-black overflow-hidden">
-      {/* Dot grid texture */}
-      <div className="pointer-events-none absolute inset-0 [background-image:radial-gradient(circle,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:28px_28px]" />
-      {/* Yellow glow — subtle, letters carry the color */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_30%_at_50%_0%,rgba(250,194,5,0.06),transparent)]" />
+    <div className="min-h-screen bg-site-bg">
 
       <div className="relative px-4 pt-14 pb-24">
         <div className="mx-auto max-w-2xl">

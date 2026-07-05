@@ -60,7 +60,7 @@ export function Hero() {
       {/* Dark overlay — heavier left (text side) fading lighter right (car side) */}
       <div
         className="absolute inset-0"
-        style={{ background: "linear-gradient(to right, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0.50) 40%, rgba(0,0,0,0.20) 100%)" }}
+        style={{ background: "linear-gradient(to right, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.38) 40%, rgba(0,0,0,0.12) 100%)" }}
       />
       {/* Dim layer — activates when CTA button is hovered */}
       <div className="hero-dim-layer absolute inset-0" />

@@ -5,6 +5,12 @@ const nextConfig: NextConfig = {
     root: __dirname,
   },
   allowedDevOrigins: ["192.168.50.5"],
+  async redirects() {
+    return [
+      { source: "/home", destination: "/", permanent: true },
+      { source: "/home/", destination: "/", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

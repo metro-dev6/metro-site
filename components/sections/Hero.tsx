@@ -15,12 +15,6 @@ export function Hero() {
       {USE_VIDEO ? (
         <>
           <style>{`
-            @keyframes heroZoomOut {
-              0%   { transform: scale(1.15); }
-              40%  { transform: scale(1.07); }
-              70%  { transform: scale(1.03); }
-              100% { transform: scale(1.00); }
-            }
             .hero-dim-layer { transition: background-color 0.5s ease; }
             section:has(.hero-cta:hover) .hero-dim-layer {
               background-color: rgba(0,0,0,0.35);
@@ -41,7 +35,6 @@ export function Hero() {
             className="hidden md:block absolute inset-0 w-full h-full object-cover"
             style={{
               objectPosition: "center",
-              animation: "heroZoomOut 4s ease-out forwards",
             }}
           >
             <source src={VIDEO_SRC} type="video/mp4" />

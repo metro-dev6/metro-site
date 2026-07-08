@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 };
 import { ServicesPreview } from "@/components/sections/ServicesPreview";
 import { WhyMetro } from "@/components/sections/WhyMetro";
+import { Gallery } from "@/components/sections/Gallery";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTABanner } from "@/components/sections/CTABanner";
@@ -122,6 +123,7 @@ export default function Home() {
       <Hero />
       <ServicesPreview />
       <WhyMetro />
+      <Gallery />
       <Testimonials />
       <CTABanner />
       <FAQ />

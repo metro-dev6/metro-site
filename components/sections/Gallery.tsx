@@ -77,7 +77,7 @@ const SLIDES = [
       id: 3,
       type: "image" as const,
       title: "Interior Detail",
-      desc: "Toyota Corolla - Spot Stain Treatment",
+      desc: "Upholstery Stain Treatment",
       url: "/gallery/Slide%202/toyota-corolla-interior-detail-bakersfield.JPEG",
       span: "col-span-1 row-span-3 sm:col-span-1 sm:row-span-3 md:col-span-2 md:row-span-3 lg:col-span-2 lg:row-span-4",
     },
@@ -121,12 +121,13 @@ export function Gallery() {
       <div className="mx-auto max-w-7xl">
 
         <div className="mb-10">
-          <h2 className="text-3xl sm:text-4xl font-black uppercase text-white tracking-normal leading-tight">
+          <h2 className="text-3xl sm:text-4xl font-black uppercase text-brand-white leading-tight">
             The Work
           </h2>
           <p className="text-white/50 text-sm mt-2 max-w-md">
             No filters. No stock. Every shot is from a real job in Bakersfield.
           </p>
+          <div className="mt-4 h-px bg-white/[0.07]" />
         </div>
 
         <div className="relative">

@@ -1,5 +1,10 @@
 
-const faqs = [
+interface FAQItem {
+  q: string;
+  a: string;
+}
+
+const DEFAULT_FAQS: FAQItem[] = [
   {
     q: "What's the difference between a detail and a regular car wash?",
     a: "A car wash is automated and surface level. It wets the car, runs generic brushes over it, and sends you out. Detailing is different. Every surface gets worked by hand, inside and out. We clean what a car wash misses and protect what a car wash leaves behind.",
@@ -46,14 +51,19 @@ const faqs = [
   },
 ];
 
-export function FAQ() {
+interface FAQProps {
+  faqs?: FAQItem[];
+  heading?: string;
+}
+
+export function FAQ({ faqs = DEFAULT_FAQS, heading = "Common Questions" }: FAQProps) {
   return (
     <section id="faq" className="bg-site-bg py-20 px-6 lg:px-8 scroll-mt-[100px]">
       <div className="mx-auto max-w-3xl">
 
         <div className="text-center mb-12">
           <h2 className="text-4xl sm:text-5xl font-black uppercase text-brand-white tracking-tight">
-            Common Questions
+            {heading}
           </h2>
         </div>
 

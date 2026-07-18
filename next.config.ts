@@ -9,6 +9,16 @@ const nextConfig: NextConfig = {
     return [
       { source: "/home", destination: "/", permanent: true },
       { source: "/home/", destination: "/", permanent: true },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.metroautodetailing.pro" }],
+        destination: "https://metroautodetailing.pro/:path*",
+        permanent: true,
+      },
+      { source: "/faq", destination: "/", permanent: true },
+      { source: "/faq/", destination: "/", permanent: true },
+      { source: "/exploring-the-latest-trends-in-limousine-interior-design-and-technology", destination: "/blog", permanent: true },
+      { source: "/exploring-the-latest-trends-in-limousine-interior-design-and-technology/", destination: "/blog", permanent: true },
     ];
   },
   async headers() {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat, DM_Sans } from "next/font/google";
+import Script from "next/script";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -91,6 +92,18 @@ export default function RootLayout({
             })
           }}
         />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-LM507WTMXH"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-LM507WTMXH');
+          `}
+        </Script>
         <AnnouncementBar />
         <Header />
         {/* AnnouncementBar h-9 (36px) + Header h-16 (64px) = 100px */}

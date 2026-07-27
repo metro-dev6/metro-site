@@ -22,7 +22,7 @@ function Divider() {
 
 function SectionLabel({ label }: { label: string }) {
   return (
-    <p className="text-[10px] font-black tracking-[0.15em] uppercase text-brand-yellow text-center">
+    <p className="text-sm font-black tracking-[0.15em] uppercase text-brand-yellow text-center">
       {label}
     </p>
   );

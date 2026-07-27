@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CheckCircle } from "lucide-react";
+import ConversionEvent from "./ConversionEvent";
 
 export const metadata: Metadata = {
   title: { absolute: "Request Received | Metro Auto Detailing" },
@@ -63,6 +64,7 @@ const CONTRASTS = [
 export default function ThankYouPage() {
   return (
     <div className="min-h-screen bg-site-bg">
+      <ConversionEvent />
       <div className="relative px-4 pt-14 pb-24">
         <div className="mx-auto max-w-lg flex flex-col items-center gap-10 text-center">
 

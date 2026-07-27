@@ -22,7 +22,7 @@ function Divider() {
 
 function SectionLabel({ label }: { label: string }) {
   return (
-    <p className="text-sm font-black tracking-[0.15em] uppercase text-brand-yellow text-center">
+    <p className="text-lg font-black tracking-[0.15em] uppercase text-brand-yellow text-center">
       {label}
     </p>
   );
@@ -101,8 +101,8 @@ export default function ThankYouPage() {
                   {n}
                 </div>
                 <div className="flex flex-col gap-0.5 pt-0.5">
-                  <p className="text-white font-bold text-[13px] leading-snug">{title}</p>
-                  <p className="text-white/60 text-[12px] leading-relaxed">{desc}</p>
+                  <p className="text-white font-bold text-[15px] leading-snug">{title}</p>
+                  <p className="text-white/60 text-[14px] leading-relaxed">{desc}</p>
                 </div>
               </div>
             ))}
@@ -118,8 +118,8 @@ export default function ThankYouPage() {
                 ? [<div key={`d${i}`} className="h-px w-full bg-white/10" />]
                 : []),
               <div key={i} className="flex flex-col gap-1 text-left">
-                <p className="text-white/70 text-[12px]">{q}</p>
-                <p className="text-white font-semibold text-[12px]">{a}</p>
+                <p className="text-white/70 text-[14px]">{q}</p>
+                <p className="text-white font-semibold text-[14px]">{a}</p>
               </div>,
             ])}
           </div>
@@ -133,14 +133,14 @@ export default function ThankYouPage() {
               className="bg-[#0f0f0f] rounded py-[14px] px-[16px] text-left"
               style={{ borderLeft: "3px solid #fac205" }}
             >
-              <p className="text-white/80 text-[12px] italic leading-[1.7]">
+              <p className="text-white/80 text-[14px] italic leading-[1.7]">
                 &ldquo;I scheduled Metro to come to me while I was at work. The carpet?
                 Spotless. The vents? Free of dust. Even the tiny cracks where dust
                 and dirt accumulate were cleaned. I couldn&apos;t be happier.&rdquo;
               </p>
               <div className="flex items-center justify-between mt-3">
-                <p className="text-white/55 text-[11px]">— Kris C., Bakersfield</p>
-                <p className="text-brand-yellow text-[12px]">★★★★★</p>
+                <p className="text-white/55 text-[13px]">— Kris C., Bakersfield</p>
+                <p className="text-brand-yellow text-[14px]">★★★★★</p>
               </div>
             </div>
           </div>
@@ -150,14 +150,14 @@ export default function ThankYouPage() {
           {/* Section 5 — Metro Loyalty */}
           <div className="flex flex-col gap-3 w-full">
             <SectionLabel label="Metro Loyalty" />
-            <p className="text-white font-bold text-[13px] leading-snug">
+            <p className="text-white font-bold text-[15px] leading-snug">
               Book a qualifying detail. Start a maintenance plan.{" "}
               Every 3 visits, pick a free add-on.
             </p>
-            <p className="text-brand-yellow font-bold text-[13px]">
+            <p className="text-brand-yellow font-bold text-[15px]">
               Engine bay. Hand wax. Headlight restoration. Your pick.
             </p>
-            <p className="text-white/60 text-[12px]">
+            <p className="text-white/60 text-[14px]">
               No expiration. No code. I keep track.
             </p>
           </div>
@@ -167,7 +167,7 @@ export default function ThankYouPage() {
           {/* Section 6 — Our Guarantee */}
           <div className="flex flex-col items-center gap-3 w-full">
             <SectionLabel label="Our Guarantee" />
-            <p className="text-white/70 text-[12px] leading-relaxed">
+            <p className="text-white/70 text-[14px] leading-relaxed">
               Anything off after the job? Text within 24 hours.
               <br />
               I come back and fix it. No charge.

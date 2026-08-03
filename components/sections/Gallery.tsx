@@ -33,7 +33,7 @@ const SLIDES = [
       span: "col-span-1 row-span-3 md:col-span-1 md:row-span-2 lg:col-span-2 lg:row-span-4",
     },
     {
-      id: 5,
+      id: 4,
       type: "image" as const,
       title: "Mirror Finish",
       desc: "2018 Silverado — 2-Step Paint Correction",
@@ -41,7 +41,7 @@ const SLIDES = [
       span: "col-span-1 row-span-3 md:col-span-2 md:row-span-3 lg:col-span-3 lg:row-span-5",
     },
     {
-      id: 6,
+      id: 5,
       type: "comparison" as const,
       title: "Headlight Restoration",
       desc: "",
@@ -54,7 +54,7 @@ const SLIDES = [
   // Slide 2 — Inverted: 2 large sliders on top, 3 small tiles on bottom
   [
     {
-      id: 1,
+      id: 6,
       type: "comparison" as const,
       title: "Seat Shampoo",
       desc: "Deep extracted, not wiped",
@@ -64,7 +64,7 @@ const SLIDES = [
       span: "col-span-2 row-span-5 sm:col-span-3 sm:row-span-5 md:col-span-2 md:row-span-5 lg:col-span-3 lg:row-span-5",
     },
     {
-      id: 2,
+      id: 7,
       type: "comparison" as const,
       title: "Headlight Restoration",
       desc: "$80 — book it on its own",
@@ -75,7 +75,7 @@ const SLIDES = [
       span: "col-span-2 row-span-4 sm:col-span-3 sm:row-span-5 md:col-span-2 md:row-span-5 lg:col-span-3 lg:row-span-5",
     },
     {
-      id: 3,
+      id: 8,
       type: "image" as const,
       title: "Interior Detail",
       desc: "Upholstery Stain Treatment",
@@ -83,7 +83,7 @@ const SLIDES = [
       span: "col-span-1 row-span-3 sm:col-span-1 sm:row-span-3 md:col-span-2 md:row-span-3 lg:col-span-2 lg:row-span-4",
     },
     {
-      id: 4,
+      id: 9,
       type: "image" as const,
       title: "Exterior Detail",
       desc: "Decontaminated, 1-Step Paint Enhancement, Protected",
@@ -91,7 +91,7 @@ const SLIDES = [
       span: "col-span-1 row-span-3 sm:col-span-1 sm:row-span-3 md:col-span-1 md:row-span-3 lg:col-span-2 lg:row-span-4",
     },
     {
-      id: 5,
+      id: 10,
       type: "image" as const,
       title: "Full Detail",
       desc: "Large 3-Row SUV Received The Works, Inside & Out",

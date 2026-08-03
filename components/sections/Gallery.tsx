@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import InteractiveBentoGallery from "@/components/ui/interactive-bento-gallery";
 import { MobileGalleryStack, type MobileGalleryItem } from "@/components/ui/mobile-gallery-stack";
+import { useIsDesktop } from "@/hooks/use-is-desktop";
 
 const SLIDES = [
   // Slide 1 — Video hero
@@ -106,6 +107,7 @@ const ALL_ITEMS: MobileGalleryItem[] = SLIDES.flat();
 export function Gallery() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const multiSlide = SLIDES.length > 1;
+  const isDesktop = useIsDesktop();
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
@@ -133,67 +135,68 @@ export function Gallery() {
           <div className="mt-4 h-px bg-white/[0.07]" />
         </div>
 
-        <div className="hidden md:block relative">
-          {/* Left arrow */}
-          {multiSlide && (
-            <button
-              onClick={prevSlide}
-              className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-black/70 border border-white/15 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/90 transition-colors"
-              aria-label="Previous slide"
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-          )}
+        {isDesktop ? (
+          <>
+            <div className="relative">
+              {/* Left arrow */}
+              {multiSlide && (
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-black/70 border border-white/15 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/90 transition-colors"
+                  aria-label="Previous slide"
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              )}
 
-          {/* Bento grid — fades between slides */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentSlide}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <InteractiveBentoGallery mediaItems={SLIDES[currentSlide]} />
-            </motion.div>
-          </AnimatePresence>
+              {/* Bento grid — fades between slides */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentSlide}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <InteractiveBentoGallery mediaItems={SLIDES[currentSlide]} />
+                </motion.div>
+              </AnimatePresence>
 
-          {/* Right arrow */}
-          {multiSlide && (
-            <button
-              onClick={nextSlide}
-              className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-black/70 border border-white/15 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/90 transition-colors"
-              aria-label="Next slide"
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-          )}
-        </div>
+              {/* Right arrow */}
+              {multiSlide && (
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-black/70 border border-white/15 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/90 transition-colors"
+                  aria-label="Next slide"
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              )}
+            </div>
 
-        {/* Slide dots */}
-        {multiSlide && (
-          <div className="hidden md:flex justify-center gap-2 mt-6">
-            {SLIDES.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => goToSlide(i)}
-                className={`h-1 rounded-full transition-all duration-300 ${
-                  i === currentSlide ? "w-6 bg-yellow-400" : "w-2 bg-white/20"
-                }`}
-                aria-label={`Go to slide ${i + 1}`}
-              />
-            ))}
-          </div>
-        )}
-
-        {/* Mobile — single-column letterboxed swipe stack */}
-        <div className="md:hidden">
+            {/* Slide dots */}
+            {multiSlide && (
+              <div className="flex justify-center gap-2 mt-6">
+                {SLIDES.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => goToSlide(i)}
+                    className={`h-1 rounded-full transition-all duration-300 ${
+                      i === currentSlide ? "w-6 bg-yellow-400" : "w-2 bg-white/20"
+                    }`}
+                    aria-label={`Go to slide ${i + 1}`}
+                  />
+                ))}
+              </div>
+            )}
+          </>
+        ) : (
           <MobileGalleryStack items={ALL_ITEMS} />
-        </div>
+        )}
 
       </div>
     </section>

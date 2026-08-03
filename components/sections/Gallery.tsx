@@ -3,6 +3,7 @@
 import { useCallback, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import InteractiveBentoGallery from "@/components/ui/interactive-bento-gallery";
+import { MobileGalleryStack, type MobileGalleryItem } from "@/components/ui/mobile-gallery-stack";
 
 const SLIDES = [
   // Slide 1 — Video hero
@@ -100,6 +101,8 @@ const SLIDES = [
   ],
 ];
 
+const ALL_ITEMS: MobileGalleryItem[] = SLIDES.flat();
+
 export function Gallery() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const multiSlide = SLIDES.length > 1;
@@ -130,7 +133,7 @@ export function Gallery() {
           <div className="mt-4 h-px bg-white/[0.07]" />
         </div>
 
-        <div className="relative">
+        <div className="hidden md:block relative">
           {/* Left arrow */}
           {multiSlide && (
             <button
@@ -173,7 +176,7 @@ export function Gallery() {
 
         {/* Slide dots */}
         {multiSlide && (
-          <div className="flex justify-center gap-2 mt-6">
+          <div className="hidden md:flex justify-center gap-2 mt-6">
             {SLIDES.map((_, i) => (
               <button
                 key={i}
@@ -186,6 +189,11 @@ export function Gallery() {
             ))}
           </div>
         )}
+
+        {/* Mobile — single-column letterboxed swipe stack */}
+        <div className="md:hidden">
+          <MobileGalleryStack items={ALL_ITEMS} />
+        </div>
 
       </div>
     </section>

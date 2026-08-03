@@ -134,7 +134,7 @@ export function ServicesPreview() {
                 {[
                   { name: "Headlight Restoration", price: "$80" },
                   { name: "Trim Restoration", price: "$100" },
-                  { name: "Water Spot Removal", price: "$100" },
+                  { name: "Water Spot Removal", price: "$60" },
                   { name: "Pet Hair and/or Sand Removal", price: "$80" },
                   { name: "Carpet & Seat Extraction", price: "$70" },
                   { name: "Engine Bay", price: "$50" },

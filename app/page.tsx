@@ -83,7 +83,7 @@ const faqSchema = {
       "name": "Is a deposit required to book?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. A $20 deposit secures your appointment and applies toward the total. It's refundable if you cancel with enough notice."
+        "text": "Yes. A $30 deposit secures your appointment and applies toward the total. It's refundable if you cancel with enough notice."
       }
     },
     {

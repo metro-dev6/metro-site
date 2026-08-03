@@ -36,6 +36,22 @@ const essentialsPlans: MetroPlan[] = [
     href: "/estimate",
   },
   {
+    name: "Interior Detail",
+    description: "Built for interiors that need more than a vacuum. Seats shampooed, carpet extracted, every surface deep cleaned and UV protected.",
+    price: 200,
+    largerVehicle: "+$20",
+    features: [
+      "Full interior vacuum (thorough)",
+      "All interior panels, compartments, and console cleaned",
+      "Carpet & seat shampoo with extraction",
+      "CarPro PERL UV interior dressing",
+      "Windows (interior & exterior)",
+      "Door jambs cleaned",
+    ],
+    buttonText: "Add to Estimate",
+    href: "/estimate",
+  },
+  {
     name: "Refresh Detail",
     description: "Full exterior wash plus a thorough interior detail. Both done right in one visit.",
     price: 250,
@@ -211,8 +227,8 @@ export default function ServicesPage() {
             />
             <AddonCard
               name="Water Spot Removal"
-              price="$100"
-              priceValue={100}
+              price="$60"
+              priceValue={60}
               description="Water spots don't just sit on the surface. Minerals from hard water etch into paint and glass over time. Left long enough, they cause permanent damage. Acid wash breaks down the mineral bond and removes them from both surfaces."
             />
             <AddonCard

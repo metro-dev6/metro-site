@@ -380,8 +380,8 @@ function ExteriorDetailPage() {
             />
             <AddonCard
               name="Water Spot Removal"
-              price="+$100"
-              priceValue={100}
+              price="+$60"
+              priceValue={60}
               description="Minerals from hard water etch into paint and glass over time. Left long enough, they cause permanent damage. Acid wash breaks down the mineral bond and removes them from both surfaces."
             />
             <AddonCard

@@ -19,7 +19,7 @@ const PACKAGES = [
 const ADDONS = [
   { name: "Headlight Restoration", price: 80 },
   { name: "Trim Restoration", price: 100 },
-  { name: "Water Spot Removal", price: 100 },
+  { name: "Water Spot Removal", price: 60 },
   { name: "Pet Hair & Sand Removal", price: 80 },
   { name: "Carpet & Seat Extraction", price: 70 },
   { name: "Engine Bay", price: 50 },

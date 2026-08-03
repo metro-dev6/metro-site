@@ -35,7 +35,7 @@ const DEFAULT_FAQS: FAQItem[] = [
   },
   {
     q: "Is a deposit required to book?",
-    a: "Yes. A $20 deposit secures your appointment and applies toward the total. It's refundable if you cancel with enough notice.",
+    a: "Yes. A $30 deposit secures your appointment and applies toward the total. It's refundable if you cancel with enough notice.",
   },
   {
     q: "What if my vehicle is in rough condition?",

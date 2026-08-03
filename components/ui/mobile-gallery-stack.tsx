@@ -22,6 +22,7 @@ const SWIPE_THRESHOLD_PX = 50;
 export function MobileGalleryStack({ items }: { items: MobileGalleryItem[] }) {
   const [index, setIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
 
   const next = useCallback(() => {
     setIndex((prev) => (prev + 1) % items.length);
@@ -31,21 +32,25 @@ export function MobileGalleryStack({ items }: { items: MobileGalleryItem[] }) {
     setIndex((prev) => (prev - 1 + items.length) % items.length);
   }, [items.length]);
 
+  const item = items[index];
+
   const onTouchStart = (e: React.TouchEvent) => {
+    if (item.type === "comparison") return;
     touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
   };
 
   const onTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return;
+    if (touchStartX.current === null || touchStartY.current === null) return;
     const deltaX = e.changedTouches[0].clientX - touchStartX.current;
-    if (Math.abs(deltaX) > SWIPE_THRESHOLD_PX) {
+    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+    if (Math.abs(deltaX) > SWIPE_THRESHOLD_PX && Math.abs(deltaX) > Math.abs(deltaY)) {
       if (deltaX < 0) next();
       else prev();
     }
     touchStartX.current = null;
+    touchStartY.current = null;
   };
-
-  const item = items[index];
 
   return (
     <div>

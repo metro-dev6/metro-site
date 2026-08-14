@@ -1,7 +1,7 @@
 # metro-site — Current Session State
 
 > Updated by /handoff. Read this at the start of every Site session.
-> Last updated: 2026-08-02
+> Last updated: 2026-08-13
 
 ## What's Live on metroautodetailing.pro
 
@@ -28,12 +28,14 @@
 | SocialFeed | Not rendered | Hold until social content built up. |
 | Favicon | Live | Metro emblem (1.png). |
 | Meta Pixel | **Not installed** | Operator understands what it does (free, works on all traffic, needs ads running to pay off). Needs Pixel ID from Facebook Events Manager (Business Settings → Data Sources → Pixels) before it can be wired in. |
+| /maintenance-terms | **Built 2026-08-13, NOT pushed** | Static terms page, content from `canonical/pricing-framework.md` (12-hour cancellation notice — RULE-025). Unblocks Template 2/4 email links, which had been pending on this page's existence. `npm run build` verified clean. |
 
 ---
 
 ## Immediate Next Steps (Priority Order)
 
-1. **Push metro-site's 9 local commits to GitHub** — nothing from tonight's session is on the remote yet.
+0. **Visual design direction concepts — session interrupted mid-brainstorm 2026-08-13.** Operator wants multiple themed concept directions for the site (current dark-theme + yellow accent flagged as generic/safe, not distinctive). `superpowers:brainstorming` skill was invoked; visual companion tool was offered but operator ended the session before responding. Next session: re-offer the companion, then continue clarifying questions (which pages get concepts — likely start with a lower-stakes page rather than a live one — how many directions, aesthetic starting points e.g. industrial/utilitarian was floated as a fit for a mobile detailing brand).
+1. **Estimate form total should repeat at the bottom, near Send Request.** Currently the running total (`grandTotal`, `app/estimate/EstimateForm.tsx:276`) only shows once, below the services checklist near the top of the form. On a long scroll (vehicle fields, info fields, condition photos) a visitor loses sight of the number before hitting submit. Add a second total display near the "Send Request" button. Flagged 2026-08-02, not built.
 2. **Meta Pixel install** — get the Pixel ID, wire into `layout.tsx` next to the existing GA4 script, fire a "Lead" event on estimate submit (same pattern as `estimate_submitted`).
 3. **Finish gallery verification** — full interactive browser check (swipe through all 10 photos, drag a comparison slider, confirm desktop bento renders correctly) was interrupted by an MCP disconnect. Network-level fix (image count) was confirmed; the visual/interaction pass was not re-run after reconnecting.
 4. **Loyalty Eligible badge** — add to qualifying service cards on /services page (Refresh, Exterior, Full Detail). Carried from prior session.
@@ -48,10 +50,11 @@
 
 ## Recent Pushes
 
-**Nothing pushed since 2026-07-26** — 9 commits from 2026-08-02 are local only, need a push request.
+**Nothing pushed since 2026-07-26** — now 10 commits local only (9 from 2026-08-02 + 1 from 2026-08-13), need a push request.
 
 | Commit | Date | What |
 |--------|------|------|
+| (pending) | 2026-08-13 | Add /maintenance-terms page |
 | 307f699 | 2026-08-02 | Interior Detail added to /services, stale Water Spot/deposit pricing fixed |
 | 914fcb7 | 2026-08-02 | Gallery rebuild spec and plan docs added |
 | 9439f33 | 2026-08-02 | .gitignore: ignore .vercel and .env* |
@@ -101,6 +104,7 @@
 | `next.config.ts` | Redirects, security headers. |
 | `app/services/page.tsx` | Essentials/Protection/Restoration/Deep Clean/Maintenance sections — Interior Detail now included. |
 | `app/services/[slug]/page.tsx` | Exterior-detail local build + redirect logic for other slugs. |
+| `app/maintenance-terms/page.tsx` | Maintenance Plan terms, static page, built 2026-08-13. |
 | `components/sections/FAQ.tsx` | Accordion, deposit answer $30. |
 | `components/sections/Gallery.tsx` | `SLIDES`/`ALL_ITEMS`, desktop/mobile split via `useIsDesktop`. |
 | `components/ui/mobile-gallery-stack.tsx` | Mobile-only gallery renderer. |

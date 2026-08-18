@@ -28,7 +28,7 @@
 | SocialFeed | Not rendered | Hold until social content built up. |
 | Favicon | Live | Metro emblem (1.png). |
 | Meta Pixel | **Not installed** | Operator understands what it does (free, works on all traffic, needs ads running to pay off). Needs Pixel ID from Facebook Events Manager (Business Settings → Data Sources → Pixels) before it can be wired in. |
-| /maintenance-terms | **Built 2026-08-13, NOT pushed** | Static terms page, content from `canonical/pricing-framework.md` (12-hour cancellation notice — RULE-025). Unblocks Template 2/4 email links, which had been pending on this page's existence. `npm run build` verified clean. |
+| /maintenance-terms | **Built 2026-08-13, NOT pushed** | Static terms page, content from `canonical/pricing-framework.md` (24-hour cancellation notice — RULE-021, reverted 2026-08-17 via RULE-027 after briefly being 12 hours under RULE-025). Unblocks Template 2/4 email links, which had been pending on this page's existence. `npm run build` verified clean 2026-08-17. |
 
 ---
 

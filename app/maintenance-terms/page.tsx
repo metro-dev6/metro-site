@@ -97,7 +97,7 @@ export default function MaintenanceTermsPage() {
               </p>
               <ul className="list-disc pl-5 flex flex-col gap-2">
                 <li>
-                  Cancelling or rescheduling with less than <strong className="text-white">12
+                  Cancelling or rescheduling with less than <strong className="text-white">24
                   hours</strong> notice triggers a $30 late-cancel fee.
                 </li>
                 <li>
@@ -115,7 +115,7 @@ export default function MaintenanceTermsPage() {
               </p>
               <p>
                 Tell Metro you want to pause, skip, or cancel — no penalty beyond the
-                12-hour cancellation terms above. The relationship stays open. Come back
+                24-hour cancellation terms above. The relationship stays open. Come back
                 to the plan whenever.
               </p>
               <p>

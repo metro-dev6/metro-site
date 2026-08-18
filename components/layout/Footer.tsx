@@ -127,9 +127,17 @@ export function Footer() {
 
         </div>
 
-        <p className="text-xs text-brand-white/25 pt-8">
-          © {new Date().getFullYear()} Metro Auto Detailing. Bakersfield, CA. All rights reserved.
-        </p>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pt-8">
+          <p className="text-xs text-brand-white/25">
+            © {new Date().getFullYear()} Metro Auto Detailing. Bakersfield, CA. All rights reserved.
+          </p>
+          <Link
+            href="/maintenance-terms"
+            className="text-xs text-brand-white/25 hover:text-brand-white/50 transition-colors w-fit"
+          >
+            Maintenance Plan Terms
+          </Link>
+        </div>
 
       </div>
     </footer>

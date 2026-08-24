@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: { absolute: "Auto Detailing Tips & Guides | Metro Auto Detailing" },
   description: "Educational guides on car detailing, paint protection, and car care for Bakersfield, CA vehicle owners. Written by Metro Auto Detailing.",
   robots: { index: false },
-  alternates: { canonical: "https://www.metroautodetailing.pro/blog" },
+  alternates: { canonical: "https://metroautodetailing.pro/blog" },
   openGraph: {
     title: "Auto Detailing Tips & Guides | Metro Auto Detailing",
     description: "Car care and detailing guides for Bakersfield, CA vehicle owners.",

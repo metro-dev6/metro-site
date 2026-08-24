@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 export const metadata: Metadata = {
   title: { absolute: "Maintenance Plan Terms | Metro Auto Detailing" },
   description: "Terms for Metro Auto Detailing's Maintenance Plan — fixed schedule and on-call. Pricing, cancellation, and how the recurring relationship works.",
-  alternates: { canonical: "https://www.metroautodetailing.pro/maintenance-terms" },
+  alternates: { canonical: "https://metroautodetailing.pro/maintenance-terms" },
 };
 
 function Divider() {

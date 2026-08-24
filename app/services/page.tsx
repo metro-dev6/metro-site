@@ -8,7 +8,7 @@ import { EstimateCartBar } from "@/components/EstimateCartBar";
 export const metadata: Metadata = {
   title: { absolute: "Mobile Detailing Services in Bakersfield, CA | Metro Auto Detailing" },
   description: "Professional mobile detailing services in Bakersfield, CA. View packages, add-ons, and book online.",
-  alternates: { canonical: "https://www.metroautodetailing.pro/services" },
+  alternates: { canonical: "https://metroautodetailing.pro/services" },
   openGraph: {
     title: "Mobile Detailing Services in Bakersfield, CA | Metro Auto Detailing",
     description: "Mobile detailing packages starting at $80. We come to you — no drop-off required.",
@@ -149,6 +149,55 @@ const protectionPlans: MetroPlan[] = [
   },
 ];
 
+const SERVICE_URL_SLUGS: Record<string, string> = {
+  "Signature Wash": "signature-wash",
+  "Interior Detail": "interior-detail",
+  "Refresh Detail": "refresh-detail",
+  "Exterior Detail": "exterior-detail",
+  "Full Detail": "full-detail",
+  "Headlight Restoration": "headlight-restoration",
+};
+
+function offerFor(name: string, description: string, price: number) {
+  return {
+    "@type": "Offer",
+    price: String(price),
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+    itemOffered: {
+      "@type": "Service",
+      name,
+      description,
+      provider: { "@id": "https://metroautodetailing.pro/#business" },
+      areaServed: ["Bakersfield", "Southwest Bakersfield", "Stockdale", "Seven Oaks", "Terra Vista", "Rosedale"],
+      ...(SERVICE_URL_SLUGS[name]
+        ? { url: `https://metroautodetailing.pro/services/${SERVICE_URL_SLUGS[name]}` }
+        : {}),
+    },
+  };
+}
+
+const SERVICES_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "OfferCatalog",
+  name: "Metro Auto Detailing Services",
+  url: "https://metroautodetailing.pro/services",
+  itemListElement: [
+    offerFor("Signature Wash", "Hand wash, light wax coat, and a surface-level interior wipe down. Mobile service in Bakersfield, CA.", 80),
+    offerFor("Interior Detail", "Full interior vacuum, carpet and seat shampoo with extraction, and CarPro PERL UV interior dressing. Mobile service in Bakersfield, CA.", 200),
+    offerFor("Refresh Detail", "Full exterior wash plus a thorough interior detail in one visit. Mobile service in Bakersfield, CA.", 250),
+    offerFor("Exterior Detail", "Full exterior decontamination — iron remover, clay bar, Koch Chemie S003 base, and Stinger 918 SiO2 ceramic sealant. 6+ months protection. Mobile service in Bakersfield, CA.", 150),
+    offerFor("Full Detail", "Complete exterior decontamination and ceramic protection combined with a full interior reset. Mobile service in Bakersfield, CA.", 400),
+    offerFor("Headlight Restoration", "Cloudy headlight lenses sanded, polished, and ceramic coated. Mobile service in Bakersfield, CA.", 80),
+    offerFor("Water Spot Removal", "Acid wash breaks down hard-water mineral deposits etched into paint and glass. Mobile service in Bakersfield, CA.", 60),
+    offerFor("Trim Restoration", "Solution Finish applied to faded black plastic trim. Semi-permanent bond, lasts 9+ months. Mobile service in Bakersfield, CA.", 100),
+    offerFor("Leather Conditioning", "Leather cleaned, conditioned, and protected against drying and cracking. Mobile service in Bakersfield, CA.", 40),
+    offerFor("Pet Hair & Sand Removal", "Full extraction of embedded pet hair and sand from carpet and seats. Mobile service in Bakersfield, CA.", 80),
+    offerFor("Carpet & Seat Extraction", "Deep stain extraction from carpet and seats, beyond standard spot treatment. Mobile service in Bakersfield, CA.", 70),
+    offerFor("Engine Bay Detail", "Engine bay degreased, cleaned, and dressed. Mobile service in Bakersfield, CA.", 50),
+  ],
+};
+
 function SectionLabel({ label, subheadline }: { label: string; subheadline: string }) {
   return (
     <div className="mb-10">
@@ -165,6 +214,10 @@ function SectionLabel({ label, subheadline }: { label: string; subheadline: stri
 export default function ServicesPage() {
   return (
     <main className="bg-site-bg text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(SERVICES_SCHEMA) }}
+      />
 
       {/* Page Header */}
       <section className="pt-20 pb-14 px-6 lg:px-8 border-b border-white/[0.06]">

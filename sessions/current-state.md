@@ -1,7 +1,7 @@
 # metro-site — Current Session State
 
 > Updated by /handoff. Read this at the start of every Site session.
-> Last updated: 2026-08-13
+> Last updated: 2026-08-17
 
 ## What's Live on metroautodetailing.pro
 
@@ -10,7 +10,7 @@
 | Hero | Live | hero-bg.mp4 (4.2MB). hero-poster.jpg = frame from truck video. |
 | ServicesPreview | Live | Exterior card = IMG_6184.JPEG. Water Spot Removal now $60. |
 | WhyMetro | Live | — |
-| Gallery | **Live — mobile rebuilt 2026-08-02** | Desktop: unchanged 2-slide bento carousel. Mobile: new single-column letterboxed swipe stack (`MobileGalleryStack`), flattened to all 10 photos in one sequence, captions always visible (fixed hover-only bug). Only one tree ever mounts (`useIsDesktop` hook via `matchMedia`) — CSS-only hiding was tried first and found to still let hidden images download, so it was replaced with real conditional mounting. **Not committed to GitHub yet** — 9 local commits on `master`, not pushed. |
+| Gallery | **Live — mobile rebuilt 2026-08-02, pushed and deployed same day** | Desktop: unchanged 2-slide bento carousel. Mobile: new single-column letterboxed swipe stack (`MobileGalleryStack`), flattened to all 10 photos in one sequence, captions always visible (fixed hover-only bug). Only one tree ever mounts (`useIsDesktop` hook via `matchMedia`) — CSS-only hiding was tried first and found to still let hidden images download, so it was replaced with real conditional mounting. |
 | Testimonials | Live | — |
 | CTABanner | Live | "Book online. We come to you." — 15% off removed commit ef644dd. |
 | FAQ | Live | Accepts optional faqs/heading props. Deposit answer now $30 (was $20, fixed 2026-08-02). |
@@ -19,7 +19,7 @@
 | Blog /blog | Live, noindex | Hidden from nav. |
 | Location pages | Live | 6 locations, explicit index:true. Interior Detail already listed correctly at $200. |
 | /services | **Live — Interior Detail added 2026-08-02** | Essentials tier now has 4 cards (Signature Wash, Interior Detail, Refresh Detail, Full Detail) — was missing Interior Detail entirely despite it being sold on the homepage and estimate form. $200, +$20 larger vehicle. Card layout itself is clean; page is 11,744px tall on mobile (~14 screens of scroll) — flagged, not fixed, operator didn't ask for it this session. |
-| /services/exterior-detail | Built locally, NOT pushed | Content revision pending. Water Spot Removal addon corrected to $60. |
+| /services/exterior-detail | Live — handled by `app/services/[slug]/page.tsx`, no separate local-only file | Copy revision still pending (operator to send brief). Water Spot Removal addon corrected to $60. |
 | Other service sub-pages | Redirect to /services | No blank indexed pages. |
 | Estimate /estimate | Live | Multi-vehicle form → /thank-you. Water Spot Removal addon now $60, 42px tap targets confirmed clean on mobile. |
 | /thank-you | Live | 6 sections: confirmation, roadmap, contrast, review, loyalty, guarantee. Fires `estimate_submitted` gtag event on load. Confirmed clean on mobile audit — no overflow, no clutter issues. |
@@ -28,7 +28,7 @@
 | SocialFeed | Not rendered | Hold until social content built up. |
 | Favicon | Live | Metro emblem (1.png). |
 | Meta Pixel | **Not installed** | Operator understands what it does (free, works on all traffic, needs ads running to pay off). Needs Pixel ID from Facebook Events Manager (Business Settings → Data Sources → Pixels) before it can be wired in. |
-| /maintenance-terms | **Built 2026-08-13, NOT pushed** | Static terms page, content from `canonical/pricing-framework.md` (24-hour cancellation notice — RULE-021, reverted 2026-08-17 via RULE-027 after briefly being 12 hours under RULE-025). Unblocks Template 2/4 email links, which had been pending on this page's existence. `npm run build` verified clean 2026-08-17. |
+| /maintenance-terms | **Live — pushed and deployed 2026-08-17** | Static terms page, content from `canonical/pricing-framework.md` (24-hour cancellation notice — RULE-021, briefly 12 hours under RULE-025, reverted 2026-08-17 via RULE-027). Linked from the site footer as of this session (was live but orphaned — no page linked to it). Unblocks Template 2/4 email links. `npm run build` verified clean 2026-08-17. |
 
 ---
 
@@ -50,11 +50,14 @@
 
 ## Recent Pushes
 
-**Nothing pushed since 2026-07-26** — now 10 commits local only (9 from 2026-08-02 + 1 from 2026-08-13), need a push request.
+**Corrected 2026-08-17** — prior entries here claiming "10 commits unpushed since 2026-07-26" were stale. Verified against both `git log origin/master..HEAD` and Vercel's deployment history: the 8/2 gallery batch was pushed and deployed same day, and production tracked GitHub exactly through commit `3a2fa1c` (8/2) until tonight. Only the 8/13 maintenance-terms commit was ever actually sitting local-only — now resolved.
 
 | Commit | Date | What |
 |--------|------|------|
-| (pending) | 2026-08-13 | Add /maintenance-terms page |
+| cceafc5 | 2026-08-17 | Link maintenance-terms page from footer |
+| 3e2cca8 | 2026-08-17 | Fix maintenance-terms cancellation window, 12hr to 24hr (RULE-027) |
+| 138f104 | 2026-08-13 | Add /maintenance-terms page |
+| 3a2fa1c | 2026-08-02 | docs: update session state for 2026-08-02 handoff |
 | 307f699 | 2026-08-02 | Interior Detail added to /services, stale Water Spot/deposit pricing fixed |
 | 914fcb7 | 2026-08-02 | Gallery rebuild spec and plan docs added |
 | 9439f33 | 2026-08-02 | .gitignore: ignore .vercel and .env* |
@@ -104,7 +107,8 @@
 | `next.config.ts` | Redirects, security headers. |
 | `app/services/page.tsx` | Essentials/Protection/Restoration/Deep Clean/Maintenance sections — Interior Detail now included. |
 | `app/services/[slug]/page.tsx` | Exterior-detail local build + redirect logic for other slugs. |
-| `app/maintenance-terms/page.tsx` | Maintenance Plan terms, static page, built 2026-08-13. |
+| `app/maintenance-terms/page.tsx` | Maintenance Plan terms, static page, built 2026-08-13, pushed 2026-08-17. |
+| `components/layout/Footer.tsx` | Site footer, used on every page. Now links to /maintenance-terms next to the copyright line. |
 | `components/sections/FAQ.tsx` | Accordion, deposit answer $30. |
 | `components/sections/Gallery.tsx` | `SLIDES`/`ALL_ITEMS`, desktop/mobile split via `useIsDesktop`. |
 | `components/ui/mobile-gallery-stack.tsx` | Mobile-only gallery renderer. |

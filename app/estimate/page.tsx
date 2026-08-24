@@ -5,7 +5,7 @@ import { EstimateForm } from "./EstimateForm";
 export const metadata: Metadata = {
   title: { absolute: "Book Mobile Detailing in Bakersfield, CA | Metro Auto Detailing" },
   description: "Request mobile detailing in Bakersfield, CA. We come to you — no drop-off required.",
-  alternates: { canonical: "https://www.metroautodetailing.pro/estimate" },
+  alternates: { canonical: "https://metroautodetailing.pro/estimate" },
 };
 
 export default function EstimatePage() {

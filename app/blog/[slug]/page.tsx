@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: post.description,
     keywords: post.keywords,
     robots: { index: false },
-    alternates: { canonical: `https://www.metroautodetailing.pro/blog/${slug}` },
+    alternates: { canonical: `https://metroautodetailing.pro/blog/${slug}` },
     openGraph: {
       title: post.title,
       description: post.description,

@@ -77,6 +77,11 @@ export default function RootLayout({
                 "Seven Oaks", "Terra Vista", "Rosedale", "Oleander"
               ],
               "priceRange": "$$",
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "5.0",
+                "reviewCount": "4"
+              },
               "logo": {
                 "@type": "ImageObject",
                 "url": "https://metroautodetailing.pro/1.png",

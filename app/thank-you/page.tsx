@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CheckCircle } from "lucide-react";
 import ConversionEvent from "./ConversionEvent";
+import { PhoneLink } from "@/components/PhoneLink";
 
 export const metadata: Metadata = {
   title: { absolute: "Request Received | Metro Auto Detailing" },
@@ -80,12 +81,9 @@ export default function ThankYouPage() {
             </p>
             <p className="text-white/35 text-sm">
               Need it sooner? Call or text{" "}
-              <a
-                href="tel:6613685165"
-                className="text-white/55 hover:text-white transition-colors"
-              >
+              <PhoneLink className="text-white/55 hover:text-white transition-colors">
                 (661) 368-5165
-              </a>
+              </PhoneLink>
               .
             </p>
           </div>

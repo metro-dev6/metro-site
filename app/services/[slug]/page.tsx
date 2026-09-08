@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import Image from "next/image";
+import { PhoneLink } from "@/components/PhoneLink";
 import Link from "next/link";
 import { AddonCard } from "@/components/sections/AddonCard";
 import { EstimateCartBar } from "@/components/EstimateCartBar";
@@ -163,12 +164,9 @@ function ExteriorDetailPage() {
               >
                 Get a Free Estimate
               </Link>
-              <a
-                href="tel:6613685165"
-                className="inline-flex items-center justify-center px-7 h-12 rounded-xl border border-white/30 text-white font-black tracking-wide text-sm hover:border-white/60 hover:bg-white/5 transition-colors"
-              >
+              <PhoneLink className="inline-flex items-center justify-center px-7 h-12 rounded-xl border border-white/30 text-white font-black tracking-wide text-sm hover:border-white/60 hover:bg-white/5 transition-colors">
                 Call (661) 368-5165
-              </a>
+              </PhoneLink>
             </div>
           </div>
 

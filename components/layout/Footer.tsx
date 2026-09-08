@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { PhoneLink } from "@/components/PhoneLink";
 
 const navLinks = [
   { label: "Home",     href: "/"         },
@@ -57,12 +58,9 @@ export function Footer() {
               We Come to You. Driven by Detail.
             </p>
             <div className="flex flex-col gap-1.5 mt-1">
-              <a
-                href="tel:6613685165"
-                className="text-sm text-brand-white/50 hover:text-brand-white transition-colors"
-              >
+              <PhoneLink className="text-sm text-brand-white/50 hover:text-brand-white transition-colors">
                 (661) 368-5165
-              </a>
+              </PhoneLink>
               <a
                 href="mailto:metrodetailing661@gmail.com"
                 className="text-sm text-brand-white/50 hover:text-brand-white transition-colors"

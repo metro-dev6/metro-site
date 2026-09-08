@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-import { useEstimateCart } from "@/hooks/use-estimate-cart";
+import { useEstimateCart, readEstimateCart } from "@/hooks/use-estimate-cart";
 import { ArrowRight, Paperclip, ChevronDown, Plus, X } from "lucide-react";
 
 const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
@@ -85,6 +85,19 @@ export function EstimateForm() {
     if (!param) return new Set();
     return new Set(param.split(",").map((s) => s.trim()).filter(Boolean));
   });
+
+  useEffect(() => {
+    // Only applies when someone lands here without the ?services= param —
+    // e.g. via the header CTA or any "Get a Free Estimate" link that isn't
+    // the estimate cart bar's own "Start Estimate" button. Without this,
+    // items added to the cart on /services silently vanish on those paths.
+    if (searchParams.get("services")) return;
+    const cartItems = readEstimateCart();
+    if (cartItems.length > 0) {
+      setSelected(new Set(cartItems.map((item) => item.name)));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [vehicles, setVehicles] = useState<Vehicle[]>(() => [newVehicle()]);
   const [formState, setFormState] = useState<FormState>("idle");

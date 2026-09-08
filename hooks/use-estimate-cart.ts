@@ -20,6 +20,9 @@ function readStorage(): EstimateItem[] {
   }
 }
 
+/** Read the cart directly, for pages that need it outside the hook's own state (e.g. a one-time fallback on mount). */
+export const readEstimateCart = readStorage;
+
 function writeStorage(items: EstimateItem[]) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));

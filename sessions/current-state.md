@@ -1,7 +1,22 @@
 # metro-site — Current Session State
 
 > Updated by /handoff. Read this at the start of every Site session.
-> Last updated: 2026-08-17
+> Last updated: 2026-09-07
+
+## 2026-09-07 Session — Bug fixes, SEO audit fixes, location strategy review
+
+All changes below are **local only, build-verified, not pushed** — per standing subpage-push rule.
+
+**Fixed:**
+- Interior Detail falsely claimed exterior windows were cleaned (`app/services/page.tsx:48`, `public/llms.txt:33`) — now says "Interior windows cleaned."
+- Real estimate-cart bug from a Downloads brief (`estimate-cart-bug.md`): selections made via "Add to Estimate" on `/services` only carried to `/estimate` through the cart bar's own "Start Estimate" button — every other CTA on the site (header, Hero, CTABanner, location/blog/service pages) dropped the cart silently. Fixed with a mount-effect fallback that reads `localStorage` directly when no `?services=` param is present (`app/estimate/EstimateForm.tsx:89-98`, exported `readEstimateCart` from `hooks/use-estimate-cart.ts`). Verified live via chrome-devtools: seeded cart, loaded bare `/estimate`, confirmed checkbox pre-checked.
+- New `phone_click` gtag event wired to all 4 `tel:` links site-wide via a new `components/PhoneLink.tsx` client component (`AnnouncementBar.tsx`, `Footer.tsx`, `thank-you/page.tsx`, `services/[slug]/page.tsx`). GA4's `click` event was an undifferentiated bucket covering phone clicks and social-icon clicks together — this splits phone-call intent out. Not yet showing real data (needs a push + real clicks first); do not mark it a GA4 key event until confirmed firing.
+- SEO audit (`knowledge/sources/research/metro-seo-audit-2026-09.md`, spot-verified accurate against 3 concrete claims before trusting the rest): H1 missing-space bug on `/` and `/estimate` (adjacent `<span>`s with no space character — matters for AI crawlers, since `robots.txt` invites them in), `sitemap.ts` hardcoded to `www` while every canonical tag is non-www (now fixed, plus every ServicesPreview card got real descriptive alt text), homepage meta description trimmed 175→139 chars, `/services` title shortened 67→43 chars and its description expanded 99→155 chars with a price/CTA anchor. Two of the audit's "missing alt" findings (Hero and CTABanner background images) were false positives — both are correctly decorative (`alt=""` + `aria-hidden="true"`), not bugs.
+
+**Also filed** (per document-ingestion.md): SEO audit findings added to `canonical/market-intelligence.md` ("SEO Content/Technical Audit (2026-09-07)" subsection) and `my-project/active-commitments.md` (corrected a stale "sitemap needs no work" claim, added the quick-win list and a pricing-transparency FAQ/blog opportunity). Ceramic coating, paint correction, and fleet-landing-page recommendations from the audit were explicitly rejected by the operator — not filed as open items.
+
+**Reviewed, not yet actioned — location page strategy:** operator is working a location-page rebuild plan with a separate Claude chat (2 drafts reviewed tonight, both from Downloads/uploads, not this vault). Final version: 14 total location pages (up from the current 6), two geographic clusters. Southwest cluster (9 pages: Southwest Bakersfield catch-all + Seven Oaks, Terra Vista, Stockdale Estates, Southern Oaks, Tevis Ranch, The Oaks, Stone Meadows, Haggin Oaks). Northwest cluster (5 pages, new territory: Rosedale catch-all + Riverlakes, Shiloh Estates, Brimhall Estates, Nottingham Estates). Net new work: 9 new pages, plus rewrites on Stockdale (re-scope) and Rosedale (full rewrite from an 80-90 word placeholder). Southwest Bakersfield and Rosedale are being kept as catch-all pages linking to the named ones, not dropped — resolves an SEO-equity/redirect risk flagged on an earlier draft of the plan. **Caught one factual error in the plan doc:** it claims Terra Vista's live copy frames it as "a different part of town" from the other neighborhoods — checked `app/locations/[slug]/page.tsx:71`, this isn't true, the copy already correctly says "southwest Bakersfield." That "fix" item doesn't apply; likely bled over from an earlier draft's own data-table mistake, not an actual site bug. **Flagged, not decided:** this is 9 new pages + 2 rewrites stacked on top of the 6 service sub-pages that are already the standing priority — real sequencing question for a solo evening/weekend schedule, operator's call.
+
 
 ## What's Live on metroautodetailing.pro
 
@@ -18,7 +33,7 @@
 | AnnouncementBar | Live | "Mobile Detailing in Bakersfield / Book Online" |
 | Blog /blog | Live, noindex | Hidden from nav. |
 | Location pages | Live | 6 locations, explicit index:true. Interior Detail already listed correctly at $200. |
-| /services | **Live — Interior Detail added 2026-08-02** | Essentials tier now has 4 cards (Signature Wash, Interior Detail, Refresh Detail, Full Detail) — was missing Interior Detail entirely despite it being sold on the homepage and estimate form. $200, +$20 larger vehicle. Card layout itself is clean; page is 11,744px tall on mobile (~14 screens of scroll) — flagged, not fixed, operator didn't ask for it this session. |
+| /services | **Live — Interior Detail added 2026-08-02, Service/Offer schema added 2026-08-23** | Essentials tier now has 4 cards (Signature Wash, Interior Detail, Refresh Detail, Full Detail) — was missing Interior Detail entirely despite it being sold on the homepage and estimate form. $200, +$20 larger vehicle. Card layout itself is clean; page is 11,744px tall on mobile (~14 screens of scroll) — flagged, not fixed. `SERVICES_SCHEMA` OfferCatalog (12 Service+Offer entries covering all 6 core services + 6 add-ons) added 2026-08-23. |
 | /services/exterior-detail | Live — handled by `app/services/[slug]/page.tsx`, no separate local-only file | Copy revision still pending (operator to send brief). Water Spot Removal addon corrected to $60. |
 | Other service sub-pages | Redirect to /services | No blank indexed pages. |
 | Estimate /estimate | Live | Multi-vehicle form → /thank-you. Water Spot Removal addon now $60, 42px tap targets confirmed clean on mobile. |
@@ -43,12 +58,22 @@
 6. **5 remaining sub-pages** — after exterior detail content approved.
 7. **`/services` page length** — 11,744px on mobile, ~14 screens of scroll because every tier prints its full feature checklist inline. Flagged during 2026-08-02 audit, not addressed. Worth a future pass (accordion collapse per tier, or trim the checklist) if bounce data on that page supports it.
 8. **Mobile nav backdrop scrim** — the mobile menu dropdown is opaque itself but has no dimming layer behind it, so the page content directly abuts the open menu. Flagged 2026-08-02, not fixed.
-9. **aggregateRating** — needs real GBP review count before adding to schema.
+9. ~~**aggregateRating**~~ — done 2026-08-23, hardcoded 5.0/4 reviews in `layout.tsx`. Fast-decay: update whenever review count changes or it goes stale vs. GBP.
 10. **OG image** — homepage and services pages.
+11. **"Premier" headline** — `components/sections/Hero.tsx:72` reads "Bakersfield's Premier Mobile Detailing Service," conflicts with `anti-misclassification.md`'s guardrail against premium/bougie positioning. Flagged 2026-08-23, not fixed — needs operator decision (change copy or carve a rule exception).
+12. **Review-request push** — `skills/review-request/SKILL.md` is stale (wrong greeting format, wrong SMS sign-off rule), needs go-ahead to fix, then push after every job. Confirmed 2026-08-23 as the top lever on two fronts: AI/LLM visibility (Metro absent from ChatGPT/Claude answers where every competitor surfaced has 55-361 reviews vs. Metro's 4) and organic CTR (Metro ranks #1 for "mobile detailing"/"auto detailing"/"car detailing near me" with near-zero clicks — no star rich-snippet without more review volume behind the new `aggregateRating`).
+13. **Check TopDetailers directory listing** — ChatGPT cited "TopDetailers" by name twice as a source for competitor recommendations during the 2026-08-23 AI-visibility test. Unconfirmed whether Metro has a listing there.
+14. **Homepage + service copy rewrite** — compact "who/what/where" format for AI extractability, per 2026-08-23 scoped AI-SEO plan. Site already has the specificity (Koch Chemie S003, Stinger 918) this format needs — copy pass, not new research.
+15. **FAQ expansion** — add more direct Q&A pairs (parking/access, pet hair, water-hookup questions) to the existing FAQ, per 2026-08-23 scoped AI-SEO plan.
+16. **NAP consistency check** — GBP, Yelp, Facebook, Bing Places should all match name/phone/address/service-area exactly.
+17. **Bing Webmaster Tools + AI Performance report** — set up to actually measure whether AI-citation work is moving anything, since Bing's AI Performance report shows which pages get cited by Copilot/Bing AI summaries.
+18. **Build out 5 stub service pages** — `signature-wash`, `interior-detail`, `refresh-detail`, `full-detail`, `headlight-restoration` currently `redirect("/services")` instead of rendering (see Service Sub-Pages table below). `exterior-detail` is a working template to copy — hero, what's included, products, comparison, FAQ, CTA, all sourced from content already in `pricing-framework.md` and `services/page.tsx`'s plan arrays. Flagged 2026-08-23, deferred as too large for one evening session.
 
 ---
 
 ## Recent Pushes
+
+**2026-08-23** — canonical/redirect conflict fixed (7 files had `alternates.canonical` pointing at `www.metroautodetailing.pro` while `next.config.ts` 301-redirects that exact URL to non-www — real cause of duplicate indexing found in a live GSC Pages.csv export, where the homepage was indexed 3 separate ways and every location page indexed twice). Also added Service/Offer OfferCatalog schema to `/services` and `aggregateRating` to the site-wide LocalBusiness schema in `layout.tsx`. Pushed as `cb4fa06`.
 
 **Corrected 2026-08-17** — prior entries here claiming "10 commits unpushed since 2026-07-26" were stale. Verified against both `git log origin/master..HEAD` and Vercel's deployment history: the 8/2 gallery batch was pushed and deployed same day, and production tracked GitHub exactly through commit `3a2fa1c` (8/2) until tonight. Only the 8/13 maintenance-terms commit was ever actually sitting local-only — now resolved.
 
@@ -100,12 +125,12 @@
 
 | File | Purpose |
 |------|---------|
-| `app/layout.tsx` | Root layout. JSON-LD schema, metadataBase, GA4 scripts. Meta Pixel not yet added here. |
+| `app/layout.tsx` | Root layout. LocalBusiness/AutomotiveBusiness JSON-LD schema (now with `aggregateRating`, 2026-08-23), metadataBase, GA4 scripts. Meta Pixel not yet added here. |
 | `app/thank-you/page.tsx` | Thank-you page. |
 | `app/thank-you/ConversionEvent.tsx` | Fires `estimate_submitted` gtag event on mount. |
 | `components/sections/CTABanner.tsx` | CTA section. |
-| `next.config.ts` | Redirects, security headers. |
-| `app/services/page.tsx` | Essentials/Protection/Restoration/Deep Clean/Maintenance sections — Interior Detail now included. |
+| `next.config.ts` | Redirects (www → non-www 301, matches canonical tags as of 2026-08-23), security headers. |
+| `app/services/page.tsx` | Essentials/Protection/Restoration/Deep Clean/Maintenance sections — Interior Detail included. `SERVICES_SCHEMA` OfferCatalog added 2026-08-23. |
 | `app/services/[slug]/page.tsx` | Exterior-detail local build + redirect logic for other slugs. |
 | `app/maintenance-terms/page.tsx` | Maintenance Plan terms, static page, built 2026-08-13, pushed 2026-08-17. |
 | `components/layout/Footer.tsx` | Site footer, used on every page. Now links to /maintenance-terms next to the copyright line. |

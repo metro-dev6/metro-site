@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const BASE = "https://www.metroautodetailing.pro";
+const BASE = "https://metroautodetailing.pro";
 
 const LOCATION_SLUGS = [
   "bakersfield",

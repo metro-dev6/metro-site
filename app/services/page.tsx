@@ -6,8 +6,8 @@ import { AddonCard } from "@/components/sections/AddonCard";
 import { EstimateCartBar } from "@/components/EstimateCartBar";
 
 export const metadata: Metadata = {
-  title: { absolute: "Mobile Detailing Services in Bakersfield, CA | Metro Auto Detailing" },
-  description: "Professional mobile detailing services in Bakersfield, CA. View packages, add-ons, and book online.",
+  title: { absolute: "Mobile Detailing Services | Bakersfield, CA" },
+  description: "Mobile detailing packages in Bakersfield, CA starting at $80. Full pricing on every package and add-on, free estimates, and online booking. We come to you.",
   alternates: { canonical: "https://metroautodetailing.pro/services" },
   openGraph: {
     title: "Mobile Detailing Services in Bakersfield, CA | Metro Auto Detailing",
@@ -45,7 +45,7 @@ const essentialsPlans: MetroPlan[] = [
       "All interior panels, compartments, and console cleaned",
       "Carpet & seat shampoo with extraction",
       "CarPro PERL UV interior dressing",
-      "Windows (interior & exterior)",
+      "Interior windows cleaned",
       "Door jambs cleaned",
     ],
     buttonText: "Add to Estimate",

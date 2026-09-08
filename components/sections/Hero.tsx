@@ -44,6 +44,7 @@ export function Hero() {
         <Image
           src={FALLBACK_IMG}
           alt=""
+          aria-hidden="true"
           fill
           priority
           style={{ objectFit: "cover", objectPosition: "center 30%" }}
@@ -70,7 +71,7 @@ export function Hero() {
               style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8)" }}
             >
               <span className="text-brand-white">Bakersfield&apos;s Premier</span><br />
-              <span className="text-brand-yellow">Mobile Detailing</span>
+              <span className="text-brand-yellow">{" "}Mobile Detailing</span>
               <span className="text-brand-white"> Service</span>
             </h1>
 

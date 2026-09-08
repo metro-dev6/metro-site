@@ -26,7 +26,7 @@ export default function EstimatePage() {
                 className="text-brand-yellow block"
                 style={{ textShadow: "0 0 24px rgba(250,194,5,0.55), 0 0 60px rgba(250,194,5,0.25)" }}
               >
-                Detail
+                {" "}Detail
               </span>
             </h1>
             <p className="text-white/50 text-base max-w-xs mx-auto">

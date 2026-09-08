@@ -4,6 +4,7 @@ import Image from "next/image";
 const services = [
   {
     name: "Signature Wash",
+    alt: "Signature Wash mobile detail in Bakersfield, CA",
     price: "$80",
     description: "Hand wash, wheels, tire dressing, wax coat, and interior vacuum. Keeps the paint clean and protected between details.",
     photo: "/wash-bg-3.JPEG",
@@ -11,6 +12,7 @@ const services = [
   },
   {
     name: "Exterior Detail",
+    alt: "Exterior Detail with ceramic sealant in Bakersfield, CA",
     price: "$150",
     description: "Full paint decontamination and ceramic sealant. 4-6 months of protection bonded to dry paint.",
     photo: "/IMG_6184.JPEG",
@@ -18,6 +20,7 @@ const services = [
   },
   {
     name: "Interior Detail",
+    alt: "Interior Detail deep clean in Bakersfield, CA",
     price: "$200",
     description: "Built for interiors that need more than a vacuum. Seats shampooed, carpet extracted, every surface deep cleaned and UV protected.",
     photo: "/interior-bg.JPEG",
@@ -25,6 +28,7 @@ const services = [
   },
   {
     name: "Refresh Detail",
+    alt: "Refresh Detail, exterior wash and interior clean in Bakersfield, CA",
     price: "$250",
     description: "For when the car needs attention inside and out but not a full decon. Exterior washed and sealed with wax. Interior deep cleaned, spot treated, and UV protected.",
     photo: "/refresh-bg.JPEG",
@@ -32,6 +36,7 @@ const services = [
   },
   {
     name: "Full Detail",
+    alt: "Full Detail, exterior and interior service in Bakersfield, CA",
     price: "$400",
     description: "Complete exterior decontamination and ceramic sealant outside. Seats shampooed, carpet extracted, every surface UV protected inside.",
     photo: "/full-detail-bg.JPEG",
@@ -75,7 +80,7 @@ export function ServicesPreview() {
               <div className="absolute inset-0 overflow-hidden">
                 <Image
                   src={service.photo}
-                  alt=""
+                  alt={service.alt}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   style={service.imageStyle}

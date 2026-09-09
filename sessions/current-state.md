@@ -1,11 +1,32 @@
 # metro-site — Current Session State
 
 > Updated by /handoff. Read this at the start of every Site session.
-> Last updated: 2026-09-07
+> Last updated: 2026-09-08
+
+## 2026-09-08 Session — Location strategy finalized, visual redesign kicked off
+
+Location-page strategy finalized (see the "Location page strategy" section below) — Terra Vista dropped from the build list (confirmed twice against live code, no fix exists), Stockdale Estates will be retitled with a redirect, Stone Meadows anchor filled in.
+
+Planning the actual page build surfaced a real blocker: `app/locations/[slug]/page.tsx` can't support the new content template — no Character, Services (tailored), Service Commitment, Nearby Areas, or Local FAQ sections exist, just a thin generic intro + one-size-fits-all services list. Building those sections is a real layout/component decision, not a content-fill task, so `superpowers:brainstorming` got invoked before touching the component.
+
+Operator redirected the goal significantly: wants a new visual design system, not a copy of the `/services/exterior-detail` page's modular pattern, possibly rolled out site-wide with new brand colors. This is the same thread as the stale "Visual design direction concepts" item below (2026-08-13) — now active again.
+
+Ran the visual companion (browser mockup tool) across 4 rounds:
+- **Round 1** — 5 directions (Industrial, Motorsport, Studio Editorial, Warm Craftsman, Modern App-Like), default system fonts. Rejected: fonts too generic.
+- **Round 2** — 5 louder/neon directions (Neon Garage, Sunset Chrome, Retro Flag, Electric Citrus, Iridescent Ceramic) with real Google Fonts. Still rejected.
+- **Reference pivot** — operator supplied 3 real sites instead of more guessing: Imperial Shinez (detailing, "not the best but not terrible"), Prime Wellness Chiropractic, Free the Qi. Screenshotted via chrome-devtools. Shared DNA found: elegant serif (often italic) mixed with clean sans, rich muted color as the dominant background (forest green / maroon / navy — not neon), rounded pill buttons and tags, banded full-bleed color sections, calm editorial tone, real photography.
+- **Round 3** — 4 directions built from that DNA (Forest & Ivory, Burgundy & Sand, Navy & Steel, Charcoal & Copper). Read as "going in the right direction," but small swatch cards weren't enough to judge.
+- **Round 4** — same 4 rebuilt as full hero mockups at real scale, with real Metro-voice headline copy (Seven Oaks' existing Full Detail/Refresh Detail anchor) instead of placeholder text.
+
+**Selected (tentative, not locked):** Forest & Ivory (deep forest green + warm tan/gold) and Burgundy & Sand (warm cream background + maroon accent) — both move away from the current dark theme entirely. Operator explicitly wants more directions explored before committing to either. Location-page build and the 5 remaining service sub-pages both stay blocked until a direction locks.
+
+**Also this session:** operator ran `npx skills add emilkowalski/skill`, installing 12 third-party design/animation skills (`.agents/skills/`, `.claude/skills/`, `skills-lock.json`) with full agent permissions per the installer's own warning. No decision made on keep/remove/commit — temporarily gitignored in the vault root as a safe default, not resolved.
+
+---
 
 ## 2026-09-07 Session — Bug fixes, SEO audit fixes, location strategy review
 
-All changes below are **local only, build-verified, not pushed** — per standing subpage-push rule.
+**Pushed 2026-09-07** in 3 commits (`cb4fa06..74f092a`): `a750913` (estimate cart fix), `a2b193c` (phone_click tracking), `74f092a` (copy fix + SEO audit fixes). Build verified clean before push. Vercel deploys from `master` automatically.
 
 **Fixed:**
 - Interior Detail falsely claimed exterior windows were cleaned (`app/services/page.tsx:48`, `public/llms.txt:33`) — now says "Interior windows cleaned."
@@ -15,7 +36,19 @@ All changes below are **local only, build-verified, not pushed** — per standin
 
 **Also filed** (per document-ingestion.md): SEO audit findings added to `canonical/market-intelligence.md` ("SEO Content/Technical Audit (2026-09-07)" subsection) and `my-project/active-commitments.md` (corrected a stale "sitemap needs no work" claim, added the quick-win list and a pricing-transparency FAQ/blog opportunity). Ceramic coating, paint correction, and fleet-landing-page recommendations from the audit were explicitly rejected by the operator — not filed as open items.
 
-**Reviewed, not yet actioned — location page strategy:** operator is working a location-page rebuild plan with a separate Claude chat (2 drafts reviewed tonight, both from Downloads/uploads, not this vault). Final version: 14 total location pages (up from the current 6), two geographic clusters. Southwest cluster (9 pages: Southwest Bakersfield catch-all + Seven Oaks, Terra Vista, Stockdale Estates, Southern Oaks, Tevis Ranch, The Oaks, Stone Meadows, Haggin Oaks). Northwest cluster (5 pages, new territory: Rosedale catch-all + Riverlakes, Shiloh Estates, Brimhall Estates, Nottingham Estates). Net new work: 9 new pages, plus rewrites on Stockdale (re-scope) and Rosedale (full rewrite from an 80-90 word placeholder). Southwest Bakersfield and Rosedale are being kept as catch-all pages linking to the named ones, not dropped — resolves an SEO-equity/redirect risk flagged on an earlier draft of the plan. **Caught one factual error in the plan doc:** it claims Terra Vista's live copy frames it as "a different part of town" from the other neighborhoods — checked `app/locations/[slug]/page.tsx:71`, this isn't true, the copy already correctly says "southwest Bakersfield." That "fix" item doesn't apply; likely bled over from an earlier draft's own data-table mistake, not an actual site bug. **Flagged, not decided:** this is 9 new pages + 2 rewrites stacked on top of the 6 service sub-pages that are already the standing priority — real sequencing question for a solo evening/weekend schedule, operator's call.
+**Location page strategy — finalized 2026-09-09, ready to build.** Source docs filed: `sessions/location-strategy-2026-09.md`, `sessions/location-page-template-2026-09.md`, `sessions/stone-meadows-anchor-2026-09.md`.
+
+14 total location pages (up from current 6), two geographic clusters:
+- **Southwest** (zip 93311/93309/93313): Southwest Bakersfield catch-all (live, no change) + Seven Oaks (live, no change) + Stockdale Estates (re-scope + retitle, decided 2026-09-09 — old "Stockdale" page gets renamed to match the specific pocket, needs a redirect from the old URL) + Southern Oaks, Tevis Ranch, The Oaks, Stone Meadows, Haggin Oaks (all new)
+- **Northwest** (zip 93312/93314, new territory): Rosedale catch-all (full rewrite, currently ~80-90 word placeholder) + Riverlakes, Shiloh Estates, Brimhall Estates, Nottingham Estates (all new)
+
+Net build: 8 new pages, 1 re-scope+retitle (Stockdale Estates), 1 rewrite (Rosedale catch-all).
+
+**Terra Vista dropped from the build list, confirmed 2026-09-09.** The strategy doc (still, even in its "final" 2026-09-08 revision) claims Terra Vista's copy frames it as "a different part of town" and calls that a needed fix. Verified against live code twice now (`app/locations/[slug]/page.tsx:71`): the actual copy reads "Terra Vista is a residential neighborhood in southwest Bakersfield" — already correct, already in the right cluster. No fix exists to make. This is a stale claim that survived two doc revisions from the separate Claude chat; not re-flagging a third time if it resurfaces, just noting the page needs zero work.
+
+Every named page now has a real anchor to write from — Stone Meadows was the last gap (no character research), filled 2026-09-09: 37.5% of households own 4+ vehicles (highest of any page in either cluster) against a standard two-car garage on short cul-de-sac streets, so cars sit outside more than almost anywhere else Metro covers. That's the page's hook.
+
+**Sequencing still the operator's call:** this is 8 new pages + 1 rewrite + 1 re-scope stacked on top of the 5 remaining service sub-pages (already the standing priority). Not a one-evening job either way.
 
 
 ## What's Live on metroautodetailing.pro
@@ -49,7 +82,7 @@ All changes below are **local only, build-verified, not pushed** — per standin
 
 ## Immediate Next Steps (Priority Order)
 
-0. **Visual design direction concepts — session interrupted mid-brainstorm 2026-08-13.** Operator wants multiple themed concept directions for the site (current dark-theme + yellow accent flagged as generic/safe, not distinctive). `superpowers:brainstorming` skill was invoked; visual companion tool was offered but operator ended the session before responding. Next session: re-offer the companion, then continue clarifying questions (which pages get concepts — likely start with a lower-stakes page rather than a live one — how many directions, aesthetic starting points e.g. industrial/utilitarian was floated as a fit for a mobile detailing brand).
+0. **Visual design direction — active as of 2026-09-08, not locked.** Picked back up from the 2026-08-13 interruption. 4 rounds of visual-companion mockups run (see session log above). Operator selected two tentative directions (Forest & Ivory, Burgundy & Sand) but wants more explored before committing. Next session: continue the brainstorm toward a locked direction, then a written design spec per the brainstorming skill's process, before any component code changes. This blocks both the location-page build and the remaining service sub-pages.
 1. **Estimate form total should repeat at the bottom, near Send Request.** Currently the running total (`grandTotal`, `app/estimate/EstimateForm.tsx:276`) only shows once, below the services checklist near the top of the form. On a long scroll (vehicle fields, info fields, condition photos) a visitor loses sight of the number before hitting submit. Add a second total display near the "Send Request" button. Flagged 2026-08-02, not built.
 2. **Meta Pixel install** — get the Pixel ID, wire into `layout.tsx` next to the existing GA4 script, fire a "Lead" event on estimate submit (same pattern as `estimate_submitted`).
 3. **Finish gallery verification** — full interactive browser check (swipe through all 10 photos, drag a comparison slider, confirm desktop bento renders correctly) was interrupted by an MCP disconnect. Network-level fix (image count) was confirmed; the visual/interaction pass was not re-run after reconnecting.
@@ -72,6 +105,8 @@ All changes below are **local only, build-verified, not pushed** — per standin
 ---
 
 ## Recent Pushes
+
+**2026-09-07** — Estimate cart bug fix (selections dropped unless the cart bar's own button was used, now falls back to reading localStorage on any entry point), `phone_click` tracking on all 4 `tel:` links, Interior Detail exterior-windows copy bug fixed, SEO audit quick wins (H1 spacing, sitemap www mismatch, meta description/title lengths, real alt text on 5 homepage images). 3 commits: `a750913`, `a2b193c`, `74f092a`.
 
 **2026-08-23** — canonical/redirect conflict fixed (7 files had `alternates.canonical` pointing at `www.metroautodetailing.pro` while `next.config.ts` 301-redirects that exact URL to non-www — real cause of duplicate indexing found in a live GSC Pages.csv export, where the homepage was indexed 3 separate ways and every location page indexed twice). Also added Service/Offer OfferCatalog schema to `/services` and `aggregateRating` to the site-wide LocalBusiness schema in `layout.tsx`. Pushed as `cb4fa06`.
 

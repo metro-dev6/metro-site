@@ -46,17 +46,20 @@ const reasons = [
 
 export function WhyMetro() {
   return (
-    <section className="bg-site-bg py-20 px-6 lg:px-8">
+    <section className="bg-[#141414] py-20 px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
 
         <div className="text-center mb-14">
+          <div className="font-accent text-xs font-medium tracking-[0.25em] uppercase text-brand-yellow mb-4 not-italic">
+            Why Metro
+          </div>
           <h2 className="text-4xl sm:text-5xl font-black uppercase text-brand-white tracking-tight">
             A Car Wash Rinses.<br />
-            <span className="text-brand-yellow">A Detail Cleans.</span>
+            <span className="font-accent normal-case text-brand-yellow">A Detail Cleans.</span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.06] rounded-xl overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.06] rounded-2xl overflow-hidden">
           {reasons.map(({ icon, headline, body }) => (
             <div
               key={headline}

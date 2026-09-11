@@ -21,7 +21,7 @@ export const ShinyButton: React.FC<ShinyButtonProps> = ({
     <button
       {...(props as object)}
       className={cn(
-        "relative overflow-hidden rounded-lg px-6 py-2 font-medium transition-[transform,box-shadow] duration-300 ease-in-out hover:shadow hover:-translate-y-1 active:scale-[0.97]",
+        "relative overflow-hidden rounded-full px-6 py-2 font-medium transition-[transform,box-shadow] duration-300 ease-in-out hover:shadow hover:-translate-y-1 active:scale-[0.97]",
         className
       )}
     >

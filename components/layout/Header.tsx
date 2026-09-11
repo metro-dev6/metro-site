@@ -77,7 +77,7 @@ export function Header() {
           </nav>
           <Link
             href="/estimate"
-            className="hidden md:inline-flex h-9 items-center rounded-md bg-brand-yellow px-4 text-sm font-semibold text-brand-black transition-opacity hover:opacity-90"
+            className="hidden md:inline-flex h-9 items-center rounded-full bg-brand-yellow px-4 text-sm font-semibold text-brand-black transition-opacity hover:opacity-90"
           >
             BUILD YOUR ESTIMATE
           </Link>
@@ -118,7 +118,7 @@ export function Header() {
                 <Link
                   href="/estimate"
                   onClick={() => (document.getElementById("mobile-nav") as HTMLDetailsElement | null)?.removeAttribute("open")}
-                  className="mt-2 inline-flex h-12 items-center justify-center rounded-md bg-brand-yellow px-7 text-sm font-black tracking-widest text-brand-black"
+                  className="mt-2 inline-flex h-12 items-center justify-center rounded-full bg-brand-yellow px-7 text-sm font-black tracking-widest text-brand-black"
                 >
                   GET A FREE ESTIMATE
                 </Link>

@@ -51,6 +51,9 @@ export function ServicesPreview() {
 
         {/* Header */}
         <div className="mb-12">
+          <div className="font-accent text-xs font-medium tracking-[0.25em] uppercase text-brand-yellow mb-3 not-italic">
+            What We Do
+          </div>
           <div className="flex items-end justify-between gap-4 flex-wrap">
             <h2 className="text-3xl sm:text-4xl font-black uppercase text-brand-white leading-tight">
               Services
@@ -118,7 +121,7 @@ export function ServicesPreview() {
                   {service.description}
                 </p>
 
-                <p className="text-2xl font-black text-brand-yellow font-dm-sans" style={{ textShadow: "0 1px 4px rgba(0,0,0,1), 0 2px 16px rgba(0,0,0,0.8)" }}>
+                <p className="text-2xl font-accent text-brand-yellow" style={{ textShadow: "0 1px 4px rgba(0,0,0,1), 0 2px 16px rgba(0,0,0,0.8)" }}>
                   Starting at {service.price}
                 </p>
               </div>
@@ -147,7 +150,7 @@ export function ServicesPreview() {
                 ].map((addon) => (
                   <li key={addon.name} className="flex items-center justify-between gap-4">
                     <span className="text-sm text-white/60">{addon.name}</span>
-                    <span className="text-sm font-black text-brand-yellow font-dm-sans">{addon.price}</span>
+                    <span className="text-sm font-accent text-brand-yellow">{addon.price}</span>
                   </li>
                 ))}
               </ul>

@@ -18,6 +18,11 @@ const reviews = [
     body: "Damian did an incredible job on my Mazda. He was very professional and I am very satisfied with his services. There is no doubt in my mind that I will go Metro Auto again for any detailing needs!",
     time: "11 weeks ago",
   },
+  {
+    name: "Mary Grigoryan",
+    body: "I wish I had taken a before and after picture! My car looks BRAND NEW!! I heard about Damian through word of mouth and I'll be doing the same! I'll be sending him to everyone I know 🙌🏻 🙌🏻",
+    time: "",
+  },
 ];
 
 function Stars() {
@@ -45,20 +50,20 @@ function GoogleIcon() {
 
 export function Testimonials() {
   return (
-    <section className="bg-site-bg py-20 px-6 lg:px-8">
+    <section className="bg-brand-yellow py-20 px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
 
         {/* Header */}
         <div className="mb-12">
           <div className="flex items-end justify-between gap-4 flex-wrap">
-            <h2 className="text-3xl sm:text-4xl font-black uppercase text-brand-white leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-black uppercase text-brand-black leading-tight">
               Straight From Our Clients
             </h2>
             <Link
               href={GOOGLE_PROFILE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-bold uppercase tracking-widest text-brand-white/40 hover:text-brand-yellow transition-colors flex items-center gap-2"
+              className="text-xs font-bold uppercase tracking-widest text-brand-black/50 hover:text-brand-black transition-colors flex items-center gap-2"
             >
               See all on Google
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -66,13 +71,13 @@ export function Testimonials() {
               </svg>
             </Link>
           </div>
-          <div className="mt-4 h-px bg-white/[0.07]" />
+          <div className="mt-4 h-px bg-black/[0.12]" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {reviews.map((review) => (
-            <div key={review.name} className="bg-white/[0.04] border border-white/[0.08] rounded-xl p-8 flex flex-col gap-4">
-              <div className="text-5xl font-black text-brand-yellow leading-none -mb-2">"</div>
+            <div key={review.name} className="bg-brand-black rounded-2xl p-8 flex flex-col gap-4">
+              <div className="font-accent text-5xl text-brand-yellow leading-none -mb-2">&ldquo;</div>
               <div className="flex items-center justify-between">
                 <Stars />
                 <div className="flex items-center gap-1.5 text-white/30">

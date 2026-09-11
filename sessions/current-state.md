@@ -1,7 +1,44 @@
 # metro-site — Current Session State
 
 > Updated by /handoff. Read this at the start of every Site session.
-> Last updated: 2026-09-08
+> Last updated: 2026-09-10
+
+## 2026-09-10 Session 6 — Visual direction locked and built (Black & Yellow, Elevated), NOT PUSHED
+
+**21st.dev MCP confirmed live** (blocked once by the auto-mode permission classifier, approved, retested with a real search — works).
+
+**Direction locked: same brand colors, new layout system.** After stress-testing Burgundy & Sand at full page length (not just a hero card), the operator reconsidered the whole rebrand premise — black+yellow is already live everywhere except this exploration (GBP, social, the vehicle) — and chose "same brand, better layout" over a new palette. Spec written and approved: `sessions/visual-design-spec-2026-09.md`. New italic accent typeface confirmed (Fraunces). Scope locked to presentation only, zero copy changes.
+
+**Implementation plan written and fully executed**, all inline this session: `sessions/visual-implementation-plan-2026-09.md`, 9 tasks. 8 code tasks done, build-verified clean after each, 8 separate commits in this repo. **None pushed** — operator wants to verify locally via `npm run dev` in a new session first.
+
+**What actually changed (local only, not live):**
+- Fraunces font added (`app/layout.tsx`, `app/globals.css`) — new `.font-accent` utility
+- All CTA buttons site-wide: `rounded-lg`/`rounded-md` → `rounded-full` (`shiny-button.tsx`, `Header.tsx`)
+- `Hero.tsx` — new eyebrow label, "Mobile Detailing" now italic Fraunces (headline text otherwise unchanged), 4-stat bordered grid replaced with a 3-stat full-bleed yellow trust strip (5+ Years / 5.0 Rating / 100% Mobile — dropped 24/7 Free Estimates per operator's explicit choice, not merged to 4 columns since that layout was never mocked up)
+- `ServicesPreview.tsx` — new "What We Do" label, all prices switched from DM Sans to Fraunces italic
+- `WhyMetro.tsx` — background changed to `#141414` so it doesn't blend into ServicesPreview above it (real gap caught in plan self-review before execution), new "Why Metro" label, `rounded-2xl` cards
+- `Testimonials.tsx` — background flipped to full-bleed yellow, cards flipped to solid black, added a 4th real review (Mary Grigoryan, Mazda CX-5, referred by Sherrise) instead of cutting one of the existing 3 named reviews, grid went 3-across → 2x2
+- `CTABanner.tsx` — "We come to you." now italic Fraunces yellow
+
+**Not touched, on purpose:** Gallery, FAQ, SocialFeed, Footer — none had an approved mockup behind them. Restyling them now would be guessing, not building to spec.
+
+**Deferred, not this session:** scroll-reveal and count-up-number animations (operator-flagged, correctly scoped as post-layout work). Real component found for the count-up piece when that phase starts: `danielpetho/basic-number-ticker` on 21st.dev (ref-triggered tween, logic reusable even though its default styling isn't).
+
+**Also this session:** generated `marketing/metro-brand-identity-guide.pdf` (colors, fonts, voice, platform rules, boilerplate, pricing) — surfaced that `marketing/brand-kit.html` (meant to be the canonical visual reference) is still the unfilled starter template with a placeholder accent color and no logo. Not fixed yet.
+
+**Next session opens with:** `npm run dev`, visual check against the approved mockup, then a push decision.
+
+---
+
+## 2026-09-10 Session 5 — Reconnected the 21st.dev "magic" MCP, no design work yet
+
+Operator wanted to keep exploring visual directions (still unlocked from 9/8) with the dev server up and the 21st.dev "magic" MCP pulling real components — explicitly overriding the standing brainstorming-skill gate for this specific thread. Before touching that: caught my own session-start error (the Downloads scan re-flagged `metro-seo-audit-2026-09.md` as new; it was already fully processed 2026-09-07, nothing further to file) and flagged the standing blocker once (visual direction not locked) — operator acknowledged and chose to proceed anyway.
+
+**Magic MCP was never actually wired up.** `metro-site/CLAUDE.md` documents it as available ("magic: 21st.dev component library"), but no `.mcp.json` existed anywhere in the project and `components.json`'s `registries` was empty — only the `@shadcn` registry MCP was live. Operator chose to reconnect it. Correct current CLI is `21st init --client claude --write --api-key <key>` (not `install`, which the operator tried first and got "Unknown command"). Ran it successfully: wrote `.mcp.json` at the **Metro-Vault root** (not inside `metro-site/`) with a `21st` HTTP MCP server (`https://21st.dev/api/mcp`), authenticated via `${API_KEY_21ST}` env-var reference — no literal key in the file itself.
+
+**Live security incident, not fully closed.** The operator's 21st.dev API key got pasted in plaintext into the chat transcript twice. Flagged immediately; operator regenerated the key at 21st.dev/mcp. Attempted to set the new key as a persistent Windows env var via `setx` — blocked by the permission classifier (system registry writes need the operator directly). **Operator still needs to**: run `setx API_KEY_21ST "<new-key>"` in a real OS terminal (PowerShell app opened normally — not this session's in-chat `!` prefix, which would echo the key into the transcript a third time), then fully restart Claude Code so the new `.mcp.json` server can authenticate.
+
+**No design work happened this session.** Dev server was never started, no mockup rounds run, magic MCP never actually called (blocked on the env var). Next session should open by confirming the `21st` MCP tool is live before anything else.
 
 ## 2026-09-08 Session — Location strategy finalized, visual redesign kicked off
 
@@ -53,14 +90,16 @@ Every named page now has a real anchor to write from — Stone Meadows was the l
 
 ## What's Live on metroautodetailing.pro
 
+**Note:** Hero, ServicesPreview, WhyMetro, Testimonials, and CTABanner have local commits from the 2026-09-10 Session 6 visual refresh (Black & Yellow, Elevated) that are **not pushed yet**. The "Live" status below reflects what's actually deployed at metroautodetailing.pro right now, not the local working tree.
+
 | Section | Status | Notes |
 |---------|--------|-------|
-| Hero | Live | hero-bg.mp4 (4.2MB). hero-poster.jpg = frame from truck video. |
-| ServicesPreview | Live | Exterior card = IMG_6184.JPEG. Water Spot Removal now $60. |
-| WhyMetro | Live | — |
+| Hero | Live (refresh pending push) | hero-bg.mp4 (4.2MB). hero-poster.jpg = frame from truck video. Local: eyebrow label, italic accent word, 3-stat yellow trust strip replacing the 4-stat bordered grid. |
+| ServicesPreview | Live (refresh pending push) | Exterior card = IMG_6184.JPEG. Water Spot Removal now $60. Local: "What We Do" label, Fraunces italic pricing. |
+| WhyMetro | Live (refresh pending push) | Local: `#141414` band background, "Why Metro" label, rounder cards. |
 | Gallery | **Live — mobile rebuilt 2026-08-02, pushed and deployed same day** | Desktop: unchanged 2-slide bento carousel. Mobile: new single-column letterboxed swipe stack (`MobileGalleryStack`), flattened to all 10 photos in one sequence, captions always visible (fixed hover-only bug). Only one tree ever mounts (`useIsDesktop` hook via `matchMedia`) — CSS-only hiding was tried first and found to still let hidden images download, so it was replaced with real conditional mounting. |
-| Testimonials | Live | — |
-| CTABanner | Live | "Book online. We come to you." — 15% off removed commit ef644dd. |
+| Testimonials | Live (refresh pending push) | Local: full-bleed yellow band, black cards, 4th review added (Mary Grigoryan), grid now 2x2. |
+| CTABanner | Live (refresh pending push) | "Book online. We come to you." — 15% off removed commit ef644dd. Local: accent phrase now italic Fraunces. |
 | FAQ | Live | Accepts optional faqs/heading props. Deposit answer now $30 (was $20, fixed 2026-08-02). |
 | Footer | Live | Facebook URL correct. |
 | AnnouncementBar | Live | "Mobile Detailing in Bakersfield / Book Online" |
@@ -82,7 +121,7 @@ Every named page now has a real anchor to write from — Stone Meadows was the l
 
 ## Immediate Next Steps (Priority Order)
 
-0. **Visual design direction — active as of 2026-09-08, not locked.** Picked back up from the 2026-08-13 interruption. 4 rounds of visual-companion mockups run (see session log above). Operator selected two tentative directions (Forest & Ivory, Burgundy & Sand) but wants more explored before committing. Next session: continue the brainstorm toward a locked direction, then a written design spec per the brainstorming skill's process, before any component code changes. This blocks both the location-page build and the remaining service sub-pages.
+0. **Visual design direction — LOCKED 2026-09-10 (Black & Yellow, Elevated), homepage built, not pushed.** Spec: `sessions/visual-design-spec-2026-09.md`. Plan: `sessions/visual-implementation-plan-2026-09.md`, all 8 code tasks executed and committed locally. Next session: `npm run dev`, verify the render against the approved mockup, then decide push. Once pushed, this unblocks the location-page build (8 new, 1 rewrite, 1 retitle) and the 5 remaining service sub-pages — both should follow the same spec/component pattern established on the homepage.
 1. **Estimate form total should repeat at the bottom, near Send Request.** Currently the running total (`grandTotal`, `app/estimate/EstimateForm.tsx:276`) only shows once, below the services checklist near the top of the form. On a long scroll (vehicle fields, info fields, condition photos) a visitor loses sight of the number before hitting submit. Add a second total display near the "Send Request" button. Flagged 2026-08-02, not built.
 2. **Meta Pixel install** — get the Pixel ID, wire into `layout.tsx` next to the existing GA4 script, fire a "Lead" event on estimate submit (same pattern as `estimate_submitted`).
 3. **Finish gallery verification** — full interactive browser check (swipe through all 10 photos, drag a comparison slider, confirm desktop bento renders correctly) was interrupted by an MCP disconnect. Network-level fix (image count) was confirmed; the visual/interaction pass was not re-run after reconnecting.

@@ -9,7 +9,7 @@ const FALLBACK_IMG = "/exterior-bg.JPEG";
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col bg-zinc-950 overflow-hidden">
+    <section className="relative min-h-screen flex flex-col bg-site-bg overflow-hidden">
 
       {/* Background — video or photo */}
       {USE_VIDEO ? (

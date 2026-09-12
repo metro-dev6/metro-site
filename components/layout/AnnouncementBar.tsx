@@ -35,7 +35,7 @@ const socials = [
 
 export function AnnouncementBar() {
   return (
-    <div className="fixed inset-x-0 top-0 z-50 h-11 bg-brand-black border-b border-white/10 flex items-center">
+    <div className="fixed inset-x-0 top-0 z-50 h-11 bg-site-bg border-b border-white/10 flex items-center">
       <div className="mx-auto w-full max-w-7xl px-6 lg:px-8 flex items-center justify-between">
         <Link href="/estimate" className="group flex items-center gap-2 hover:opacity-80 transition-opacity">
           <span className="hidden sm:block text-sm font-bold tracking-[0.12em] uppercase text-brand-yellow">

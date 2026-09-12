@@ -41,7 +41,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-11 z-40 bg-brand-black transition-shadow duration-200",
+        "fixed inset-x-0 top-11 z-40 bg-site-bg transition-shadow duration-200",
         scrolled && "shadow-[0_1px_0_0_rgba(255,255,255,0.08)]"
       )}
     >
@@ -89,7 +89,7 @@ export function Header() {
               <X size={22} className="hidden group-open:block" />
             </summary>
             {/* Fixed dropdown below announcement bar (44px) + header (64px) = 108px */}
-            <div className="fixed left-0 right-0 top-[108px] z-40 bg-brand-black border-t border-white/10 px-6 pb-6 pt-4">
+            <div className="fixed left-0 right-0 top-[108px] z-40 bg-site-bg border-t border-white/10 px-6 pb-6 pt-4">
               <nav className="flex flex-col gap-4 mx-auto max-w-7xl items-end">
                 <a
                   href="/"

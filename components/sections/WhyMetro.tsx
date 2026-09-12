@@ -46,7 +46,7 @@ const reasons = [
 
 export function WhyMetro() {
   return (
-    <section className="bg-[#141414] py-20 px-6 lg:px-8">
+    <section className="bg-site-bg py-20 px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
 
         <div className="text-center mb-14">

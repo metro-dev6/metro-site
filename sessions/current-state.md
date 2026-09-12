@@ -1,7 +1,37 @@
 # metro-site — Current Session State
 
 > Updated by /handoff. Read this at the start of every Site session.
-> Last updated: 2026-09-10
+> Last updated: 2026-09-12
+
+## 2026-09-12 Session 7 — Background unified to Steel Graphite, header/footer matched, NOT PUSHED
+
+**Root cause found for operator's "3 separate colors, no flow" complaint from reviewing Session 6's build:** Hero used `bg-zinc-950`, most sections used `bg-site-bg` (`#050606`), WhyMetro used `bg-[#141414]` — three different near-black shades creating visible seams while scrolling. Not a new bug, just never named until the operator actually ran the build.
+
+**Competitive research before picking a fix:** WebSearch + chrome-devtools screenshots of Hyer Quality Detail (Tempe, AZ — dark PPF/ceramic studio, closest real comparable to Metro's dark theme) and SHWASH (Dallas mobile detailing, light theme but far better engagement stats per operator's SimilarWeb pull — 1:45 avg visit vs. HQD's 16 sec). Both confirmed the same pattern: one consistent base background color, contrast reserved for genuinely different accent colors used sparingly or at specific deliberate moments — never several near-identical shades distributed for "separation." That ruled out adding more bands and pointed straight at unification.
+
+**Color selection, two rounds of Artifact tools:**
+- Round 1 — static 5-card comparison page (warm dark options: Soft Charcoal, Warm Espresso, Warm Graphite, Olive Ink) with a mini hero mockup per candidate.
+- Round 2 — operator asked for something interactive: built an HSL color-wheel lab with a live-updating mockup, then rebuilt the mockup to use the actual real homepage copy/structure (real headline, real 5 service cards with real prices, real Why Metro copy, real gallery titles, all 4 real client reviews, real FAQ, real footer) after the operator asked for "a real mockup" instead of simplified placeholder sections.
+- Operator floated pure white as an option too; flagged that as a full rebrand reversal (breaks the "same brand, no rebrand" call locked into `visual-design-spec-2026-09.md`) versus a quick fix — operator agreed white wasn't landing and asked to narrow to graphite-family options only, static-card format, no wheel.
+- Final picks presented: Graphite Black `#18191B`, Steel Graphite `#1D2126`, Graphite `#202224`, Warm Graphite `#211F1D`, Soft Graphite `#26282A`. **Operator chose Steel Graphite `#1D2126`.**
+
+**Contrast verified with real math before implementing, not assumed:** headline (white 100%) 16.2:1, subtext/body (white/70, white/50) 8.5:1 and 5.1:1, yellow eyebrow/accent 9.9:1 — all clear WCAG AA. The one borderline case, de-emphasized secondary labels at `white/40` (~3.7:1), was already at ~3.8:1 against the old `#050606` — not a regression from this change, left as-is.
+
+**Implemented (build-verified clean, twice):**
+- `app/globals.css` — `--color-site-bg` changed from `#050606` to `#1D2126`.
+- `components/sections/Hero.tsx` — `bg-zinc-950` → `bg-site-bg`.
+- `components/sections/WhyMetro.tsx` — `bg-[#141414]` → `bg-site-bg`.
+- Operator then asked for header/footer to match too: `components/layout/AnnouncementBar.tsx`, `components/layout/Header.tsx` (desktop bar + mobile dropdown), `components/layout/Footer.tsx` — all `bg-brand-black`/`bg-zinc-950` → `bg-site-bg`.
+
+**Left alone on purpose:** card-level `zinc-950` inside ServicesPreview's Add-Ons cell and WhyMetro's 4 reason tiles — those now read as recessed cards against the lighter section color (real depth, not a clash), and text inside them has even higher contrast on the darker card color, not lower.
+
+**Not pushed** — same standing pattern as Session 6, operator hasn't run `npm run dev` to eyeball the actual render yet this cycle. 6 files committed locally in the metro-site repo, no push.
+
+**New, separate from the vault:** a taskbar-pinnable desktop shortcut ("Metro Site Dev Server") that opens PowerShell, `cd`s into `metro-site/`, and runs `npm run dev` — lives outside any repo (`C:\Users\Damian\Desktop\`), not tracked here beyond this note.
+
+**Floated, not built:** redesigning ServicesPreview's flush/touching card grid (cards share 1px gap lines, no individual rounding) into separated rounded bento-style cards, plus tags/badges on service cards. Real precedent already exists and was never built: `04-services-page-v3.md` specs a "Best Value" yellow-border badge on the Full Detail card. Offered to run this through a design pass (mockup + spec, same process the homepage refresh went through) before touching the component — operator deferred to next session.
+
+**Next session opens with:** operator runs `npm run dev`, verifies the Steel Graphite background renders as expected across every section including header/footer, decides push. If it looks right, move to the card-redesign discussion (brainstorm first, per standing practice for layout/component changes) or the location-page build, both still unblocked by the Session 6 spec.
 
 ## 2026-09-10 Session 6 — Visual direction locked and built (Black & Yellow, Elevated), NOT PUSHED
 
@@ -212,7 +242,7 @@ Every named page now has a real anchor to write from — Stone Meadows was the l
 | `components/sections/Gallery.tsx` | `SLIDES`/`ALL_ITEMS`, desktop/mobile split via `useIsDesktop`. |
 | `components/ui/mobile-gallery-stack.tsx` | Mobile-only gallery renderer. |
 | `hooks/use-is-desktop.ts` | Breakpoint-detection hook, SSR-safe. |
-| `app/globals.css` | `--color-site-bg: #050606` |
+| `app/globals.css` | `--color-site-bg: #1D2126` (Steel Graphite, changed 2026-09-12 — was `#050606`) |
 | `docs/superpowers/specs/2026-08-02-mobile-gallery-rebuild.md` | Gallery rebuild spec. |
 | `docs/superpowers/plans/2026-08-02-mobile-gallery-rebuild.md` | Gallery rebuild implementation plan. |
 
@@ -220,7 +250,7 @@ Every named page now has a real anchor to write from — Stone Meadows was the l
 
 ## Background
 
-All sections use `bg-site-bg` → `--color-site-bg: #050606`.
+All sections plus header/footer/announcement bar use `bg-site-bg` → `--color-site-bg: #1D2126` (Steel Graphite, unified 2026-09-12 — previously three mismatched shades: `bg-zinc-950` on Hero/chrome, `#050606` on most sections, `#141414` on WhyMetro).
 Facebook URL: `https://www.facebook.com/profile.php?id=61586613950253`
 Canonical domain: `https://metroautodetailing.pro` (non-www).
 GA4 Measurement ID: G-LM507WTMXH

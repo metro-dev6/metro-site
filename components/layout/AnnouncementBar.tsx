@@ -26,8 +26,14 @@ export function AnnouncementBar() {
         body: formData,
         headers: { Accept: "application/json" },
       });
-      setFormState(res.ok ? "success" : "error");
-    } catch {
+      if (res.ok) {
+        setFormState("success");
+      } else {
+        console.error("Announcement bar coupon signup failed:", res.status, await res.text().catch(() => ""));
+        setFormState("error");
+      }
+    } catch (err) {
+      console.error("Announcement bar coupon signup network error:", err);
       setFormState("error");
     }
   }
@@ -61,6 +67,7 @@ export function AnnouncementBar() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
+          aria-label="Email address"
           disabled={formState === "submitting"}
           className="text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full border border-black/20 text-brand-black bg-brand-white focus:outline-none focus:border-brand-black w-24 sm:w-56"
         />

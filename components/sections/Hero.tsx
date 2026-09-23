@@ -1,15 +1,22 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { Phone } from "lucide-react";
 import { ShinyButton } from "@/components/ui/shiny-button";
+import { GOOGLE_RATING_VALUE, GOOGLE_REVIEW_COUNT, GoogleIcon, Stars } from "@/components/ui/google-rating";
+import { fadeUpMount } from "@/lib/motion";
+import { PhoneLink } from "@/components/PhoneLink";
 import Link from "next/link";
 
-const USE_VIDEO = true;
+const USE_VIDEO = false;
 const VIDEO_SRC = "/hero-bg.mp4";
 const FALLBACK_IMG = "/exterior-bg.JPEG";
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col bg-site-bg overflow-hidden">
+    <section className="relative min-h-[90vh] flex flex-col bg-brand-black overflow-hidden -mt-[68px] mb-4 sm:mb-10 mx-4 sm:mx-10 rounded-[50px]">
 
       {/* Background — video or photo */}
       {USE_VIDEO ? (
@@ -47,103 +54,101 @@ export function Hero() {
           aria-hidden="true"
           fill
           priority
-          style={{ objectFit: "cover", objectPosition: "center 30%" }}
+          style={{ objectFit: "cover", objectPosition: "center 45%" }}
         />
       )}
 
-      {/* Dark overlay — heavier left (text side) fading lighter right (car side) */}
+      {/* Dark overlay — heavier left (text side) fading lighter right (car side), lightened for more visible background */}
       <div
         className="absolute inset-0"
-        style={{ background: "linear-gradient(to right, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.38) 40%, rgba(0,0,0,0.12) 100%)" }}
+        style={{ background: "linear-gradient(to right, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0.45) 20%, rgba(0,0,0,0.06) 100%)" }}
       />
       {/* Dim layer — activates when CTA button is hovered */}
       <div className="hero-dim-layer absolute inset-0" />
 
       {/* Main content */}
-      <div className="relative z-10 flex-1 flex flex-col md:items-center md:justify-center mx-auto w-full max-w-7xl px-6 lg:px-8">
+      <div className="relative z-10 flex-1 flex flex-col md:items-start md:justify-center w-full px-6 sm:px-10 lg:px-16">
 
-        {/* Text block — fills space on mobile, centers within that zone */}
-        <div className="flex-1 md:flex-none flex items-center justify-center w-full">
-          <div className="max-w-4xl w-full text-center mx-auto -mt-4 md:mt-0">
-
-            <div
-              className="font-accent text-xs sm:text-sm font-medium tracking-[0.25em] uppercase text-brand-yellow mb-4 sm:mb-5 not-italic"
-              style={{ textShadow: "0 1px 10px rgba(0,0,0,0.9)" }}
-            >
-              Bakersfield &middot; Fully Mobile
-            </div>
-
+        {/* Text block — fills space on mobile, centers within that zone; left-anchored on desktop */}
+        <div className="flex-1 md:flex-none flex items-center justify-center md:justify-start w-full">
+          <motion.div
+            {...fadeUpMount}
+            className="max-w-6xl w-full text-center md:text-left -mt-4 md:mt-0"
+          >
             <h1
-              className="text-[2.2rem] sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] sm:leading-[1] tracking-tight uppercase mb-4 sm:mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight uppercase mb-5 sm:mb-16"
               style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8)" }}
             >
               <span className="text-brand-white">Bakersfield&apos;s Premier</span><br />
-              <span className="font-accent normal-case text-brand-yellow">{" "}Mobile Detailing</span>
+              <span className="text-brand-yellow">Mobile Detailing</span>
               <span className="text-brand-white"> Service</span>
             </h1>
 
             <p
-              className="text-sm sm:text-base md:text-lg text-brand-white/70 max-w-md mx-auto mb-6 sm:mb-10 leading-relaxed"
+              className="text-lg sm:text-xl md:text-2xl text-brand-white/90 max-w-2x1 mx-auto md:mx-0 mb-16 leading-relaxed font-normal"
               style={{ textShadow: "0 1px 10px rgba(0,0,0,0.9)" }}
             >
-              Professional detailing at your door because your time is worth it.
+              Professional detailing at your door because your time is <span className="font-accent font-medium">worth it</span>. <br/ >
+              Proudly serving Bakersfield and surrounding areas.
             </p>
 
+            {/* Google rating badge */}
+            <Link
+              href={`#reviews`}
+              className="inline-flex items-center gap-4 bg-brand-white border border-white/20 rounded-full pl-5 pr-7 py-3 mb-6 sm:mb-10 shadow-lg hover:shadow-xl transition-shadow"
+            >
+              <GoogleIcon className="w-5 h-5" />
+              <span className="text-md sm:text-xl font-bold text-brand-black">
+                {GOOGLE_RATING_VALUE}
+              </span>
+              <Stars className="w-5.5 h-5.5" />
+              <span className="text-brand-black/80">&bull;</span>
+              <span className="text-md sm:text-md text-brand-black font-medium">
+                {GOOGLE_REVIEW_COUNT} reviews
+              </span>
+            </Link>
+
             {/* Desktop CTA — inline with text */}
-            <div className="hidden md:flex flex-wrap gap-4 justify-center">
+            <div className="hidden md:flex flex-wrap gap-4 justify-start">
               <Link href="/estimate" className="hero-cta">
                 <ShinyButton
-                  className="bg-brand-yellow text-brand-black font-black tracking-widest h-12 px-7"
+                  className="bg-brand-yellow text-brand-black font-black tracking-widest h-16 px-11 text-lg border border-brand-yellow hover:shadow-[0_0_20px_5px_rgba(250,194,5,0.45),0_0_0_5px_rgba(255,255,255,0.15),0_0_0_6px_rgba(255,255,255,0.2)] hover:translate-y-0"
                   style={{ "--primary": "46 96% 50%" } as React.CSSProperties}
                 >
-                  Get a Free Estimate
+                  Book Now
                 </ShinyButton>
               </Link>
-              <Link
-                href="/services"
-                className="inline-flex h-12 items-center rounded-md border border-white/20 px-7 text-xs font-bold text-brand-white uppercase tracking-widest transition-colors hover:border-white/50 hover:bg-white/5"
-              >
-                Our Services
-              </Link>
+              <PhoneLink className="group relative inline-flex h-16 items-center gap-2.5 overflow-hidden rounded-full border-2 border-white bg-black/40 backdrop-blur-sm px-8 text-sm font-bold uppercase tracking-widest text-brand-white shadow-lg transition-colors duration-700 hover:border-4 hover:border-brand-black">
+                <span className="absolute inset-0 origin-left scale-x-0 bg-brand-white transition-transform duration-700 ease-out group-hover:scale-x-100" />
+                <Phone className="relative z-10 h-5 w-5 shrink-0 transition-colors duration-700 group-hover:text-brand-black" strokeWidth={2.5} />
+                <span className="relative z-10 transition-colors duration-700 group-hover:text-brand-black">
+                  (661) 368-5165
+                </span>
+              </PhoneLink>
             </div>
 
-          </div>
+          </motion.div>
         </div>
 
         {/* Mobile CTA — separate zone, pinned below text */}
-        <div className="md:hidden flex justify-center pb-20">
+        <div className="md:hidden flex flex-col items-center gap-3 pb-20">
           <Link href="/estimate" className="hero-cta">
             <ShinyButton
-              className="bg-brand-yellow text-brand-black font-black tracking-widest h-12 px-7"
+              className="bg-brand-yellow text-brand-black font-black tracking-widest h-14 px-9 text-base border border-brand-yellow hover:shadow-[0_0_20px_5px_rgba(250,194,5,0.45),0_0_0_5px_rgba(255,255,255,0.15),0_0_0_6px_rgba(255,255,255,0.2)] hover:translate-y-0"
               style={{ "--primary": "46 96% 50%" } as React.CSSProperties}
             >
-              Get a Free Estimate
+              Book Now
             </ShinyButton>
           </Link>
+          <PhoneLink className="group relative inline-flex h-14 items-center gap-2.5 overflow-hidden rounded-full border-2 border-white bg-black/40 backdrop-blur-sm px-8 text-sm font-bold uppercase tracking-widest text-brand-white shadow-lg transition-colors duration-700 hover:border-4 hover:border-brand-black">
+            <span className="absolute inset-0 origin-left scale-x-0 bg-brand-white transition-transform duration-700 ease-out group-hover:scale-x-100" />
+            <Phone className="relative z-10 h-5 w-5 shrink-0 transition-colors duration-700 group-hover:text-brand-black" strokeWidth={2.5} />
+            <span className="relative z-10 transition-colors duration-700 group-hover:text-brand-black">
+              (661) 368-5165
+            </span>
+          </PhoneLink>
         </div>
 
-      </div>
-
-      {/* Trust strip — full-bleed yellow band */}
-      <div className="relative z-10 bg-brand-yellow py-10 px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl grid grid-cols-3 gap-6 text-center">
-
-          <div className="flex flex-col items-center gap-1">
-            <span className="font-accent text-4xl sm:text-5xl text-brand-black leading-none">5+</span>
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-brand-black/70">Years Experience</span>
-          </div>
-
-          <div className="flex flex-col items-center gap-1">
-            <span className="font-accent text-4xl sm:text-5xl text-brand-black leading-none">5.0</span>
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-brand-black/70">Google Rating</span>
-          </div>
-
-          <div className="flex flex-col items-center gap-1">
-            <span className="font-accent text-4xl sm:text-5xl text-brand-black leading-none">100%</span>
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-brand-black/70">Mobile Service</span>
-          </div>
-
-        </div>
       </div>
 
     </section>

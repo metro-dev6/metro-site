@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat, DM_Sans, Fraunces } from "next/font/google";
 import Script from "next/script";
+import { MotionConfig } from "framer-motion";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -88,7 +89,7 @@ export default function RootLayout({
               "aggregateRating": {
                 "@type": "AggregateRating",
                 "ratingValue": "5.0",
-                "reviewCount": "4"
+                "reviewCount": "5"
               },
               "logo": {
                 "@type": "ImageObject",
@@ -117,12 +118,16 @@ export default function RootLayout({
             gtag('config', 'G-LM507WTMXH');
           `}
         </Script>
-        <AnnouncementBar />
-        <Header />
-        {/* AnnouncementBar h-9 (36px) + Header h-16 (64px) = 100px */}
-        <div className="h-[100px]" aria-hidden="true" />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <MotionConfig reducedMotion="user">
+          <AnnouncementBar />
+          <Header />
+          {/* AnnouncementBar is real in-flow content now (h-11, 44px) and reserves
+              its own space automatically. This spacer only needs to cover Header's
+              own fixed height (h-16, 64px). */}
+          <div className="h-16" aria-hidden="true" />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </MotionConfig>
       </body>
     </html>
   );

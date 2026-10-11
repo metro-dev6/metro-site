@@ -1,66 +1,73 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer, staggerItem } from "@/lib/motion";
+
+const MotionLink = motion.create(Link);
 
 const services = [
   {
+    name: "Exterior Refresh",
+    alt: "Exterior Refresh mobile wash and spray wax in Bakersfield, CA",
+    price: "$80",
+    description: "Two-step exterior wash finished with a spray wax for shine, plus wheels, tires, and door jambs. Upgrade to a 3-month ceramic sealant for $30. For a maintained car that just needs the outside cleaned.",
+    photo: "/services/exterior-refresh-bakersfield.webp",
+    imageStyle: { objectFit: "cover" as const, objectPosition: "center" },
+  },
+  {
     name: "Signature Wash",
     alt: "Signature Wash mobile detail in Bakersfield, CA",
-    price: "$80",
-    description: "Hand wash, wheels, tire dressing, wax coat, and interior vacuum. Keeps the paint clean and protected between details.",
-    photo: "/wash-bg-3.JPEG",
+    price: "$150",
+    description: "Full exterior wash sealed with a 3-month ceramic, plus a full interior clean inside. For a car in good shape that wants both sides handled in one visit.",
+    photo: "/services/signature-wash-bakersfield.webp",
     imageStyle: { objectFit: "cover" as const, objectPosition: "75% center" },
   },
   {
-    name: "Exterior Detail",
-    alt: "Exterior Detail with ceramic sealant in Bakersfield, CA",
-    price: "$150",
-    description: "Full paint decontamination and ceramic sealant. 4-6 months of protection bonded to dry paint.",
-    photo: "/IMG_6184.JPEG",
+    name: "Clay n Seal",
+    alt: "Clay n Seal decontamination and ceramic sealant in Bakersfield, CA",
+    price: "$200",
+    description: "Adds a clay bar and decontamination to strip bonded grime a wash leaves behind, then a 6-month ceramic sealant. Choose this when the paint feels rough to the touch.",
+    photo: "/services/clay-n-seal-bakersfield.webp",
     imageStyle: { objectFit: "cover" as const, objectPosition: "center" },
   },
   {
     name: "Interior Detail",
     alt: "Interior Detail deep clean in Bakersfield, CA",
     price: "$200",
-    description: "Built for interiors that need more than a vacuum. Seats shampooed, carpet extracted, every surface deep cleaned and UV protected.",
-    photo: "/interior-bg.JPEG",
+    description: "Seats and carpets shampooed and extracted, every surface cleaned and UV protected. For interiors past a vacuum, think stains, spills, kids, and pets.",
+    photo: "/services/interior-detail-bakersfield.webp",
     imageStyle: { objectFit: "cover" as const, objectPosition: "center" },
-  },
-  {
-    name: "Refresh Detail",
-    alt: "Refresh Detail, exterior wash and interior clean in Bakersfield, CA",
-    price: "$250",
-    description: "For when the car needs attention inside and out but not a full decon. Exterior washed and sealed with wax. Interior deep cleaned, spot treated, and UV protected.",
-    photo: "/refresh-bg.JPEG",
-    imageStyle: { objectFit: "cover" as const, objectPosition: "center bottom" },
   },
   {
     name: "Full Detail",
     alt: "Full Detail, exterior and interior service in Bakersfield, CA",
-    price: "$400",
-    description: "Complete exterior decontamination and ceramic sealant outside. Seats shampooed, carpet extracted, every surface UV protected inside.",
-    photo: "/full-detail-bg.JPEG",
+    price: "$350",
+    description: "The full reset. Exterior wash and a 3-month sealant outside, seats and carpets shampooed and extracted inside. Best when you want everything done in one appointment.",
+    photo: "/services/full-detail-bakersfield.webp",
     imageStyle: { objectFit: "cover" as const, objectPosition: "center" },
   },
 ];
 
 export function ServicesPreview() {
   return (
-    <section className="bg-site-bg pt-14 pb-20 px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+    <section className="bg-site-surface pt-16 pb-24 px-6 lg:px-10">
+      <div className="mx-auto max-w-[1600px]">
 
         {/* Header */}
-        <div className="mb-12">
-          <div className="font-accent text-xs font-medium tracking-[0.25em] uppercase text-brand-yellow mb-3 not-italic">
+        <motion.div {...fadeUp} className="mb-16">
+          <div className="h-[3px] w-10 bg-brand-yellow mb-4" />
+          <div className="font-accent text-xs font-medium tracking-[0.25em] uppercase text-brand-black mb-3 not-italic">
             What We Do
           </div>
           <div className="flex items-end justify-between gap-4 flex-wrap">
-            <h2 className="text-3xl sm:text-4xl font-black uppercase text-brand-white leading-tight">
+            <h2 className="text-4xl sm:text-5xl font-black uppercase text-brand-black tracking-normal">
               Services
             </h2>
             <Link
               href="/services#essentials"
-              className="text-xs font-bold uppercase tracking-widest text-brand-white/40 hover:text-brand-yellow transition-colors flex items-center gap-2"
+              className="text-xs font-bold uppercase tracking-widest text-black/55 hover:text-brand-yellow transition-colors flex items-center gap-2"
             >
               Full pricing &amp; add-ons
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -68,16 +75,19 @@ export function ServicesPreview() {
               </svg>
             </Link>
           </div>
-          <div className="mt-4 h-px bg-white/[0.07]" />
-        </div>
+          <div className="mt-4 h-px bg-black/15" />
+        </motion.div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.07]">
-          {services.map((service) => (
-            <Link
+        <motion.div {...staggerContainer} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service) => {
+            const isBestValue = service.name === "Full Detail";
+            return (
+            <MotionLink
               key={service.name}
+              variants={staggerItem}
               href="/services#essentials"
-              className="group relative min-h-[300px] flex flex-col justify-end"
+              className={`hover-lift group relative min-h-[380px] flex flex-col justify-end rounded-2xl overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.13)] border ${isBestValue ? "border-brand-yellow" : "border-black/15"}`}
             >
               {/* Image wrapper */}
               <div className="absolute inset-0 overflow-hidden">
@@ -93,12 +103,6 @@ export function ServicesPreview() {
 
               {/* Dark gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black/0 group-hover:from-black group-hover:via-black/75 transition-colors duration-300" />
-
-              {/* Border */}
-              <div
-                className="absolute inset-0 pointer-events-none z-30"
-                style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.18), inset 1px 0 0 rgba(255,255,255,0.08), inset -1px 0 0 rgba(255,255,255,0.08)" }}
-              />
 
               {/* Content */}
               <div className="relative z-10 p-8 flex flex-col gap-3" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%)" }}>
@@ -125,13 +129,15 @@ export function ServicesPreview() {
                   Starting at {service.price}
                 </p>
               </div>
-            </Link>
-          ))}
+            </MotionLink>
+            );
+          })}
 
           {/* 6th cell — Add-ons */}
-          <Link
+          <MotionLink
+            variants={staggerItem}
             href="/services#essentials"
-            className="group bg-zinc-950 min-h-[300px] flex flex-col justify-start p-8 hover:bg-white/[0.03] transition-colors"
+            className="hover-lift group bg-[#141414] border border-white/10 shadow-[0_12px_30px_rgba(0,0,0,0.18)] rounded-2xl min-h-[380px] flex flex-col justify-start p-8 hover:border-white/25 transition-colors"
           >
             <div className="flex flex-col gap-3">
               <h3 className="text-base font-black uppercase tracking-wide text-brand-white leading-tight">
@@ -140,30 +146,31 @@ export function ServicesPreview() {
 
               <ul className="flex flex-col gap-2">
                 {[
-                  { name: "Headlight Restoration", price: "$80" },
+                  { name: "Headlight Restoration", price: "$100" },
                   { name: "Trim Restoration", price: "$100" },
-                  { name: "Water Spot Removal", price: "$60" },
-                  { name: "Pet Hair and/or Sand Removal", price: "$80" },
-                  { name: "Carpet & Seat Extraction", price: "$70" },
+                  { name: "Water Spot Removal", price: "$50" },
+                  { name: "Pet Hair and/or Sand Removal", price: "$50" },
                   { name: "Engine Bay", price: "$50" },
-                  { name: "Leather Conditioning", price: "$40" },
+                  { name: "Leather Conditioning", price: "$50" },
                 ].map((addon) => (
                   <li key={addon.name} className="flex items-center justify-between gap-4">
-                    <span className="text-sm text-white/60">{addon.name}</span>
+                    <span className="text-sm text-white/70">{addon.name}</span>
                     <span className="text-sm font-accent text-brand-yellow">{addon.price}</span>
                   </li>
                 ))}
               </ul>
 
-              <span className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-brand-yellow group-hover:gap-4 transition-all duration-200 pt-1">
+              <span
+                className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-brand-yellow group-hover:gap-4 transition-all duration-200 pt-1"
+              >
                 See all services
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </span>
             </div>
-          </Link>
-        </div>
+          </MotionLink>
+        </motion.div>
 
       </div>
     </section>

@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
-  allowedDevOrigins: ["192.168.50.5"],
+  allowedDevOrigins: ["192.168.50.5", "192.168.50.6"],
   async redirects() {
     return [
       { source: "/home", destination: "/", permanent: true },

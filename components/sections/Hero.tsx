@@ -11,8 +11,8 @@ import { PhoneLink } from "@/components/PhoneLink";
 import Link from "next/link";
 
 const USE_VIDEO = false;
-const VIDEO_SRC = "/hero-bg.mp4";
-const FALLBACK_IMG = "/exterior-bg.JPEG";
+const VIDEO_SRC = "/hero/mobile-auto-detailing-bakersfield.mp4";
+const FALLBACK_IMG = "/hero/exterior-paint-detail-bakersfield.webp";
 
 export function Hero() {
   return (
@@ -38,7 +38,7 @@ export function Hero() {
             loop
             playsInline
             preload="metadata"
-            poster="/hero-poster.jpg"
+            poster="/hero/mobile-auto-detailing-bakersfield-poster.jpg"
             className="hidden md:block absolute inset-0 w-full h-full object-cover"
             style={{
               objectPosition: "center",
@@ -67,25 +67,25 @@ export function Hero() {
       <div className="hero-dim-layer absolute inset-0" />
 
       {/* Main content */}
-      <div className="relative z-10 flex-1 flex flex-col md:items-start md:justify-center w-full px-6 sm:px-10 lg:px-16">
+      <div className="relative z-10 flex-1 flex flex-col md:items-start md:justify-center w-full px-6 sm:px-10 lg:px-16 pt-[120px] md:pt-0">
 
         {/* Text block — fills space on mobile, centers within that zone; left-anchored on desktop */}
-        <div className="flex-1 md:flex-none flex items-center justify-center md:justify-start w-full">
+        <div className="flex-1 md:flex-none flex items-start md:items-center justify-center md:justify-start w-full">
           <motion.div
             {...fadeUpMount}
-            className="max-w-6xl w-full text-center md:text-left -mt-4 md:mt-0"
+            className="max-w-6xl w-full text-center md:text-left mt-0"
           >
             <h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight uppercase mb-5 sm:mb-16"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-[0.03em] uppercase mb-5 sm:mb-16"
               style={{ textShadow: "0 2px 20px rgba(0,0,0,0.8)" }}
             >
-              <span className="text-brand-white">Bakersfield&apos;s Premier</span><br />
+              <span className="text-brand-white">Bakersfield&apos;s Premier</span>{" "}<br />
               <span className="text-brand-yellow">Mobile Detailing</span>
               <span className="text-brand-white"> Service</span>
             </h1>
 
             <p
-              className="text-lg sm:text-xl md:text-2xl text-brand-white/90 max-w-2x1 mx-auto md:mx-0 mb-16 leading-relaxed font-normal"
+              className="text-lg sm:text-xl md:text-xl text-brand-white/90 max-w-2x1 mx-auto md:mx-0 mb-16 leading-relaxed font-normal"
               style={{ textShadow: "0 1px 10px rgba(0,0,0,0.9)" }}
             >
               Professional detailing at your door because your time is <span className="font-accent font-medium">worth it</span>. <br/ >
@@ -95,7 +95,7 @@ export function Hero() {
             {/* Google rating badge */}
             <Link
               href={`#reviews`}
-              className="inline-flex items-center gap-4 bg-brand-white border border-white/20 rounded-full pl-5 pr-7 py-3 mb-6 sm:mb-10 shadow-lg hover:shadow-xl transition-shadow"
+              className="inline-flex items-center gap-4 bg-brand-white border border-white/20 rounded-full pl-5 pr-7 py-3 mb-6 sm:mb-10 shadow-lg hover:shadow-xl transition-[transform,box-shadow] duration-150 active:scale-[0.98]"
             >
               <GoogleIcon className="w-5 h-5" />
               <span className="text-md sm:text-xl font-bold text-brand-black">

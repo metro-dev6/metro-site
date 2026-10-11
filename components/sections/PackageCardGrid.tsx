@@ -8,9 +8,10 @@ import { useEstimateCart } from "@/hooks/use-estimate-cart";
 export interface MetroPlan {
   name: string;
   price: number;
-  largerVehicle?: string;
+  vehicleClassPrices?: { sedan: number; suv5: number; suv7: number };
   description: string;
   features: string[];
+  excludedFeatures?: string[];
   buttonText: string;
   href: string;
   featured?: boolean;
@@ -54,8 +55,14 @@ function MetroPricingCard({ plan, index }: { plan: MetroPlan; index: number }) {
             format={{ style: "currency", currency: "USD", minimumFractionDigits: 0 }}
           />
         </span>
-        {plan.largerVehicle && (
-          <span className="text-xs text-white/40 mt-1">{plan.largerVehicle} larger vehicles</span>
+        {plan.vehicleClassPrices && (
+          <div className="flex items-center gap-3 mt-2 text-xs text-white/40">
+            <span>Sedan/Coupe ${plan.vehicleClassPrices.sedan}</span>
+            <span className="text-white/20">&middot;</span>
+            <span>5-Seat SUV/Truck ${plan.vehicleClassPrices.suv5}</span>
+            <span className="text-white/20">&middot;</span>
+            <span>7-Seat SUV/Van ${plan.vehicleClassPrices.suv7}</span>
+          </div>
         )}
       </div>
 
@@ -63,6 +70,12 @@ function MetroPricingCard({ plan, index }: { plan: MetroPlan; index: number }) {
         {plan.features.map((feature) => (
           <li key={feature} className="flex items-start gap-3 text-sm text-white/70 leading-snug">
             <Check className="h-4 w-4 text-brand-yellow mt-0.5 shrink-0" />
+            {feature}
+          </li>
+        ))}
+        {plan.excludedFeatures?.map((feature) => (
+          <li key={feature} className="flex items-start gap-3 text-sm text-white/30 leading-snug line-through decoration-white/20">
+            <X className="h-4 w-4 text-white/20 mt-0.5 shrink-0" />
             {feature}
           </li>
         ))}

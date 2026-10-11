@@ -8,9 +8,9 @@ const INSTAGRAM_URL = "https://www.instagram.com/metroautodetailingca";
 const FACEBOOK_PAGE_URL = "https://www.facebook.com/profile.php?id=61586613950253";
 
 const INSTAGRAM_PREVIEW = [
-  { src: "/metro_v3_5.jpg", alt: "Metro Auto Detailing — Instagram" },
-  { src: "/metro_v3_4.jpg", alt: "Metro Auto Detailing — Instagram" },
-  { src: "/metro_v3_2.jpg", alt: "Metro Auto Detailing — Instagram" },
+  { src: "/_unused/metro_v3_5.jpg", alt: "Metro Auto Detailing — Instagram" },
+  { src: "/_unused/metro_v3_4.jpg", alt: "Metro Auto Detailing — Instagram" },
+  { src: "/_unused/metro_v3_2.jpg", alt: "Metro Auto Detailing — Instagram" },
 ];
 
 function InstagramIcon() {

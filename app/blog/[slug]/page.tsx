@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.description,
       url: `https://www.metroautodetailing.pro/blog/${slug}`,
       siteName: "Metro Auto Detailing",
-      images: [{ url: "https://www.metroautodetailing.pro/hero-car-enhanced.jpg", width: 1200, height: 630 }],
+      images: [{ url: "https://www.metroautodetailing.pro/og/metro-auto-detailing-bakersfield.jpg", width: 1200, height: 630 }],
       type: "article",
       publishedTime: post.date,
     },

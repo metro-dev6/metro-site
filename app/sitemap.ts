@@ -2,27 +2,44 @@ import type { MetadataRoute } from "next";
 
 const BASE = "https://metroautodetailing.pro";
 
+// Service detail pages (/services/[slug]) currently redirect to /services (not built yet,
+// see app/services/[slug]/page.tsx), so they are intentionally excluded from the sitemap.
+// Add them here once the detail pages render instead of redirecting.
+
+// Keep these in sync when locations or blog posts are added.
 const LOCATION_SLUGS = [
   "bakersfield",
   "southwest-bakersfield",
   "stockdale",
   "seven-oaks",
-  "terra-vista",
   "rosedale",
+  "terra-vista",
 ];
 
+// Blog is parked pre-launch: the one post was pulled to content/_parked/ and
+// /blog is noindex with no posts, so neither is advertised here. Re-add the
+// /blog static entry and a BLOG_SLUGS loop when real posts go live.
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const locationPages = LOCATION_SLUGS.map((slug) => ({
-    url: `${BASE}/locations/${slug}`,
-    lastModified: new Date("2026-07-01"),
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
+  const now = new Date();
+
+  const staticPages: { path: string; priority: number }[] = [
+    { path: "", priority: 1 },
+    { path: "/services", priority: 0.9 },
+    { path: "/estimate", priority: 0.9 },
+    { path: "/maintenance-terms", priority: 0.4 },
+  ];
+
+  const entries: MetadataRoute.Sitemap = staticPages.map(({ path, priority }) => ({
+    url: `${BASE}${path}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority,
   }));
 
-  return [
-    { url: BASE, lastModified: new Date("2026-07-01"), changeFrequency: "weekly" as const, priority: 1.0 },
-    { url: `${BASE}/services`, lastModified: new Date("2026-07-01"), changeFrequency: "monthly" as const, priority: 0.9 },
-    { url: `${BASE}/estimate`, lastModified: new Date("2026-07-01"), changeFrequency: "monthly" as const, priority: 0.9 },
-    ...locationPages,
-  ];
+  for (const slug of LOCATION_SLUGS) {
+    entries.push({ url: `${BASE}/locations/${slug}`, lastModified: now, changeFrequency: "monthly", priority: 0.7 });
+  }
+
+  return entries;
 }

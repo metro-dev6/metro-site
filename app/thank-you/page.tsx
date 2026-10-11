@@ -153,7 +153,7 @@ export default function ThankYouPage() {
               Every 3 visits, pick a free add-on.
             </p>
             <p className="text-brand-yellow font-bold text-[15px]">
-              Engine bay. Hand wax. Headlight restoration. Your pick.
+              Engine bay. Spray wax. Headlight restoration. Your pick.
             </p>
             <p className="text-white/60 text-[14px]">
               No expiration. No code. I keep track.

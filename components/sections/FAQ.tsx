@@ -1,10 +1,10 @@
 
-interface FAQItem {
+export interface FAQItem {
   q: string;
   a: string;
 }
 
-const DEFAULT_FAQS: FAQItem[] = [
+export const DEFAULT_FAQS: FAQItem[] = [
   {
     q: "What's the difference between a detail and a regular car wash?",
     a: "A car wash is automated and surface level. It wets the car, runs generic brushes over it, and sends you out. Detailing is different. Every surface gets worked by hand, inside and out. We clean what a car wash misses and protect what a car wash leaves behind.",
@@ -51,18 +51,23 @@ const DEFAULT_FAQS: FAQItem[] = [
   },
 ];
 
+import { cn } from "@/lib/utils";
+
 interface FAQProps {
   faqs?: FAQItem[];
   heading?: string;
+  theme?: "dark" | "light";
 }
 
-export function FAQ({ faqs = DEFAULT_FAQS, heading = "Common Questions" }: FAQProps) {
+export function FAQ({ faqs = DEFAULT_FAQS, heading = "Common Questions", theme = "dark" }: FAQProps) {
+  const isLight = theme === "light";
+
   return (
-    <section id="faq" className="bg-site-bg py-20 px-6 lg:px-8 scroll-mt-[100px]">
+    <section id="faq" className={cn("py-20 px-6 lg:px-8 scroll-mt-[100px]", isLight ? "bg-site-surface" : "bg-site-bg")}>
       <div className="mx-auto max-w-3xl">
 
-        <div className="text-center mb-12">
-          <h2 className="text-4xl sm:text-5xl font-black uppercase text-brand-white tracking-tight">
+        <div className="mb-12">
+          <h2 className={cn("text-4xl sm:text-5xl font-black uppercase tracking-normal", isLight ? "text-brand-black" : "text-brand-white")}>
             {heading}
           </h2>
         </div>
@@ -71,10 +76,15 @@ export function FAQ({ faqs = DEFAULT_FAQS, heading = "Common Questions" }: FAQPr
           {faqs.map((faq, index) => (
             <details
               key={index}
-              className="group rounded-xl border border-white/[0.06] bg-white/[0.02] [&[open]]:border-brand-yellow/40 [&[open]]:bg-white/[0.03] transition-colors duration-200"
+              className={cn(
+                "group rounded-xl border transition-colors duration-200",
+                isLight
+                  ? "border-black/[0.08] bg-black/[0.015] [&[open]]:border-brand-yellow/60 [&[open]]:bg-black/[0.03]"
+                  : "border-white/[0.06] bg-white/[0.02] [&[open]]:border-brand-yellow/40 [&[open]]:bg-white/[0.03]"
+              )}
             >
               <summary className="w-full px-6 pt-5 pb-5 flex items-center justify-between gap-6 text-left cursor-pointer list-none [&::-webkit-details-marker]:hidden touch-manipulation select-none">
-                <span className="text-base font-bold text-brand-white group-open:text-brand-yellow transition-colors duration-200">
+                <span className={cn("text-base font-bold group-open:text-brand-yellow transition-colors duration-200", isLight ? "text-brand-black" : "text-brand-white")}>
                   {faq.q}
                 </span>
                 <svg
@@ -94,7 +104,7 @@ export function FAQ({ faqs = DEFAULT_FAQS, heading = "Common Questions" }: FAQPr
                   />
                 </svg>
               </summary>
-              <p className="px-6 pb-5 text-base text-brand-white/55 leading-relaxed">
+              <p className={cn("px-6 pb-5 text-base leading-relaxed", isLight ? "text-black/60" : "text-brand-white/55")}>
                 {faq.a}
               </p>
             </details>

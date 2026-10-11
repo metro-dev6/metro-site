@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer, staggerItem } from "@/lib/motion";
 
 const reasons = [
   {
@@ -8,7 +12,7 @@ const reasons = [
       </svg>
     ),
     headline: "We Come to You",
-    body: "No driving across town. No dropping it off and waiting. You book a time, we bring everything needed, and the car stays put until it's clean.",
+    body: "No driving across town. No dropping it off and waiting. You book a time, and we show up fully self-contained with our own water, power, and equipment. The car stays put until it's clean.",
   },
   {
     icon: (
@@ -46,42 +50,47 @@ const reasons = [
 
 export function WhyMetro() {
   return (
-    <section className="bg-site-bg py-20 px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+    <section className="bg-site-surface py-24 px-6 lg:px-10">
+      <div className="mx-auto max-w-[1600px]">
 
-        <div className="text-center mb-14">
-          <div className="font-accent text-xs font-medium tracking-[0.25em] uppercase text-brand-yellow mb-4 not-italic">
+        <motion.div {...fadeUp} className="mb-16">
+          <div className="font-accent text-xs font-medium tracking-[0.25em] uppercase text-brand-black mb-3 not-italic">
             Why Metro
           </div>
-          <h2 className="text-4xl sm:text-5xl font-black uppercase text-brand-white tracking-tight">
+          <h2 className="text-4xl sm:text-5xl font-black uppercase text-brand-black tracking-normal">
             A Car Wash Rinses.<br />
-            <span className="font-accent normal-case text-brand-yellow">A Detail Cleans.</span>
+            <span className="font-accent normal-case text-brand-yellow" style={{ textShadow: "0 1px 2px rgba(0,0,0,0.15)" }}>A Detail Cleans.</span>
           </h2>
-        </div>
+          <div className="mt-4 h-px bg-black/[0.08]" />
+        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.06] rounded-2xl overflow-hidden">
+        <motion.div
+          {...staggerContainer}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-black/[0.08] rounded-2xl overflow-hidden"
+        >
           {reasons.map(({ icon, headline, body }) => (
-            <div
+            <motion.div
               key={headline}
-              className="bg-zinc-950 px-8 py-10 flex flex-col gap-5"
+              variants={staggerItem}
+              className="hover-lift bg-black/[0.02] px-10 py-12 flex flex-col gap-5"
             >
               <div
                 className="text-brand-yellow w-fit"
-                style={{ filter: "drop-shadow(0 0 8px rgba(250,194,5,0.5))" }}
+                style={{ filter: "drop-shadow(0 2px 3px rgba(0,0,0,0.18))" }}
               >
                 {icon}
               </div>
               <div>
-                <h3 className="text-lg font-black uppercase tracking-wide text-brand-white mb-2">
+                <h3 className="text-lg font-black uppercase tracking-wide text-brand-black mb-2">
                   {headline}
                 </h3>
-                <p className="text-base text-brand-white/50 leading-relaxed">
+                <p className="text-base text-black/65 leading-relaxed">
                   {body}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>

@@ -1,204 +1,151 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import InteractiveBentoGallery from "@/components/ui/interactive-bento-gallery";
+import { ImageComparison } from "@/components/ui/image-comparison";
 import { MobileGalleryStack, type MobileGalleryItem } from "@/components/ui/mobile-gallery-stack";
 import { useIsDesktop } from "@/hooks/use-is-desktop";
+import { fadeUp, EASE_OUT } from "@/lib/motion";
+import { GALLERY_ITEMS, ROW_SPAN, COMPARISON_ROW_SPAN, type GalleryItem } from "@/lib/gallery-data";
 
-const SLIDES = [
-  // Slide 1 — Video hero
-  [
-    {
-      id: 1,
-      type: "image" as const,
-      title: "Exterior Detail",
-      desc: "Decontaminated & Protected",
-      url: "/gallery/Slide%201/IMG_5804.JPEG",
-      span: "col-span-1 row-span-6 md:col-span-2 md:row-span-7 lg:col-span-2 lg:row-span-4",
-    },
-    {
-      id: 2,
-      type: "image" as const,
-      title: "Maintenance Detail",
-      desc: "Back to New Every Month",
-      url: "/gallery/Slide%201/IMG_6214.JPEG",
-      span: "col-span-1 row-span-3 md:col-span-2 md:row-span-3 lg:col-span-2 lg:row-span-4",
-    },
-    {
-      id: 3,
-      type: "image" as const,
-      title: "Deep Cleaned Wheel",
-      desc: "Brake Dust Safely Removed",
-      url: "/gallery/Slide%201/IMG_6026.JPEG",
-      span: "col-span-1 row-span-3 md:col-span-1 md:row-span-2 lg:col-span-2 lg:row-span-4",
-    },
-    {
-      id: 4,
-      type: "image" as const,
-      title: "Mirror Finish",
-      desc: "2018 Silverado — 2-Step Paint Correction",
-      url: "/gallery/Slide%201/IMG_6297.JPEG",
-      span: "col-span-1 row-span-3 md:col-span-2 md:row-span-3 lg:col-span-3 lg:row-span-5",
-    },
-    {
-      id: 5,
-      type: "comparison" as const,
-      title: "Headlight Restoration",
-      desc: "",
-      url: "",
-      beforeUrl: "/gallery/Slide%201/IMG_6170.JPEG",
-      afterUrl: "/gallery/Slide%201/IMG_6195.JPEG",
-      span: "col-span-1 row-span-4 md:col-span-2 md:row-span-5 lg:col-span-3 lg:row-span-5",
-    },
-  ],
-  // Slide 2 — Inverted: 2 large sliders on top, 3 small tiles on bottom
-  [
-    {
-      id: 6,
-      type: "comparison" as const,
-      title: "Seat Shampoo",
-      desc: "Deep extracted, not wiped",
-      url: "",
-      beforeUrl: "/gallery/Slide%202/IMG_6321.JPEG",
-      afterUrl: "/gallery/Slide%202/IMG_6348.JPEG",
-      span: "col-span-2 row-span-5 sm:col-span-3 sm:row-span-5 md:col-span-2 md:row-span-5 lg:col-span-3 lg:row-span-5",
-    },
-    {
-      id: 7,
-      type: "comparison" as const,
-      title: "Headlight Restoration",
-      desc: "$80 — book it on its own",
-      url: "",
-      beforeUrl: "/gallery/Slide%202/IMG_6346.JPEG",
-      afterUrl: "/gallery/Slide%202/IMG_6367.JPEG",
-      afterObjectPosition: "center calc(50% + 25px)",
-      span: "col-span-2 row-span-4 sm:col-span-3 sm:row-span-5 md:col-span-2 md:row-span-5 lg:col-span-3 lg:row-span-5",
-    },
-    {
-      id: 8,
-      type: "image" as const,
-      title: "Interior Detail",
-      desc: "Upholstery Stain Treatment",
-      url: "/gallery/Slide%202/toyota-corolla-interior-detail-bakersfield.JPEG",
-      span: "col-span-1 row-span-3 sm:col-span-1 sm:row-span-3 md:col-span-2 md:row-span-3 lg:col-span-2 lg:row-span-4",
-    },
-    {
-      id: 9,
-      type: "image" as const,
-      title: "Exterior Detail",
-      desc: "Decontaminated, 1-Step Paint Enhancement, Protected",
-      url: "/gallery/Slide%202/IMG_6158.JPEG",
-      span: "col-span-1 row-span-3 sm:col-span-1 sm:row-span-3 md:col-span-1 md:row-span-3 lg:col-span-2 lg:row-span-4",
-    },
-    {
-      id: 10,
-      type: "image" as const,
-      title: "Full Detail",
-      desc: "Large 3-Row SUV Received The Works, Inside & Out",
-      url: "/gallery/Slide%202/IMG_5922.JPEG",
-      span: "col-span-1 row-span-3 sm:col-span-1 sm:row-span-3 md:col-span-1 md:row-span-3 lg:col-span-2 lg:row-span-4",
-    },
-  ],
-];
+const INITIAL_COUNT = 5;
 
-const ALL_ITEMS: MobileGalleryItem[] = SLIDES.flat();
+const MOBILE_ITEMS: MobileGalleryItem[] = GALLERY_ITEMS.map((item) => ({
+  id: item.id,
+  type: item.type,
+  title: item.title,
+  desc: item.desc,
+  url: item.url ?? "",
+  beforeUrl: item.beforeUrl,
+  afterUrl: item.afterUrl,
+  objectPosition: item.objectPosition,
+  beforeObjectPosition: item.beforeObjectPosition,
+  afterObjectPosition: item.afterObjectPosition,
+}));
 
 export function Gallery() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const multiSlide = SLIDES.length > 1;
   const isDesktop = useIsDesktop();
+  const [expanded, setExpanded] = useState(false);
+  const [lightbox, setLightbox] = useState<GalleryItem | null>(null);
 
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
-  }, []);
-
-  const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
-  }, []);
-
-  const goToSlide = useCallback((index: number) => {
-    setCurrentSlide(index);
-  }, []);
+  const canToggle = GALLERY_ITEMS.length > INITIAL_COUNT;
+  const visible = expanded ? GALLERY_ITEMS : GALLERY_ITEMS.slice(0, INITIAL_COUNT);
 
   return (
-    <section className="py-24 px-6 lg:px-8 bg-site-bg">
-      <div className="mx-auto max-w-7xl">
+    <section className="py-12 lg:py-16">
+      <div className="bg-[#141414] rounded-[50px] mx-4 sm:mx-10 px-6 lg:px-12 py-16 lg:py-20">
+        <div className="mx-auto max-w-[1600px]">
 
-        <div className="mb-10">
-          <h2 className="text-3xl sm:text-4xl font-black uppercase text-brand-white leading-tight">
-            The Work
+        <motion.div {...fadeUp} className="mb-12">
+          <div className="font-accent text-xs font-medium tracking-[0.25em] uppercase text-brand-yellow mb-3 not-italic">
+            Gallery
+          </div>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase text-brand-white tracking-normal leading-[0.95]">
+            The work speaks for <span className="text-brand-yellow">itself.</span>
           </h2>
-          <p className="text-white/50 text-sm mt-2 max-w-md">
-            No filters. No stock. Every shot is from a real job in Bakersfield.
+          <p className="text-white/70 text-base mt-4 max-w-lg leading-relaxed">
+            Every car here got detailed where it sits, right in Bakersfield. Drag the sliders to see the before.
           </p>
-          <div className="mt-4 h-px bg-white/[0.07]" />
-        </div>
+          <div className="mt-6 h-px bg-white/10" />
+        </motion.div>
 
         {isDesktop ? (
           <>
-            <div className="relative">
-              {/* Left arrow */}
-              {multiSlide && (
-                <button
-                  onClick={prevSlide}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-black/70 border border-white/15 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/90 transition-colors"
-                  aria-label="Previous slide"
-                >
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
-              )}
-
-              {/* Bento grid — fades between slides */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentSlide}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <InteractiveBentoGallery mediaItems={SLIDES[currentSlide]} />
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Right arrow */}
-              {multiSlide && (
-                <button
-                  onClick={nextSlide}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-black/70 border border-white/15 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/90 transition-colors"
-                  aria-label="Next slide"
-                >
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
+            <div className="grid grid-cols-4 auto-rows-[240px] grid-flow-row-dense gap-3">
+              {visible.map((item, idx) =>
+                item.type === "comparison" ? (
+                  <motion.div
+                    key={item.id}
+                    className="col-span-2 rounded-2xl overflow-hidden relative"
+                    style={{ gridRow: `span ${COMPARISON_ROW_SPAN}` }}
+                    initial={idx >= INITIAL_COUNT ? { opacity: 0, y: 12 } : false}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, ease: EASE_OUT, delay: idx >= INITIAL_COUNT ? (idx - INITIAL_COUNT) * 0.05 : 0 }}
+                  >
+                    <ImageComparison
+                      before={{ src: item.beforeUrl!, alt: `${item.title} before` }}
+                      after={{ src: item.afterUrl!, alt: `${item.title} after` }}
+                      initialPosition={75}
+                      fillContainer
+                      beforeObjectPosition={item.beforeObjectPosition}
+                      afterObjectPosition={item.afterObjectPosition}
+                    />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key={item.id}
+                    className="group relative rounded-2xl overflow-hidden cursor-zoom-in"
+                    style={{ gridRow: `span ${ROW_SPAN[item.size]}` }}
+                    onClick={() => setLightbox(item)}
+                    initial={idx >= INITIAL_COUNT ? { opacity: 0, y: 12 } : false}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, ease: EASE_OUT, delay: idx >= INITIAL_COUNT ? (idx - INITIAL_COUNT) * 0.05 : 0 }}
+                  >
+                    <img
+                      src={item.url}
+                      alt={item.title}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      style={item.objectPosition ? { objectPosition: item.objectPosition } : undefined}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                      <h3 className="text-white text-sm font-medium line-clamp-1">{item.title}</h3>
+                      {item.desc && <p className="text-white/70 text-xs mt-0.5 line-clamp-1">{item.desc}</p>}
+                    </div>
+                  </motion.div>
+                )
               )}
             </div>
 
-            {/* Slide dots */}
-            {multiSlide && (
-              <div className="flex justify-center gap-2 mt-6">
-                {SLIDES.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => goToSlide(i)}
-                    className={`h-1 rounded-full transition-all duration-300 ${
-                      i === currentSlide ? "w-6 bg-yellow-400" : "w-2 bg-white/20"
-                    }`}
-                    aria-label={`Go to slide ${i + 1}`}
-                  />
-                ))}
+            {canToggle && (
+              <div className="flex justify-center mt-10">
+                <button
+                  onClick={() => setExpanded((v) => !v)}
+                  className="bg-brand-yellow text-brand-black font-black tracking-widest text-sm px-7 h-11 rounded-full hover:shadow-[0_0_20px_5px_rgba(250,194,5,0.35)] transition-[transform,box-shadow] duration-150 active:scale-[0.97]"
+                >
+                  {expanded ? "Show less" : "Show all"}
+                </button>
               </div>
             )}
           </>
         ) : (
-          <MobileGalleryStack items={ALL_ITEMS} />
+          <MobileGalleryStack items={MOBILE_ITEMS} />
         )}
 
+        </div>
       </div>
+
+      <AnimatePresence>
+        {lightbox && lightbox.type !== "comparison" && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-6 cursor-zoom-out"
+            onClick={() => setLightbox(null)}
+          >
+            <button
+              onClick={() => setLightbox(null)}
+              aria-label="Close"
+              className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+            >
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M2 2l14 14M16 2L2 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            </button>
+            <motion.img
+              initial={{ scale: 0.96, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.2, ease: EASE_OUT }}
+              src={lightbox.url}
+              alt={lightbox.title}
+              className="max-w-full max-h-full object-contain rounded-lg"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

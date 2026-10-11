@@ -84,16 +84,16 @@ export function ImageComparison({
         </span>
       </div>
 
-      {/* Before (clipped layer) */}
+      {/* Before (clipped to the left of the slider via clip-path, avoids per-frame layout) */}
       <div
-        className="absolute inset-0 overflow-hidden"
-        style={{ width: `${position}%` }}
+        className="absolute inset-0"
+        style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
       >
         <img
           src={before.src}
           alt={before.alt}
-          className="absolute inset-0 h-full object-cover"
-          style={{ width: `${10000 / position}%`, maxWidth: "none", ...(beforeObjectPosition ? { objectPosition: beforeObjectPosition } : {}) }}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={beforeObjectPosition ? { objectPosition: beforeObjectPosition } : undefined}
         />
         <span className="absolute bottom-4 left-4 text-xs font-bold tracking-widest uppercase text-white bg-black/60 px-3 py-1 rounded-full">
           Before

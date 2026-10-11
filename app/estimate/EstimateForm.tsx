@@ -1,47 +1,50 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-import { useEstimateCart, readEstimateCart } from "@/hooks/use-estimate-cart";
 import { ArrowRight, Paperclip, ChevronDown, Plus, X } from "lucide-react";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 
 const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
 
+type VehicleClass = "sedan" | "suv5" | "suv7";
+
+const VEHICLE_CLASSES: { value: VehicleClass; label: string; hint: string }[] = [
+  { value: "sedan", label: "Sedan/Coupe", hint: "Standard passenger car" },
+  { value: "suv5", label: "5-Seat SUV/Truck", hint: "Mid-size SUV, half-ton truck" },
+  { value: "suv7", label: "7-Seat SUV/Van", hint: "3-row SUV, minivan" },
+];
+
 const PACKAGES = [
-  { name: "Signature Wash", price: 80 },
-  { name: "Exterior Detail", price: 150 },
-  { name: "Interior Detail", price: 200 },
-  { name: "Refresh Detail", price: 250 },
-  { name: "Full Detail", price: 400 },
+  { name: "Exterior Refresh", prices: { sedan: 80, suv5: 100, suv7: 120 } },
+  { name: "Signature Wash", prices: { sedan: 150, suv5: 180, suv7: 210 } },
+  { name: "Clay n Seal", prices: { sedan: 200, suv5: 230, suv7: 260 } },
+  { name: "Interior Detail", prices: { sedan: 200, suv5: 230, suv7: 260 } },
+  { name: "Full Detail", prices: { sedan: 350, suv5: 380, suv7: 410 } },
 ] as const;
 
 const ADDONS = [
-  { name: "Headlight Restoration", price: 80 },
-  { name: "Trim Restoration", price: 100 },
-  { name: "Water Spot Removal", price: 60 },
-  { name: "Pet Hair & Sand Removal", price: 80 },
-  { name: "Carpet & Seat Extraction", price: 70 },
-  { name: "Engine Bay", price: 50 },
-  { name: "Leather Conditioning", price: 40 },
+  { name: "Headlight Restoration", prices: { sedan: 100, suv5: 100, suv7: 100 } },
+  { name: "Trim Restoration", prices: { sedan: 100, suv5: 100, suv7: 100 } },
+  { name: "Water Spot Removal", prices: { sedan: 50, suv5: 50, suv7: 50 } },
+  { name: "Pet Hair & Sand Removal", prices: { sedan: 50, suv5: 50, suv7: 50 } },
+  { name: "Engine Bay", prices: { sedan: 50, suv5: 50, suv7: 50 } },
+  { name: "Leather Conditioning", prices: { sedan: 50, suv5: 50, suv7: 50 } },
 ] as const;
 
 const ALL_SERVICES = [...PACKAGES, ...ADDONS];
 
-const RELEVANT_ADDONS: Record<string, string[]> = {
-  "Signature Wash": ["Headlight Restoration", "Trim Restoration", "Water Spot Removal", "Engine Bay"],
-  "Exterior Detail": ["Headlight Restoration", "Trim Restoration", "Water Spot Removal", "Engine Bay"],
-  "Interior Detail": ["Pet Hair & Sand Removal", "Carpet & Seat Extraction", "Leather Conditioning"],
-  "Refresh Detail": ["Headlight Restoration", "Trim Restoration", "Water Spot Removal", "Pet Hair & Sand Removal", "Carpet & Seat Extraction", "Engine Bay", "Leather Conditioning"],
-  "Full Detail": ["Headlight Restoration", "Trim Restoration", "Pet Hair & Sand Removal", "Carpet & Seat Extraction", "Engine Bay", "Leather Conditioning"],
-};
+function priceFor(name: string, vehicleClass: VehicleClass): number {
+  return ALL_SERVICES.find((s) => s.name === name)?.prices[vehicleClass] ?? 0;
+}
 
-const SURCHARGES: Record<string, number> = {
-  "Signature Wash": 20,
-  "Exterior Detail": 20,
-  "Interior Detail": 40,
-  "Refresh Detail": 40,
-  "Full Detail": 40,
+const RELEVANT_ADDONS: Record<string, string[]> = {
+  "Exterior Refresh": ["Headlight Restoration", "Trim Restoration", "Water Spot Removal", "Engine Bay"],
+  "Signature Wash": ["Headlight Restoration", "Trim Restoration", "Water Spot Removal", "Engine Bay"],
+  "Clay n Seal": ["Headlight Restoration", "Trim Restoration", "Water Spot Removal", "Engine Bay"],
+  "Interior Detail": ["Pet Hair & Sand Removal", "Leather Conditioning"],
+  "Full Detail": ["Headlight Restoration", "Trim Restoration", "Pet Hair & Sand Removal", "Engine Bay", "Leather Conditioning"],
 };
 
 const MAKES = [
@@ -62,7 +65,7 @@ type Vehicle = {
   year: string;
   make: string;
   model: string;
-  largerVehicle: boolean;
+  vehicleClass: VehicleClass;
 };
 
 function newVehicle(): Vehicle {
@@ -71,13 +74,30 @@ function newVehicle(): Vehicle {
     year: "",
     make: "",
     model: "",
-    largerVehicle: false,
+    vehicleClass: "sedan",
   };
 }
 
+// Reveal motion for the sections that unlock when a vehicle size is picked.
+// Critically damped spring (no overshoot) per apple-design; children stagger so
+// packages and add-ons arrive separately. Reduced motion falls back to a cross-fade.
+const revealContainer: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
+};
+
+const revealItem: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 35 } },
+};
+
+const revealItemReduced: Variants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { duration: 0.2, ease: "easeOut" } },
+};
+
 export function EstimateForm() {
   const router = useRouter();
-  const { clear } = useEstimateCart();
   const searchParams = useSearchParams();
 
   const [selected, setSelected] = useState<Set<string>>(() => {
@@ -86,20 +106,25 @@ export function EstimateForm() {
     return new Set(param.split(",").map((s) => s.trim()).filter(Boolean));
   });
 
-  useEffect(() => {
-    // Only applies when someone lands here without the ?services= param —
-    // e.g. via the header CTA or any "Get a Free Estimate" link that isn't
-    // the estimate cart bar's own "Start Estimate" button. Without this,
-    // items added to the cart on /services silently vanish on those paths.
-    if (searchParams.get("services")) return;
-    const cartItems = readEstimateCart();
-    if (cartItems.length > 0) {
-      setSelected(new Set(cartItems.map((item) => item.name)));
+  const [vehicles, setVehicles] = useState<Vehicle[]>(() => {
+    const sizeParam = searchParams.get("size");
+    const validSizes: VehicleClass[] = ["sedan", "suv5", "suv7"];
+    const v = newVehicle();
+    if (sizeParam && validSizes.includes(sizeParam as VehicleClass)) {
+      v.vehicleClass = sizeParam as VehicleClass;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const [vehicles, setVehicles] = useState<Vehicle[]>(() => [newVehicle()]);
+    return [v];
+  });
+  const [sizeChosen, setSizeChosen] = useState<boolean>(() => {
+    const sizeParam = searchParams.get("size");
+    const validSizes: VehicleClass[] = ["sedan", "suv5", "suv7"];
+    return (!!sizeParam && validSizes.includes(sizeParam as VehicleClass)) || !!searchParams.get("services");
+  });
+  // Only animate the reveal when the user picks a size here, not when arriving pre-selected.
+  const wasPreSelected = useRef(sizeChosen).current;
+  const reduce = useReducedMotion();
+  const revealInitial = wasPreSelected ? false : "hidden";
+  const itemVariants = reduce ? revealItemReduced : revealItem;
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
@@ -117,16 +142,9 @@ export function EstimateForm() {
     ? new Set(ADDONS.filter((a) => !relevantAddons.has(a.name)).map((a) => a.name))
     : new Set();
 
-  const perVehicleBase = [...selected].reduce((sum, name) => {
-    const svc = ALL_SERVICES.find((s) => s.name === name);
-    return sum + (svc?.price ?? 0);
-  }, 0);
-
   const grandTotal = vehicles.reduce((sum, v) => {
-    const vehicleSurcharge = v.largerVehicle
-      ? [...selected].reduce((s, name) => s + (SURCHARGES[name] ?? 0), 0)
-      : 0;
-    return sum + perVehicleBase + vehicleSurcharge;
+    const vehicleTotal = [...selected].reduce((s, name) => s + priceFor(name, v.vehicleClass), 0);
+    return sum + vehicleTotal;
   }, 0);
 
   function updateVehicle(id: string, patch: Partial<Omit<Vehicle, "id">>) {
@@ -193,8 +211,8 @@ export function EstimateForm() {
     const vehiclesText = vehicles
       .map((v, i) => {
         const prefix = vehicles.length > 1 ? `Vehicle ${i + 1}: ` : "";
-        const size = v.largerVehicle ? " (larger vehicle)" : "";
-        return `${prefix}${v.year} ${v.make} ${v.model}${size}`;
+        const classLabel = VEHICLE_CLASSES.find((c) => c.value === v.vehicleClass)?.label ?? "";
+        return `${prefix}${v.year} ${v.make} ${v.model} (${classLabel})`;
       })
       .join("\n");
     formData.set("vehicles", vehiclesText);
@@ -205,15 +223,9 @@ export function EstimateForm() {
     formData.delete("vehicle_make");
     formData.delete("vehicle_model");
 
-    const basePerVehicle = effectiveSelected.reduce((sum, name) => {
-      const svc = ALL_SERVICES.find((s) => s.name === name);
-      return sum + (svc?.price ?? 0);
-    }, 0);
     const effectiveGrand = vehicles.reduce((sum, v) => {
-      const vehicleSurcharge = v.largerVehicle
-        ? effectiveSelected.reduce((s, name) => s + (SURCHARGES[name] ?? 0), 0)
-        : 0;
-      return sum + basePerVehicle + vehicleSurcharge;
+      const vehicleTotal = effectiveSelected.reduce((s, name) => s + priceFor(name, v.vehicleClass), 0);
+      return sum + vehicleTotal;
     }, 0);
     const estTotal = effectiveGrand > 0 ? `$${effectiveGrand}` : "TBD";
     formData.set("estimated_total", estTotal);
@@ -232,7 +244,6 @@ export function EstimateForm() {
       });
 
       if (res.ok) {
-        clear();
         setSelected(new Set());
         setVehicles([newVehicle()]);
         setFileNames([]);
@@ -253,53 +264,97 @@ export function EstimateForm() {
     <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-6">
 
       {/* Services */}
-      <div className="rounded-2xl bg-white/[0.04] border border-white/[0.08] p-5">
-        <p className="text-xs font-black text-brand-yellow uppercase tracking-[0.15em] mb-4">
-          Services
-        </p>
-        <div className="flex flex-col gap-5">
-          <p className="text-xs text-white/50">
-            Select a package, then add any relevant extras.
+      <div className="rounded-2xl bg-[#faf9f7] border border-black/15 shadow-[0_12px_30px_rgba(0,0,0,0.10)] p-5">
+        <div className="mb-4">
+          <div className="h-[3px] w-10 bg-brand-yellow mb-3" />
+          <p className="font-accent text-sm font-medium uppercase tracking-[0.1em] text-brand-black">
+            Services
           </p>
+        </div>
+        <div className="flex flex-col gap-5">
+          <div>
+            <p className="text-xs font-black text-black/55 uppercase tracking-[0.12em] mb-2">
+              Vehicle Size
+            </p>
+            <VehicleClassSelector
+              value={sizeChosen ? vehicles[0].vehicleClass : null}
+              onChange={(val) => {
+                updateVehicle(vehicles[0].id, { vehicleClass: val });
+                setSizeChosen(true);
+              }}
+            />
+            {!sizeChosen && (
+              <p className="text-xs text-black/45 mt-2">Pick your vehicle size to see packages and pricing.</p>
+            )}
+          </div>
 
-          <ServiceGroup
-            label="Packages"
-            services={PACKAGES}
-            selected={selected}
-            disabled={disabledPackages}
-            onToggle={toggleService}
-          />
+          {sizeChosen && (
+            <motion.div
+              variants={revealContainer}
+              initial={revealInitial}
+              animate="show"
+              className="flex flex-col gap-5"
+            >
+              <motion.p variants={itemVariants} className="text-xs text-black/55">
+                Select a package, then add any relevant extras.
+              </motion.p>
 
-          <ServiceGroup
-            label="Add-ons"
-            services={ADDONS}
-            selected={selected}
-            disabled={disabledAddons}
-            onToggle={toggleService}
-          />
+              <motion.div variants={itemVariants}>
+                <ServiceGroup
+                  label="Packages"
+                  services={PACKAGES}
+                  selected={selected}
+                  disabled={disabledPackages}
+                  onToggle={toggleService}
+                  vehicleClass={vehicles[0].vehicleClass}
+                />
+              </motion.div>
 
-          {selected.size > 0 && (
-            <div className="flex justify-between items-center pt-1 border-t border-white/[0.06]">
-              <span className="text-xs text-white/50">
-                {selected.size} selected
-                {vehicles.length > 1 && ` · ${vehicles.length} vehicles`}
-              </span>
-              <div className="text-right">
-                <span className="text-sm font-black text-white font-numeric">
-                  Est. ${grandTotal.toLocaleString()}
-                </span>
-                <p className="text-xs text-white/40 mt-0.5">Final price confirmed at booking.</p>
-              </div>
-            </div>
+              <motion.div variants={itemVariants}>
+                <ServiceGroup
+                  label="Add-ons"
+                  services={ADDONS}
+                  selected={selected}
+                  disabled={disabledAddons}
+                  onToggle={toggleService}
+                  vehicleClass={vehicles[0].vehicleClass}
+                />
+              </motion.div>
+
+              {selected.size > 0 && (
+                <div className="flex justify-between items-center pt-1 border-t border-black/10">
+                  <span className="text-xs text-black/55">
+                    {selected.size} selected
+                    {vehicles.length > 1 && ` · ${vehicles.length} vehicles`}
+                  </span>
+                  <div className="text-right">
+                    <span className="text-sm font-black text-brand-black font-numeric">
+                      Est. ${grandTotal.toLocaleString()}
+                    </span>
+                    <p className="text-xs text-black/45 mt-0.5">Final price confirmed at booking.</p>
+                  </div>
+                </div>
+              )}
+            </motion.div>
           )}
         </div>
       </div>
 
+      {sizeChosen && (
+        <motion.div
+          variants={itemVariants}
+          initial={revealInitial}
+          animate="show"
+          className="flex flex-col gap-6"
+        >
       {/* Contact + vehicles */}
-      <div className="rounded-2xl bg-white/[0.04] border border-white/[0.08] p-5 flex flex-col gap-5">
-        <p className="text-xs font-black text-brand-yellow uppercase tracking-[0.15em]">
-          Your Info
-        </p>
+      <div className="rounded-2xl bg-[#faf9f7] border border-black/15 shadow-[0_12px_30px_rgba(0,0,0,0.10)] p-5 flex flex-col gap-5">
+        <div>
+          <div className="h-[3px] w-10 bg-brand-yellow mb-3" />
+          <p className="font-accent text-sm font-medium uppercase tracking-[0.1em] text-brand-black">
+            Your Info
+          </p>
+        </div>
 
         <Field label="Name" htmlFor="name" required>
           <input
@@ -354,7 +409,7 @@ export function EstimateForm() {
 
         {/* Vehicles */}
         <div className="flex flex-col gap-3">
-          <p className="text-sm font-bold text-white/90">
+          <p className="text-sm font-bold text-brand-black">
             Vehicle <span className="text-brand-yellow">*</span>
           </p>
 
@@ -366,7 +421,7 @@ export function EstimateForm() {
                 index={i}
                 showLabel={vehicles.length > 1}
                 showRemove={vehicles.length > 1}
-                selectedServices={selected}
+                showClassSelector={i > 0}
                 onUpdate={(patch) => updateVehicle(vehicle.id, patch)}
                 onRemove={() => removeVehicle(vehicle.id)}
               />
@@ -377,7 +432,7 @@ export function EstimateForm() {
             <button
               type="button"
               onClick={addVehicle}
-              className="flex items-center gap-2 px-4 py-3 rounded-xl border border-dashed border-white/[0.12] text-sm text-white/50 hover:border-brand-yellow/40 hover:text-white/70 transition-colors"
+              className="flex items-center gap-2 px-4 py-3 rounded-xl border border-dashed border-black/20 text-sm text-black/55 hover:border-brand-yellow/40 hover:text-brand-black/70 transition-colors"
             >
               <Plus className="h-4 w-4" />
               Add another vehicle
@@ -391,7 +446,7 @@ export function EstimateForm() {
             name="preferred_date"
             type="date"
             min={new Date().toISOString().split("T")[0]}
-            className={`${inputClass} [color-scheme:dark]`}
+            className={`${inputClass} [color-scheme:light]`}
           />
         </Field>
 
@@ -406,14 +461,14 @@ export function EstimateForm() {
         </Field>
 
         <div className="flex flex-col gap-1.5">
-          <label className="text-sm font-bold text-white/90">
+          <label className="text-sm font-bold text-brand-black">
             Condition photos{" "}
-            <span className="text-white/50 font-normal">(optional)</span>
+            <span className="text-black/55 font-normal">(optional)</span>
           </label>
           <button
             type="button"
             onClick={() => fileRef.current?.click()}
-            className="flex items-center gap-2 px-4 py-3 rounded-xl border border-white/[0.12] bg-white/[0.03] text-sm text-white/60 hover:border-white/20 hover:text-white/80 transition-colors text-left"
+            className="flex items-center gap-2 px-4 py-3 rounded-xl border border-black/20 bg-black/[0.02] text-sm text-black/60 hover:border-black/25 hover:text-brand-black/80 transition-colors text-left"
           >
             <Paperclip className="h-4 w-4 shrink-0" />
             {fileNames.length > 0 ? fileNames.join(", ") : "Attach photos"}
@@ -426,7 +481,7 @@ export function EstimateForm() {
             className="hidden"
             onChange={handleFileChange}
           />
-          <p className="text-xs text-white/40">
+          <p className="text-xs text-black/45">
             Helps us understand condition before arrival.
           </p>
         </div>
@@ -445,9 +500,11 @@ export function EstimateForm() {
         {formState !== "submitting" && <ArrowRight className="h-4 w-4" />}
       </button>
 
-      <p className="text-center text-xs text-white/40">
+      <p className="text-center text-xs text-black/45">
         Or call / text directly: (661) 368-5165.
       </p>
+        </motion.div>
+      )}
     </form>
   );
 }
@@ -457,7 +514,7 @@ function VehicleEntry({
   index,
   showLabel,
   showRemove,
-  selectedServices,
+  showClassSelector,
   onUpdate,
   onRemove,
 }: {
@@ -465,26 +522,22 @@ function VehicleEntry({
   index: number;
   showLabel: boolean;
   showRemove: boolean;
-  selectedServices: Set<string>;
+  showClassSelector: boolean;
   onUpdate: (patch: Partial<Omit<Vehicle, "id">>) => void;
   onRemove: () => void;
 }) {
-  const surcharge = vehicle.largerVehicle
-    ? [...selectedServices].reduce((sum, name) => sum + (SURCHARGES[name] ?? 0), 0)
-    : 0;
-
   return (
-    <div className={showLabel ? "rounded-xl border border-white/[0.08] p-4 flex flex-col gap-3" : "flex flex-col gap-3"}>
+    <div className={showLabel ? "rounded-xl border border-black/10 p-4 flex flex-col gap-3" : "flex flex-col gap-3"}>
       {showLabel && (
         <div className="flex items-center justify-between">
-          <p className="text-xs font-bold text-white/50 uppercase tracking-[0.12em]">
+          <p className="text-xs font-bold text-black/55 uppercase tracking-[0.12em]">
             Vehicle {index + 1}
           </p>
           {showRemove && (
             <button
               type="button"
               onClick={onRemove}
-              className="flex items-center gap-1 text-xs text-white/30 hover:text-red-400 transition-colors"
+              className="flex items-center gap-1 text-xs text-black/40 hover:text-red-400 transition-colors"
             >
               <X className="h-3 w-3" />
               Remove
@@ -528,57 +581,56 @@ function VehicleEntry({
         className={inputClass}
       />
 
-      <LargerVehicleToggle
-        checked={vehicle.largerVehicle}
-        onChange={(val) => onUpdate({ largerVehicle: val })}
-        surcharge={surcharge}
-      />
+      {showClassSelector && (
+        <VehicleClassSelector
+          value={vehicle.vehicleClass}
+          onChange={(val) => onUpdate({ vehicleClass: val })}
+        />
+      )}
     </div>
   );
 }
 
-function LargerVehicleToggle({
-  checked,
+function VehicleClassSelector({
+  value,
   onChange,
-  surcharge,
 }: {
-  checked: boolean;
-  onChange: (val: boolean) => void;
-  surcharge: number;
+  value: VehicleClass | null;
+  onChange: (val: VehicleClass) => void;
 }) {
   return (
-    <label
-      className="group/lv flex items-center gap-3 w-full px-3 py-3 rounded-xl border text-left transition-colors cursor-pointer touch-manipulation has-[:checked]:border-brand-yellow/50 has-[:checked]:bg-brand-yellow/5 border-white/[0.06] hover:border-white/[0.12]"
-    >
-      <input
-        type="checkbox"
-        className="sr-only"
-        checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
-      />
-      <div className="w-4 h-4 rounded border border-white/20 flex items-center justify-center shrink-0 transition-colors group-has-[:checked]/lv:border-brand-yellow group-has-[:checked]/lv:bg-brand-yellow">
-        <svg className="w-2.5 h-2.5 text-black hidden group-has-[:checked]/lv:block" viewBox="0 0 10 10" fill="none">
-          <path
-            d="M1.5 5l2.5 2.5 4.5-4.5"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </div>
-      <div className="flex-1">
-        <span className="text-sm text-white font-medium">Larger vehicle</span>
-        <span className="text-xs text-white/50 ml-2">SUV, truck, van, full-size</span>
-      </div>
-      {checked && surcharge > 0 ? (
-        <span className="text-sm font-black text-brand-yellow font-numeric shrink-0">
-          +${surcharge}
-        </span>
-      ) : (
-        <span className="text-xs text-white/40 shrink-0">+$20–$40</span>
-      )}
-    </label>
+    <div className="grid grid-cols-3 gap-2" role="radiogroup" aria-label="Vehicle size">
+      {VEHICLE_CLASSES.map((cls) => {
+        const isChecked = value === cls.value;
+        return (
+          <label
+            key={cls.value}
+            className={`flex flex-col gap-1 rounded-xl border p-3 text-center cursor-pointer touch-manipulation transition duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] motion-safe:active:scale-[0.97] ${
+              isChecked
+                ? "border-brand-yellow bg-brand-yellow/5"
+                : "border-black/10 hover:border-black/25"
+            }`}
+          >
+            <input
+              type="radio"
+              name="vehicle_class"
+              className="sr-only"
+              checked={isChecked}
+              onChange={() => onChange(cls.value)}
+            />
+            <span className="text-xs sm:text-sm font-bold text-brand-black leading-tight">
+              {cls.label.split("/").map((part, i) => (
+                <span key={i}>
+                  {i > 0 && <>/<wbr /></>}
+                  {part}
+                </span>
+              ))}
+            </span>
+            <span className="text-xs text-black/55 leading-snug">{cls.hint}</span>
+          </label>
+        );
+      })}
+    </div>
   );
 }
 
@@ -586,7 +638,7 @@ function SelectWrapper({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative">
       {children}
-      <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/50" />
+      <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-black/55" />
     </div>
   );
 }
@@ -597,16 +649,18 @@ function ServiceGroup({
   selected,
   disabled,
   onToggle,
+  vehicleClass,
 }: {
   label: string;
-  services: readonly { name: string; price: number }[];
+  services: readonly { name: string; prices: { sedan: number; suv5: number; suv7: number } }[];
   selected: Set<string>;
   disabled: Set<string>;
   onToggle: (name: string) => void;
+  vehicleClass: VehicleClass;
 }) {
   return (
     <div className="flex flex-col gap-1">
-      <p className="text-xs font-black text-white/50 uppercase tracking-[0.12em] mb-2">
+      <p className="text-xs font-black text-black/55 uppercase tracking-[0.12em] mb-2">
         {label}
       </p>
       {services.map((svc) => {
@@ -617,10 +671,10 @@ function ServiceGroup({
           <label
             key={svc.name}
             htmlFor={uid}
-            className={`group/svc flex items-center justify-between w-full px-3 py-2.5 rounded-xl border text-left transition-all touch-manipulation ${
+            className={`group/svc flex items-center justify-between w-full px-3 py-3 rounded-xl border text-left transition-colors touch-manipulation ${
               isDisabled
-                ? "border-white/[0.04] opacity-30 cursor-not-allowed pointer-events-none"
-                : "cursor-pointer has-[:checked]:border-brand-yellow/50 has-[:checked]:bg-brand-yellow/5 border-white/[0.06] hover:border-white/[0.12]"
+                ? "border-black/[0.06] opacity-30 cursor-not-allowed pointer-events-none"
+                : "cursor-pointer has-[:checked]:border-brand-yellow/50 has-[:checked]:bg-brand-yellow/5 border-black/10 hover:border-black/20"
             }`}
           >
             <input
@@ -634,7 +688,7 @@ function ServiceGroup({
               onChange={() => !isDisabled && onToggle(svc.name)}
             />
             <div className="flex items-center gap-3">
-              <div className="w-4 h-4 rounded border border-white/20 flex items-center justify-center shrink-0 transition-colors group-has-[:checked]/svc:border-brand-yellow group-has-[:checked]/svc:bg-brand-yellow">
+              <div className="w-4 h-4 rounded border border-black/25 flex items-center justify-center shrink-0 transition-colors group-has-[:checked]/svc:border-brand-yellow group-has-[:checked]/svc:bg-brand-yellow">
                 <svg className="w-2.5 h-2.5 text-black hidden group-has-[:checked]/svc:block" viewBox="0 0 10 10" fill="none">
                   <path
                     d="M1.5 5l2.5 2.5 4.5-4.5"
@@ -645,10 +699,10 @@ function ServiceGroup({
                   />
                 </svg>
               </div>
-              <span className="text-sm text-white">{svc.name}</span>
+              <span className="text-sm text-brand-black">{svc.name}</span>
             </div>
             <span className="text-sm font-black text-brand-yellow font-numeric shrink-0">
-              ${svc.price}
+              ${svc.prices[vehicleClass]}
             </span>
           </label>
         );
@@ -670,7 +724,7 @@ function Field({
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={htmlFor} className="text-sm font-bold text-white/90">
+      <label htmlFor={htmlFor} className="text-sm font-bold text-brand-black">
         {label}
         {required && <span className="text-brand-yellow ml-1">*</span>}
       </label>
@@ -680,7 +734,7 @@ function Field({
 }
 
 const inputClass =
-  "w-full bg-white/[0.06] border border-white/[0.12] rounded-xl px-4 py-3 text-base text-white placeholder:text-white/40 focus:outline-none focus:border-brand-yellow/60 focus:ring-1 focus:ring-brand-yellow/30 transition-colors";
+  "w-full bg-white border border-black/15 rounded-xl px-4 py-3 text-base text-brand-black placeholder:text-black/40 focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow/40 transition-colors";
 
 const selectClass =
-  "w-full bg-white/[0.06] border border-white/[0.12] rounded-xl px-4 py-3 pr-10 text-base text-white focus:outline-none focus:border-brand-yellow/60 focus:ring-1 focus:ring-brand-yellow/30 transition-colors appearance-none";
+  "w-full bg-white border border-black/15 rounded-xl px-4 py-3 pr-10 text-base text-brand-black focus:outline-none focus:border-brand-yellow focus:ring-1 focus:ring-brand-yellow/40 transition-colors appearance-none";

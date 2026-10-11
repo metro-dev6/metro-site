@@ -4,7 +4,6 @@ import Image from "next/image";
 import { PhoneLink } from "@/components/PhoneLink";
 import Link from "next/link";
 import { AddonCard } from "@/components/sections/AddonCard";
-import { EstimateCartBar } from "@/components/EstimateCartBar";
 import { FAQ } from "@/components/sections/FAQ";
 import { QuickContactForm } from "@/components/sections/QuickContactForm";
 
@@ -13,35 +12,40 @@ const SERVICES: Record<string, {
   metaTitle: string;
   metaDescription: string;
 }> = {
+  "exterior-refresh": {
+    name: "Exterior Refresh",
+    metaTitle: "Mobile Exterior Refresh in Bakersfield, CA | Metro Auto Detailing",
+    metaDescription: "Exterior wash finished with a spray wax, upgradeable to a 3-month ceramic sealant. Mobile service — we come to you in Bakersfield, CA. Starting at $80.",
+  },
   "signature-wash": {
     name: "Signature Wash",
     metaTitle: "Mobile Signature Wash in Bakersfield, CA | Metro Auto Detailing",
-    metaDescription: "Hand wash, light wax, and interior wipe-down. Mobile service — we come to you in Bakersfield, CA. Starting at $80.",
+    metaDescription: "Full wash, 3-month ceramic sealant, and interior blowout. Mobile service — we come to you in Bakersfield, CA. Starting at $150.",
+  },
+  "clay-n-seal": {
+    name: "Clay n Seal",
+    metaTitle: "Mobile Clay n Seal Detailing in Bakersfield, CA | Metro Auto Detailing",
+    metaDescription: "Full exterior decontamination, clay bar, and 6-month ceramic sealant. Mobile service in Bakersfield, CA. Starting at $200.",
   },
   "exterior-detail": {
-    name: "Exterior Detail",
-    metaTitle: "Mobile Exterior Detailing in Bakersfield, CA | Metro Auto Detailing",
-    metaDescription: "Full exterior decontamination, clay bar, and paint protection. Mobile service in Bakersfield, CA. Starting at $150.",
+    name: "Clay n Seal",
+    metaTitle: "Mobile Clay n Seal Detailing in Bakersfield, CA | Metro Auto Detailing",
+    metaDescription: "Full exterior decontamination, clay bar, and 6-month ceramic sealant. Mobile service in Bakersfield, CA. Starting at $200.",
   },
   "interior-detail": {
     name: "Interior Detail",
     metaTitle: "Mobile Interior Detailing in Bakersfield, CA | Metro Auto Detailing",
     metaDescription: "Deep interior cleaning — vacuumed, wiped, dressed, and protected. Mobile service in Bakersfield, CA. Starting at $200.",
   },
-  "refresh-detail": {
-    name: "Refresh Detail",
-    metaTitle: "Mobile Refresh Detail in Bakersfield, CA | Metro Auto Detailing",
-    metaDescription: "Interior and exterior refresh for vehicles that need more than a wash. Mobile service in Bakersfield, CA. Starting at $250.",
-  },
   "full-detail": {
     name: "Full Detail",
     metaTitle: "Mobile Full Detail in Bakersfield, CA | Metro Auto Detailing",
-    metaDescription: "Complete interior and exterior detail with full decontamination, clay bar, and paint protection. Mobile service in Bakersfield, CA. Starting at $400.",
+    metaDescription: "Complete interior and exterior detail with a 3-month ceramic sealant. Mobile service in Bakersfield, CA. Starting at $350.",
   },
   "headlight-restoration": {
     name: "Headlight Restoration",
     metaTitle: "Mobile Headlight Restoration in Bakersfield, CA | Metro Auto Detailing",
-    metaDescription: "Cloudy headlights sanded, polished, and ceramic coated. Mobile service in Bakersfield, CA. $80.",
+    metaDescription: "Cloudy headlights sanded, polished, and ceramic coated. Mobile service in Bakersfield, CA. $100.",
   },
 };
 
@@ -60,7 +64,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: service.metaDescription,
       url: `https://metroautodetailing.pro/services/${slug}`,
       siteName: "Metro Auto Detailing",
-      images: [{ url: "https://metroautodetailing.pro/hero-car-enhanced.jpg", width: 1200, height: 630 }],
+      images: [{ url: "https://metroautodetailing.pro/og/metro-auto-detailing-bakersfield.jpg", width: 1200, height: 630 }],
       type: "website",
     },
   };
@@ -70,16 +74,15 @@ export function generateStaticParams() {
   return Object.keys(SERVICES).map((slug) => ({ slug }));
 }
 
-// ─── Exterior Detail content ─────────────────────────────────────────────────
+// ─── Clay n Seal content ──────────────────────────────────────────────────────
 
 const INCLUDES = [
   { step: "Hand wash & dry" },
-  { step: "Iron remover", detail: "Dissolves bonded metallic contamination." },
+  { step: "Iron decontamination", detail: "Dissolves bonded metallic contamination." },
   { step: "Tar and tree sap removal" },
-  { step: "Clay bar", detail: "Removes remaining contamination, leaves paint smooth to the touch." },
-  { step: "Koch Chemie S003", detail: "Ceramic base layer." },
-  { step: "Stinger 918", detail: "SiO2 ceramic sealant applied over S003. 6+ months protection." },
-  { step: "Wheels, rims, and fender wells cleaned" },
+  { step: "Clay bar treatment", detail: "Removes remaining contamination, leaves paint smooth to the touch." },
+  { step: "6-month ceramic sealant", detail: "Bonds to decontaminated paint, so it lasts longer than the wash-tier sealants." },
+  { step: "Wheels, tires, and rims deep cleaned" },
   { step: "Tire dressing" },
   { step: "Door jambs cleaned" },
   { step: "Windows cleaned" },
@@ -87,32 +90,32 @@ const INCLUDES = [
 
 const PRODUCTS = [
   {
-    name: "Koch Chemie S003",
-    desc: "The ceramic base layer. Applied after washing to bond to the paint and prep the surface before the sealant goes on top. Lifts remaining contamination without contact, reducing wash-induced scratching.",
+    name: "Decontamination Pass",
+    desc: "Iron remover dissolves bonded metallic contamination, then a clay bar pass lifts what's left. Preps the surface before the sealant goes on top — the step soap and water can't do.",
   },
   {
-    name: "Stinger 918",
-    desc: "An SiO2 ceramic sealant applied over the S003 base. Water sheets off instead of sitting, and paint stays cleaner longer between visits.",
-    badge: "6+ Months Protection",
+    name: "6-Month Ceramic Sealant",
+    desc: "Applied to dry, decontaminated paint. Water sheets off instead of sitting, and paint stays cleaner longer between visits. The only package with this level of prep underneath it.",
+    badge: "6-Month Protection",
   },
 ];
 
 const EXTERIOR_FAQS = [
   {
-    q: "What is an iron remover?",
-    a: "Brake dust and road grime embed ferrous particles in your paint. They cause rust spots over time. Iron remover dissolves them chemically before they do damage.",
+    q: "What is iron decontamination?",
+    a: "Brake dust and road grime embed ferrous particles in your paint. They cause rust spots over time. Iron decontamination dissolves them chemically before they do damage.",
   },
   {
-    q: "What is clay bar?",
+    q: "What is clay bar treatment?",
     a: "A clay bar grabs contamination that's bonded to the clear coat. After clay, paint feels slick instead of rough.",
   },
   {
-    q: "How long does the ceramic protection last?",
-    a: "6+ months on a daily driver in Bakersfield conditions.",
+    q: "How long does the ceramic sealant last?",
+    a: "6 months on a daily driver in Bakersfield conditions. The decontamination lets it bond longer than the wash-tier sealants.",
   },
   {
     q: "Does this include interior?",
-    a: "No. Interior is a separate service.",
+    a: "No. Interior is a separate service — see Interior Detail.",
   },
 ];
 
@@ -128,7 +131,7 @@ const EXTERIOR_FAQ_SCHEMA = {
 
 // ─── Page component ───────────────────────────────────────────────────────────
 
-function ExteriorDetailPage() {
+function ClayNSealPage() {
   return (
     <main className="bg-site-bg text-white">
       <script
@@ -147,15 +150,15 @@ function ExteriorDetailPage() {
               Bakersfield, CA &middot; Fully Mobile
             </p>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-tight mb-5">
-              Exterior Detail
+              Clay n Seal
             </h1>
             <p className="text-lg text-white/80 max-w-[46ch] leading-relaxed mb-8">
               Full decontamination and paint protection in Bakersfield. Hand wash, iron decontamination,
-              clay bar, and ceramic sealant. Mobile.
+              clay bar, and a 6-month ceramic sealant. Mobile. The only package with decon.
             </p>
             <div className="flex items-baseline gap-3 mb-8">
-              <span className="text-5xl font-black text-brand-yellow font-numeric leading-none">$150</span>
-              <span className="text-sm text-white/60">+$20 larger vehicles</span>
+              <span className="text-5xl font-black text-brand-yellow font-numeric leading-none">$200</span>
+              <span className="text-sm text-white/60">$230 5-Seat SUV/Truck &middot; $260 7-Seat SUV/Van</span>
             </div>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -172,7 +175,7 @@ function ExteriorDetailPage() {
 
           {/* Quick contact form */}
           <div>
-            <QuickContactForm service="Exterior Detail" />
+            <QuickContactForm service="Clay n Seal" />
           </div>
 
         </div>
@@ -183,7 +186,7 @@ function ExteriorDetailPage() {
         <div className="mx-auto max-w-7xl grid lg:grid-cols-[5fr_7fr] gap-12 lg:gap-16 items-center">
           <div className="relative h-64 lg:h-72 rounded-xl overflow-hidden bg-white/[0.03]">
             <Image
-              src="/exterior-bg.JPEG"
+              src="/hero/exterior-paint-detail-bakersfield.webp"
               alt="Exterior paint detail close-up"
               fill
               className="object-cover"
@@ -231,7 +234,7 @@ function ExteriorDetailPage() {
           <div className="hidden lg:block">
             <div className="sticky top-24 relative h-80 rounded-xl overflow-hidden bg-white/[0.03]">
               <Image
-                src="/wash-bg.JPEG"
+                src="/services/detail-process-bakersfield.webp"
                 alt="Exterior detail process"
                 fill
                 className="object-cover"
@@ -256,7 +259,7 @@ function ExteriorDetailPage() {
               >
                 <div className="relative h-56 rounded-xl overflow-hidden bg-white/[0.03]">
                   <Image
-                    src="/wash-bg-1.JPEG"
+                    src="/services/products-protection-bakersfield.webp"
                     alt={product.name}
                     fill
                     className="object-cover"
@@ -298,10 +301,10 @@ function ExteriorDetailPage() {
                 Lighter
               </span>
               <h3 className="text-xl font-black uppercase text-white">Signature Wash</h3>
-              <p className="font-black text-brand-yellow font-numeric">$80 <span className="text-sm font-medium text-white/40">+$20 larger</span></p>
+              <p className="font-black text-brand-yellow font-numeric">$150 <span className="text-sm font-medium text-white/40">$180 / $210 larger</span></p>
               <p className="text-sm text-white/55 leading-relaxed flex-1">
-                Hand wash, light wax coat, and a surface-level interior wipe down. The right call for
-                routine maintenance. No decontamination, no clay.
+                Full wash and a 3-month ceramic sealant, full interior blowout inside. The right call for
+                a car that&apos;s already maintained. No decontamination, no clay.
               </p>
               <span className="text-xs font-bold uppercase tracking-wide text-brand-yellow group-hover:underline mt-auto">
                 See Signature Wash &rarr;
@@ -312,7 +315,7 @@ function ExteriorDetailPage() {
             <div className="flex lg:items-center justify-center py-2 lg:px-2">
               <div className="bg-brand-yellow text-black rounded-lg px-5 py-3 text-center">
                 <p className="text-xs font-black uppercase tracking-wide leading-tight">You Are Here</p>
-                <p className="text-xs font-black uppercase tracking-wide leading-tight">Exterior Detail</p>
+                <p className="text-xs font-black uppercase tracking-wide leading-tight">Clay n Seal</p>
               </div>
             </div>
 
@@ -325,10 +328,10 @@ function ExteriorDetailPage() {
                 Heavier
               </span>
               <h3 className="text-xl font-black uppercase text-white">Full Detail</h3>
-              <p className="font-black text-brand-yellow font-numeric">$400 <span className="text-sm font-medium text-white/40">+$40 larger</span></p>
+              <p className="font-black text-brand-yellow font-numeric">$350 <span className="text-sm font-medium text-white/40">$380 / $410 larger</span></p>
               <p className="text-sm text-white/55 leading-relaxed flex-1">
-                The same exterior decontamination and ceramic protection, plus a full interior reset.
-                Vacuum, shampoo, and UV dressing. Both sides of the car.
+                A 3-month ceramic sealant, plus a full interior reset, vacuum, shampoo, and UV
+                protectant. Doesn&apos;t include decontamination — add Clay n Seal on top if you want both.
               </p>
               <span className="text-xs font-bold uppercase tracking-wide text-brand-yellow group-hover:underline mt-auto">
                 See Full Detail &rarr;
@@ -343,7 +346,7 @@ function ExteriorDetailPage() {
         <div className="mx-auto max-w-7xl grid lg:grid-cols-[5fr_7fr] gap-12 lg:gap-16 items-center">
           <div className="relative h-64 lg:h-72 rounded-xl overflow-hidden bg-white/[0.03]">
             <Image
-              src="/6cfdf17d879b1c336369a41a14884917.jpg"
+              src="/services/mobile-detailing-driveway-bakersfield.webp"
               alt="Mobile detailing at a client driveway in Bakersfield"
               fill
               className="object-cover"
@@ -372,14 +375,14 @@ function ExteriorDetailPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             <AddonCard
               name="Headlight Restoration"
-              price="+$80"
-              priceValue={80}
+              price="+$100"
+              priceValue={100}
               description="Lenses sanded progressively, polished to remove surface scratches, prepped with IPA, and coated with a ceramic clear coat. Restores clarity and protects against UV."
             />
             <AddonCard
               name="Water Spot Removal"
-              price="+$60"
-              priceValue={60}
+              price="+$50"
+              priceValue={50}
               description="Minerals from hard water etch into paint and glass over time. Left long enough, they cause permanent damage. Acid wash breaks down the mineral bond and removes them from both surfaces."
             />
             <AddonCard
@@ -405,11 +408,11 @@ function ExteriorDetailPage() {
       <section className="py-20 lg:py-24 px-6 lg:px-8 bg-white/[0.02] border-t border-white/[0.06]">
         <div className="mx-auto max-w-xl text-center">
           <h2 className="text-4xl lg:text-5xl font-black uppercase tracking-tight text-white leading-none mb-3">
-            Book Your Exterior Detail
+            Book Your Clay n Seal
           </h2>
           <p className="font-black text-3xl text-brand-yellow font-numeric mb-8">
-            $150{" "}
-            <span className="text-base font-medium text-white/55">+$20 larger vehicles</span>
+            $200{" "}
+            <span className="text-base font-medium text-white/55">$230 / $260 larger vehicles</span>
           </p>
           <Link
             href="/estimate"
@@ -420,7 +423,6 @@ function ExteriorDetailPage() {
         </div>
       </section>
 
-      <EstimateCartBar />
     </main>
   );
 }
@@ -432,7 +434,12 @@ export default async function ServicePage({ params }: Props) {
   const service = SERVICES[slug];
   if (!service) notFound();
 
-  if (slug === "exterior-detail") return <ExteriorDetailPage />;
+  // Standalone service detail pages are not ready. Every slug redirects to /services.
+  // Flip SERVICE_PAGES_LIVE to true to re-enable Clay n Seal (clay-n-seal / exterior-detail).
+  const SERVICE_PAGES_LIVE: boolean = false;
+  if (SERVICE_PAGES_LIVE && (slug === "clay-n-seal" || slug === "exterior-detail")) {
+    return <ClayNSealPage />;
+  }
 
   redirect("/services");
 }

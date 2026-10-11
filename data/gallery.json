@@ -1,0 +1,18 @@
+{
+  "items": [
+    { "id": 1, "type": "image", "size": "lg", "title": "Mazda CX-5", "desc": "Foam bath and hand wash, curbside", "url": "/gallery/mazda-cx5-mobile-wash-bakersfield.webp" },
+    { "id": 2, "type": "image", "size": "lg", "title": "Jeep Grand Cherokee", "desc": "Foam bath before the rinse", "url": "/gallery/jeep-grand-cherokee-detail-bakersfield.webp" },
+    { "id": 3, "type": "comparison", "size": "lg", "title": "Headlight Restoration", "desc": "Yellowed to crystal clear", "beforeUrl": "/gallery/headlight-restoration-1-before-bakersfield.webp", "afterUrl": "/gallery/headlight-restoration-1-after-bakersfield.webp" },
+    { "id": 4, "type": "image", "size": "md", "title": "Honda Accord", "desc": "Wash and sealant at the house", "url": "/gallery/honda-accord-detail-bakersfield.webp" },
+    { "id": 5, "type": "image", "size": "md", "title": "Mazda 3", "desc": "Paint you can see yourself in", "url": "/gallery/mazda3-detail-bakersfield.webp" },
+    { "id": 6, "type": "image", "size": "lg", "title": "Exterior Detail", "desc": "Decontaminated and protected", "url": "/gallery/exterior-detail-decon-bakersfield.webp" },
+    { "id": 7, "type": "image", "size": "lg", "title": "Hyundai Elantra", "desc": "Mid-wash foam bath", "url": "/gallery/hyundai-elantra-mobile-wash-bakersfield.webp" },
+    { "id": 8, "type": "comparison", "size": "lg", "title": "Seat Shampoo", "desc": "Deep extracted, not wiped", "beforeUrl": "/gallery/seat-shampoo-before-bakersfield.webp", "afterUrl": "/gallery/seat-shampoo-after-bakersfield.webp" },
+    { "id": 9, "type": "image", "size": "md", "title": "Mercedes C-Class", "desc": "Exterior detail in the driveway", "url": "/gallery/mercedes-c-class-detail-bakersfield.webp" },
+    { "id": 10, "type": "image", "size": "md", "title": "Nissan Versa", "desc": "Washed and sealed, curbside", "url": "/gallery/nissan-versa-detail-bakersfield.webp" },
+    { "id": 11, "type": "image", "size": "md", "title": "Deep Cleaned Wheel", "desc": "Brake dust safely removed", "url": "/gallery/wheel-brake-dust-removal-bakersfield.webp" },
+    { "id": 12, "type": "image", "size": "md", "title": "RAM 1500", "desc": "Big truck, full wash and sealant", "url": "/gallery/ram-1500-detail-bakersfield.webp" },
+    { "id": 13, "type": "image", "size": "md", "title": "Mazda Miata", "desc": "Green over tan, cleaned up", "url": "/gallery/mazda-miata-detail-bakersfield.webp" },
+    { "id": 14, "type": "image", "size": "md", "title": "Chevy Silverado", "desc": "Paint cleaned up and sealed", "url": "/gallery/chevy-silverado-detail-bakersfield.webp" }
+  ]
+}

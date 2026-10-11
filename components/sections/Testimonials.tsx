@@ -1,8 +1,20 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { fadeUp } from "@/lib/motion";
+import {
+  GOOGLE_PROFILE_URL,
+  GOOGLE_REVIEW_URL,
+  GOOGLE_RATING_VALUE,
+  GOOGLE_REVIEW_COUNT,
+  GoogleIcon,
+  Stars,
+} from "@/components/ui/google-rating";
 
-const GOOGLE_PROFILE_URL = "https://share.google/ggiBdFRwhkILjiw87"; // TODO: replace with real URL
+type Review = { name: string; body: string; time: string };
 
-const reviews = [
+const reviews: Review[] = [
   {
     name: "Dennis Hannum",
     body: "Devin was really great. He is very knowledgeable about detailing cars. He was punctual as well as polite. I will be using him again in the future.",
@@ -23,77 +35,111 @@ const reviews = [
     body: "I wish I had taken a before and after picture! My car looks BRAND NEW!! I heard about Damian through word of mouth and I'll be doing the same! I'll be sending him to everyone I know 🙌🏻 🙌🏻",
     time: "",
   },
+  {
+    name: "Jimmy Wilson",
+    body: "",
+    time: "",
+  },
 ];
 
-function Stars() {
+function ReviewCard({ review }: { review: Review }) {
   return (
-    <div className="flex items-center gap-0.5">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <svg key={i} className="w-4 h-4 fill-brand-yellow text-brand-yellow" viewBox="0 0 24 24">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-        </svg>
-      ))}
+    <div className="hover-lift bg-black/[0.02] border border-black/10 rounded-2xl p-8 flex flex-col gap-4">
+      {review.body && (
+        <div className="font-accent text-5xl text-brand-yellow leading-none -mb-2">&ldquo;</div>
+      )}
+      <div className="flex items-center justify-between">
+        <Stars />
+        <div className="flex items-center gap-1.5 text-black/30">
+          <GoogleIcon />
+          <span className="text-xs font-medium">Google</span>
+        </div>
+      </div>
+      {review.body ? (
+        <p className="text-base text-black/65 leading-relaxed flex-1">&ldquo;{review.body}&rdquo;</p>
+      ) : (
+        <div className="flex-1" />
+      )}
+      <div className="pt-2 border-t border-black/[0.08]">
+        <span className="text-sm font-black text-brand-black">{review.name}</span>
+      </div>
     </div>
   );
 }
 
-function GoogleIcon() {
+// direction "down" is wired for the future two-column (B) layout; only "up" is used today.
+// Flipping to B: render two ReviewColumns with sliced arrays and opposite directions,
+// and add an `animate-scroll-vertical-reverse` keyframe in globals.css.
+function ReviewColumn({ items, direction = "up" }: { items: Review[]; direction?: "up" | "down" }) {
+  const doubled = [...items, ...items];
+  const anim = direction === "up" ? "animate-scroll-vertical" : "animate-scroll-vertical-reverse";
   return (
-    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
-      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-    </svg>
+    <div
+      className="relative h-[500px] lg:h-[640px] overflow-hidden"
+      style={{
+        maskImage: "linear-gradient(to bottom, transparent, black 8%, black 92%, transparent)",
+        WebkitMaskImage: "linear-gradient(to bottom, transparent, black 8%, black 92%, transparent)",
+      }}
+    >
+      <div className={`${anim} flex flex-col gap-4`}>
+        {doubled.map((review, i) => (
+          <ReviewCard key={`${review.name}-${i}`} review={review} />
+        ))}
+      </div>
+    </div>
   );
 }
 
 export function Testimonials() {
   return (
-    <section className="bg-brand-yellow py-20 px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+    <section id="reviews" className="bg-site-surface py-24 px-6 lg:px-10 scroll-mt-[100px]">
+      <div className="mx-auto max-w-[1600px] grid lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-20 items-center">
 
-        {/* Header */}
-        <div className="mb-12">
-          <div className="flex items-end justify-between gap-4 flex-wrap">
-            <h2 className="text-3xl sm:text-4xl font-black uppercase text-brand-black leading-tight">
-              Straight From Our Clients
-            </h2>
+        <motion.div {...fadeUp}>
+          <div className="font-accent text-xs font-medium tracking-[0.25em] uppercase text-brand-black mb-3 not-italic">
+            Reviews
+          </div>
+          <h2 className="text-4xl sm:text-5xl font-black uppercase text-brand-black tracking-normal mb-4">
+            Straight From Our Clients
+          </h2>
+          <p className="text-black/65 text-base leading-relaxed max-w-sm mb-6">
+            No paid actors, no stock quotes. Every review here came from a real job in Bakersfield.
+          </p>
+
+          <div className="inline-flex items-center gap-2.5 border border-black/10 rounded-full pl-3 pr-4 py-2 mb-6">
+            <GoogleIcon className="w-4 h-4" />
+            <Stars className="w-3.5 h-3.5" />
+            <span className="text-sm font-bold text-brand-black">{GOOGLE_RATING_VALUE}</span>
+            <span className="text-sm text-black/50">({GOOGLE_REVIEW_COUNT} reviews)</span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4">
             <Link
               href={GOOGLE_PROFILE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-bold uppercase tracking-widest text-brand-black/50 hover:text-brand-black transition-colors flex items-center gap-2"
+              className="text-xs font-bold uppercase tracking-widest text-brand-yellow hover:text-brand-black transition-colors inline-flex items-center gap-2"
+              style={{ textShadow: "0 1px 1px rgba(0,0,0,0.2)" }}
             >
               See all on Google
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
+            <Link
+              href={GOOGLE_REVIEW_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-bold uppercase tracking-widest text-brand-black bg-brand-yellow rounded-full px-4 py-2 hover:bg-brand-black hover:text-brand-yellow transition-[color,background-color,transform] duration-150 active:scale-[0.97]"
+            >
+              Leave a review
+            </Link>
           </div>
-          <div className="mt-4 h-px bg-black/[0.12]" />
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {reviews.map((review) => (
-            <div key={review.name} className="bg-brand-black rounded-2xl p-8 flex flex-col gap-4">
-              <div className="font-accent text-5xl text-brand-yellow leading-none -mb-2">&ldquo;</div>
-              <div className="flex items-center justify-between">
-                <Stars />
-                <div className="flex items-center gap-1.5 text-white/30">
-                  <GoogleIcon />
-                  <span className="text-xs font-medium">Google</span>
-                </div>
-              </div>
-              <p className="text-base text-brand-white/70 leading-relaxed flex-1">
-                &ldquo;{review.body}&rdquo;
-              </p>
-              <div className="pt-2 border-t border-white/[0.06]">
-                <span className="text-sm font-black text-brand-white">{review.name}</span>
-              </div>
-            </div>
-          ))}
-        </div>
+        <motion.div {...fadeUp}>
+          <ReviewColumn items={reviews} direction="up" />
+        </motion.div>
 
       </div>
     </section>

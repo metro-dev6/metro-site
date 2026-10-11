@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, MapPin } from "lucide-react";
+import { FAQ } from "@/components/sections/FAQ";
 
 const LOCATIONS: Record<string, {
   name: string;
@@ -48,7 +49,7 @@ const LOCATIONS: Record<string, {
     metaTitle: "Mobile Detailing in Seven Oaks, Bakersfield | Metro Auto Detailing",
     metaDescription: "Mobile auto detailing in Seven Oaks, Bakersfield CA. Metro Auto Detailing comes to your home. Full detail, refresh detail, headlight restoration, and more.",
     headline: "Mobile Detailing in Seven Oaks, Bakersfield",
-    intro: "Seven Oaks clients usually want the Full Detail or Refresh Detail. We show up, do the work, and leave the vehicle looking the way it should. No upselling on the driveway. Just the job you booked.",
+    intro: "Seven Oaks clients usually want the Full Detail or a deep Interior Detail. We show up, do the work, and leave the vehicle looking the way it should. No upselling on the driveway. Just the job you booked.",
     note: "Serving Seven Oaks and the surrounding southwest area.",
     mapQuery: "Seven+Oaks,Bakersfield,CA",
     mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13018.667243110227!2d-119.12882728428211!3d35.33909453774978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80ea415db5ab7c2f%3A0x9ea1344abc851444!2sSeven%20Oaks%2C%20Bakersfield%2C%20CA%2093311!5e0!3m2!1sen!2sus!4v1782619947091!5m2!1sen!2sus",
@@ -76,12 +77,48 @@ const LOCATIONS: Record<string, {
 };
 
 const SERVICES = [
-  { name: "Signature Wash", price: "$80", note: "Hand wash, wax coat, interior wipe" },
-  { name: "Exterior Detail", price: "$150", note: "Full exterior decontamination and protection" },
-  { name: "Interior Detail", price: "$200", note: "Deep clean, vacuum, panels, console" },
-  { name: "Refresh Detail", price: "$250", note: "Interior + exterior combined" },
-  { name: "Full Detail", price: "$400", note: "Complete top-to-bottom detail" },
+  { name: "Exterior Refresh", price: "$80", note: "Exterior wash, wheels, spray wax finish" },
+  { name: "Signature Wash", price: "$150", note: "Full wash, 3-month ceramic, basic interior" },
+  { name: "Clay n Seal", price: "$200", note: "Decontamination, clay bar, 6-month ceramic sealant" },
+  { name: "Interior Detail", price: "$200", note: "Deep clean, vacuum, shampoo, panels, console" },
+  { name: "Full Detail", price: "$350", note: "Complete inside and out" },
 ];
+
+interface LocationFaq {
+  q: string;
+  a: string;
+}
+
+// Area-specific availability line. Everything else in the location FAQ is templated.
+const LOCATION_FAQ_AVAILABILITY: Record<string, string> = {
+  "bakersfield": "We cover all of Bakersfield. Submit an estimate and we confirm the soonest open slot.",
+  "southwest-bakersfield": "Southwest Bakersfield is our home base, so this area gets the fastest availability in the city.",
+  "stockdale": "We run the Stockdale Highway corridor regularly, so booking is usually quick.",
+  "seven-oaks": "Seven Oaks sits close to our southwest home base, so availability is fast.",
+  "rosedale": "We cover Rosedale and northwest Bakersfield on a regular rotation.",
+  "terra-vista": "Terra Vista is close to home base, so slots open up fast.",
+};
+
+function buildLocationFaqs(name: string, slug: string): LocationFaq[] {
+  return [
+    {
+      q: `Do you detail cars in ${name}?`,
+      a: `Yes. Metro Auto Detailing is fully mobile and serves ${name}. We bring the water, power, and equipment to your driveway, so you never leave home.`,
+    },
+    {
+      q: `How much does mobile detailing cost in ${name}?`,
+      a: "Same pricing as anywhere in Bakersfield. Exterior Refresh starts at $80, Signature Wash at $150, Full Detail at $350. Larger vehicles add $20 to $40. No location upcharge inside our service area.",
+    },
+    {
+      q: `How soon can you get to ${name}?`,
+      a: LOCATION_FAQ_AVAILABILITY[slug] ?? `We cover ${name} regularly. Submit an estimate and we confirm the soonest slot.`,
+    },
+    {
+      q: `Do I need to be home for my ${name} appointment?`,
+      a: "No. We just need access to the vehicle and the keys. Park it in the driveway or lot and we handle the rest. A before-and-after walkthrough is welcome if you want one.",
+    },
+  ];
+}
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -99,7 +136,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: location.metaDescription,
       url: `https://www.metroautodetailing.pro/locations/${slug}`,
       siteName: "Metro Auto Detailing",
-      images: [{ url: "https://www.metroautodetailing.pro/hero-car-enhanced.jpg", width: 1200, height: 630 }],
+      images: [{ url: "https://www.metroautodetailing.pro/og/metro-auto-detailing-bakersfield.jpg", width: 1200, height: 630 }],
       type: "website",
     },
   };
@@ -114,8 +151,23 @@ export default async function LocationPage({ params }: Props) {
   const location = LOCATIONS[slug];
   if (!location) notFound();
 
+  const faqs = buildLocationFaqs(location.name, slug);
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
   return (
     <div className="min-h-screen bg-site-bg">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="mx-auto max-w-4xl px-6 lg:px-8 pt-16 pb-24">
 
         {/* Badge */}
@@ -196,6 +248,7 @@ export default async function LocationPage({ params }: Props) {
         </div>
 
       </div>
+      <FAQ faqs={faqs} heading="Common Questions" theme="dark" />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useEstimateCart } from "@/hooks/use-estimate-cart";
 import { ChevronUp, X, ArrowRight } from "lucide-react";
+import { EASE_OUT } from "@/lib/motion";
 
 export function EstimateCartBar() {
   const { items, remove, clear, total } = useEstimateCart();
@@ -30,7 +31,7 @@ export function EstimateCartBar() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
+                    transition={{ duration: 0.2, ease: EASE_OUT }}
                     className="overflow-hidden"
                   >
                     <div className="px-5 pt-4 pb-2 flex flex-col gap-1">

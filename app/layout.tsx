@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, DM_Sans, Fraunces } from "next/font/google";
+import { Oswald, Hanken_Grotesk, DM_Sans, Fraunces } from "next/font/google";
 import Script from "next/script";
 import { MotionConfig } from "framer-motion";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
@@ -7,8 +7,14 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
+const oswald = Oswald({
+  variable: "--font-oswald",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const hanken = Hanken_Grotesk({
+  variable: "--font-hanken",
   subsets: ["latin"],
   display: "swap",
 });
@@ -38,7 +44,7 @@ export const metadata: Metadata = {
     siteName: "Metro Auto Detailing",
     type: "website",
     locale: "en_US",
-    images: [{ url: "/hero-car-enhanced.jpg", width: 1200, height: 630, alt: "Metro Auto Detailing — Bakersfield, CA" }],
+    images: [{ url: "/og/metro-auto-detailing-bakersfield.jpg", width: 1200, height: 630, alt: "Metro Auto Detailing — Bakersfield, CA" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -53,7 +59,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} ${dmSans.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${oswald.variable} ${hanken.variable} ${dmSans.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <script
@@ -93,11 +99,11 @@ export default function RootLayout({
               },
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://metroautodetailing.pro/1.png",
-                "width": 8334,
-                "height": 8334
+                "url": "https://metroautodetailing.pro/brand/metro-auto-detailing-logo.png",
+                "width": 512,
+                "height": 512
               },
-              "image": "https://metroautodetailing.pro/hero-car-enhanced.jpg",
+              "image": "https://metroautodetailing.pro/og/metro-auto-detailing-bakersfield.jpg",
               "hasMap": "https://maps.google.com/?q=Bakersfield,CA",
               "sameAs": [
                 "https://instagram.com/metroautodetailingca",

@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { EASE_OUT } from "@/lib/motion";
 
 const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
 
@@ -44,17 +46,27 @@ export function QuickContactForm({ service }: QuickContactFormProps) {
 
   if (formState === "success") {
     return (
-      <div className="rounded-2xl bg-white/[0.04] border border-brand-yellow/30 p-7 flex flex-col gap-3">
-        <div className="w-10 h-10 rounded-full bg-brand-yellow/10 border border-brand-yellow/30 flex items-center justify-center">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.25, ease: EASE_OUT }}
+        className="rounded-2xl bg-white/[0.04] border border-brand-yellow/30 p-7 flex flex-col gap-3"
+      >
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ type: "spring", bounce: 0.2, duration: 0.4, delay: 0.1 }}
+          className="w-10 h-10 rounded-full bg-brand-yellow/10 border border-brand-yellow/30 flex items-center justify-center"
+        >
           <svg className="w-5 h-5 text-brand-yellow" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
             <polyline points="20 6 9 17 4 12" />
           </svg>
-        </div>
+        </motion.div>
         <p className="text-white font-bold text-base">Got it. We&apos;ll call you back.</p>
         <p className="text-white/55 text-sm leading-relaxed">
           Or reach us directly at (661) 368-5165.
         </p>
-      </div>
+      </motion.div>
     );
   }
 
@@ -118,7 +130,7 @@ export function QuickContactForm({ service }: QuickContactFormProps) {
         disabled={formState === "submitting"}
         className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-brand-yellow text-black font-black text-sm tracking-wide hover:bg-brand-yellow/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {formState === "submitting" ? "Sending..." : "Get a Callback"}
+        {formState === "submitting" ? "Sending..." : "Get My Quote"}
         {formState !== "submitting" && <ArrowRight className="h-4 w-4" />}
       </button>
 

@@ -32,7 +32,7 @@ export const SERVICES: Service[] = [
     slug: "exterior-refresh",
     name: "Exterior Refresh",
     description:
-      "A two-step exterior wash finished with a spray wax for shine, plus wheels, tires, and door jambs. For a maintained car that just needs the outside cleaned.",
+      "A two-step exterior wash finished with a spray wax for shine, plus wheels, tires, and door jambs. For a maintained car that just needs the outside cleaned. Recommended every 2 to 4 weeks.",
     prices: { sedan: 80, suv5: 100, suv7: 120 },
     timeEstimate: { sedan: "30-45m", suv5: "45m-1h", suv7: "1h+" },
     features: [
@@ -53,7 +53,7 @@ export const SERVICES: Service[] = [
     slug: "signature-detail",
     name: "Signature Detail",
     description:
-      "A full exterior wash finished with a ceramic sealant that beads off water and keeps the paint slick and glossy for up to 3 months, plus a full interior clean inside. Recommended every 2 to 4 weeks.",
+      "A full exterior wash finished with a ceramic sealant that beads off water and keeps the paint slick and glossy for up to 3 months, plus a full interior clean inside.",
     prices: { sedan: 150, suv5: 180, suv7: 210 },
     timeEstimate: { sedan: "1h", suv5: "1h-1.5h", suv7: "1.5h+" },
     mostPopular: true,

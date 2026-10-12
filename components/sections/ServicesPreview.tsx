@@ -12,7 +12,7 @@ const services = [
     name: "Exterior Refresh",
     alt: "Exterior Refresh mobile wash and spray wax in Bakersfield, CA",
     price: "$80",
-    description: "A two-step exterior wash finished with a spray wax for shine, plus wheels, tires, and door jambs. For a maintained car that just needs the outside cleaned.",
+    description: "A two-step exterior wash finished with a spray wax for shine, plus wheels, tires, and door jambs. For a maintained car that just needs the outside cleaned. Recommended every 2 to 4 weeks.",
     photo: "/services/exterior-refresh-bakersfield.webp",
     imageStyle: { objectFit: "cover" as const, objectPosition: "center" },
   },
@@ -20,7 +20,7 @@ const services = [
     name: "Signature Detail",
     alt: "Signature Detail mobile detail in Bakersfield, CA",
     price: "$150",
-    description: "A full exterior wash finished with a ceramic sealant that beads off water and keeps the paint slick and glossy for up to 3 months, plus a full interior clean inside. Recommended every 2 to 4 weeks.",
+    description: "A full exterior wash finished with a ceramic sealant that beads off water and keeps the paint slick and glossy for up to 3 months, plus a full interior clean inside.",
     photo: "/services/signature-detail-bakersfield.webp",
     imageStyle: { objectFit: "cover" as const, objectPosition: "75% center" },
   },
@@ -87,7 +87,7 @@ export function ServicesPreview() {
               key={service.name}
               variants={staggerItem}
               href="/services#essentials"
-              className={`hover-lift group relative min-h-[380px] flex flex-col justify-end rounded-2xl overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.13)] border ${isBestValue ? "border-brand-yellow" : "border-black/15"}`}
+              className={`hover-lift group relative min-h-[460px] flex flex-col justify-between rounded-2xl overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.13)] border ${isBestValue ? "border-brand-yellow" : "border-black/15"}`}
             >
               {/* Image wrapper */}
               <div className="absolute inset-0 overflow-hidden">
@@ -97,35 +97,42 @@ export function ServicesPreview() {
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   style={service.imageStyle}
-                  className="transition-transform duration-500 group-hover:scale-105"
+                  className="brightness-110 transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
 
-              {/* Dark gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/0 group-hover:from-black group-hover:via-black/80 transition-colors duration-300" />
+              {/* Top scrim for the name */}
+              <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/60 via-black/20 to-transparent" />
 
-              {/* Content */}
-              <div className="relative z-10 p-8 flex flex-col gap-3" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%)" }}>
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="text-base font-black uppercase tracking-wide text-brand-white leading-tight" style={{ textShadow: "0 1px 4px rgba(0,0,0,1), 0 2px 16px rgba(0,0,0,0.9)" }}>
+              {/* Bottom gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-black/0 group-hover:from-black group-hover:via-black/60 transition-colors duration-300" />
+
+              {/* Name (top-left) */}
+              <div className="relative z-10 flex items-start justify-between gap-4 p-8">
+                <div>
+                  <div className="h-[3px] w-8 bg-brand-yellow mb-3" />
+                  <h3 className="text-2xl font-black uppercase tracking-wide text-brand-white leading-[1.1]" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.85), 0 2px 14px rgba(0,0,0,0.65)" }}>
                     {service.name}
                   </h3>
-                  <svg
-                    className="w-4 h-4 text-white/20 group-hover:text-brand-yellow transition-colors shrink-0 mt-0.5"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
                 </div>
+                <svg
+                  className="w-5 h-5 text-white/30 group-hover:text-brand-yellow transition-colors shrink-0 mt-1"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </div>
 
-                <p className="text-sm text-white/80 leading-relaxed" style={{ textShadow: "0 1px 4px rgba(0,0,0,1), 0 1px 12px rgba(0,0,0,0.9)" }}>
+              {/* Description + price (bottom) */}
+              <div className="relative z-10 px-8 pb-8 flex flex-col gap-3">
+                <p className="text-sm text-white/80 leading-relaxed" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.85), 0 1px 10px rgba(0,0,0,0.6)" }}>
                   {service.description}
                 </p>
 
-                <p className="text-2xl font-accent text-brand-yellow" style={{ textShadow: "0 1px 4px rgba(0,0,0,1), 0 2px 16px rgba(0,0,0,0.8)" }}>
+                <p className="text-2xl font-accent text-brand-yellow" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.85), 0 2px 14px rgba(0,0,0,0.55)" }}>
                   Starting at {service.price}
                 </p>
               </div>
@@ -137,10 +144,10 @@ export function ServicesPreview() {
           <MotionLink
             variants={staggerItem}
             href="/services#essentials"
-            className="hover-lift group bg-[#141414] border border-white/10 shadow-[0_12px_30px_rgba(0,0,0,0.18)] rounded-2xl min-h-[380px] flex flex-col justify-start p-8 hover:border-white/25 transition-colors"
+            className="hover-lift group bg-[#141414] border border-white/10 shadow-[0_12px_30px_rgba(0,0,0,0.18)] rounded-2xl min-h-[460px] flex flex-col justify-start p-8 hover:border-white/25 transition-colors"
           >
             <div className="flex flex-col gap-3">
-              <h3 className="text-base font-black uppercase tracking-wide text-brand-white leading-tight">
+              <h3 className="text-2xl font-black uppercase tracking-wide text-brand-white leading-tight">
                 Add-Ons
               </h3>
 

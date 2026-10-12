@@ -18,8 +18,8 @@ const VEHICLE_CLASSES: { value: VehicleClass; label: string; hint: string }[] = 
 
 const PACKAGES = [
   { name: "Exterior Refresh", prices: { sedan: 80, suv5: 100, suv7: 120 } },
-  { name: "Signature Wash", prices: { sedan: 150, suv5: 180, suv7: 210 } },
-  { name: "Clay n Seal", prices: { sedan: 200, suv5: 230, suv7: 260 } },
+  { name: "Signature Detail", prices: { sedan: 150, suv5: 180, suv7: 210 } },
+  { name: "Clay n Seal", prices: { sedan: 150, suv5: 180, suv7: 210 } },
   { name: "Interior Detail", prices: { sedan: 200, suv5: 230, suv7: 260 } },
   { name: "Full Detail", prices: { sedan: 350, suv5: 380, suv7: 410 } },
 ] as const;
@@ -41,7 +41,7 @@ function priceFor(name: string, vehicleClass: VehicleClass): number {
 
 const RELEVANT_ADDONS: Record<string, string[]> = {
   "Exterior Refresh": ["Headlight Restoration", "Trim Restoration", "Water Spot Removal", "Engine Bay"],
-  "Signature Wash": ["Headlight Restoration", "Trim Restoration", "Water Spot Removal", "Engine Bay"],
+  "Signature Detail": ["Headlight Restoration", "Trim Restoration", "Water Spot Removal", "Engine Bay"],
   "Clay n Seal": ["Headlight Restoration", "Trim Restoration", "Water Spot Removal", "Engine Bay"],
   "Interior Detail": ["Pet Hair & Sand Removal", "Leather Conditioning"],
   "Full Detail": ["Headlight Restoration", "Trim Restoration", "Pet Hair & Sand Removal", "Engine Bay", "Leather Conditioning"],

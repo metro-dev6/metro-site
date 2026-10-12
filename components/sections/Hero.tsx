@@ -12,7 +12,7 @@ import Link from "next/link";
 
 const USE_VIDEO = false;
 const VIDEO_SRC = "/hero/mobile-auto-detailing-bakersfield.mp4";
-const FALLBACK_IMG = "/hero/exterior-paint-detail-bakersfield.webp";
+const FALLBACK_IMG = "/hero/silverado-mobile-detailing-bakersfield.webp";
 
 export function Hero() {
   return (

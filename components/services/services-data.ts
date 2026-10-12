@@ -24,6 +24,7 @@ export interface Service {
   excludedFeatures?: string[];
   upgrade?: { text: string; price: number }; // optional upsell note rendered on the card
   image?: string; // undefined = render a labeled placeholder (operator swaps)
+  imagePosition?: string; // object-position for the card photo. "center 70%" shows lower in the frame, "center 30%" higher. Default center.
 }
 
 export const SERVICES: Service[] = [
@@ -31,7 +32,7 @@ export const SERVICES: Service[] = [
     slug: "exterior-refresh",
     name: "Exterior Refresh",
     description:
-      "Regular exterior upkeep, best every 2 to 4 weeks. A 100% hand wash with wheels, tires, glass, and door jambs cleaned, finished with a spray wax for shine.",
+      "A two-step exterior wash finished with a spray wax for shine, plus wheels, tires, and door jambs. For a maintained car that just needs the outside cleaned.",
     prices: { sedan: 80, suv5: 100, suv7: 120 },
     timeEstimate: { sedan: "30-45m", suv5: "45m-1h", suv7: "1h+" },
     features: [
@@ -46,12 +47,13 @@ export const SERVICES: Service[] = [
     excludedFeatures: ["Interior cleaning", "Decontamination (iron removal + clay bar)"],
     upgrade: { text: "Upgrade the wax to a 3-month ceramic sealant", price: 30 },
     image: "/services/exterior-refresh-bakersfield.webp",
+    imagePosition: "center 40%",
   },
   {
-    slug: "signature-wash",
-    name: "Signature Wash",
+    slug: "signature-detail",
+    name: "Signature Detail",
     description:
-      "Our most-booked package, inside and out. A full hand wash sealed with a 3-month ceramic, then a complete interior blowout, vacuum, and wipe-down of every panel and the console. Built for a car that's kept up and wants a monthly reset.",
+      "A full exterior wash finished with a ceramic sealant that beads off water and keeps the paint slick and glossy for up to 3 months, plus a full interior clean inside. Recommended every 2 to 4 weeks.",
     prices: { sedan: 150, suv5: 180, suv7: 210 },
     timeEstimate: { sedan: "1h", suv5: "1h-1.5h", suv7: "1.5h+" },
     mostPopular: true,
@@ -71,14 +73,14 @@ export const SERVICES: Service[] = [
       "Shampoo & extraction",
       "Interior UV dressing",
     ],
-    image: "/services/signature-wash-bakersfield.webp",
+    image: "/services/signature-detail-bakersfield.webp",
   },
   {
     slug: "clay-n-seal",
     name: "Clay n Seal",
     description:
-      "When your paint feels rough or looks hazy, this strips it clean. We pull iron, tar, and road grime, clay the paint smooth, and remove water spots. Sealed with a 6-month ceramic sealant.",
-    prices: { sedan: 200, suv5: 230, suv7: 260 },
+      "When your paint feels rough or looks hazy, this strips it clean. An iron and clay decontamination pulls bonded iron, tar, and road grime off the paint and leaves it smooth to the touch. Then a ceramic sealant goes on for a slick, high-gloss surface that lasts 6+ months.",
+    prices: { sedan: 150, suv5: 180, suv7: 210 },
     timeEstimate: { sedan: "1h", suv5: "1.5h", suv7: "1.5h+" },
     features: [
       "Hand wash & dry",
@@ -100,7 +102,7 @@ export const SERVICES: Service[] = [
     slug: "interior-detail",
     name: "Interior Detail",
     description:
-      "A full reset for an interior worn down by kids, pets, and daily life. Seats and carpets shampooed and extracted, every panel deep cleaned, all surfaces UV protected. No exterior wash in this one.",
+      "A full reset for an interior worn down by kids, pets, or daily life. Seats and carpets are shampooed and extracted, every panel is deep cleaned, all surfaces are UV protected, and your interior is back to normal.",
     prices: { sedan: 200, suv5: 230, suv7: 260 },
     timeEstimate: { sedan: "2h", suv5: "2.5h", suv7: "3h+" },
     features: [
@@ -113,12 +115,13 @@ export const SERVICES: Service[] = [
     ],
     excludedFeatures: ["Exterior wash"],
     image: "/services/interior-detail-bakersfield.webp",
+    imagePosition: "center 30%",
   },
   {
     slug: "full-detail",
     name: "Full Detail",
     description:
-      "The complete reset, inside and out. A full exterior wash sealed with a 3-month ceramic, plus a deep interior clean with carpets and seats shampooed and extracted. Our pick when a car hasn't been detailed in a while.",
+      "The complete reset, inside and out. A full exterior wash sealed with a 3-month ceramic sealant that beads off water and keeps the paint slick and glossy, plus a deep interior clean with carpets and seats shampooed and extracted. Our pick when a car hasn't been detailed in a while and needs attention everywhere.",
     prices: { sedan: 350, suv5: 380, suv7: 410 },
     timeEstimate: { sedan: "3h", suv5: "4h", suv7: "5h+" },
     features: [
@@ -150,14 +153,14 @@ export interface MaintenancePlan {
 export const MAINTENANCE_PLANS: MaintenancePlan[] = [
   {
     name: "Monthly",
-    scope: "Signature Wash scope",
+    scope: "Signature Detail scope",
     prices: { sedan: 110, suv5: 140, suv7: 170 },
     mostCommon: true,
     note: "Light touch-up. The car hasn't had time to get dirty.",
   },
   {
     name: "Every 2 Months",
-    scope: "Signature Wash to Full Detail",
+    scope: "Signature Detail to Full Detail",
     prices: { sedan: 140, suv5: 170, suv7: 200 },
     note: "Trends toward a Full Detail depending on how you drive.",
   },

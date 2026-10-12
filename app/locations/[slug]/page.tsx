@@ -78,8 +78,8 @@ const LOCATIONS: Record<string, {
 
 const SERVICES = [
   { name: "Exterior Refresh", price: "$80", note: "Exterior wash, wheels, spray wax finish" },
-  { name: "Signature Wash", price: "$150", note: "Full wash, 3-month ceramic, basic interior" },
-  { name: "Clay n Seal", price: "$200", note: "Decontamination, clay bar, 6-month ceramic sealant" },
+  { name: "Signature Detail", price: "$150", note: "Full wash, 3-month ceramic, basic interior" },
+  { name: "Clay n Seal", price: "$150", note: "Decontamination, clay bar, 6-month ceramic sealant" },
   { name: "Interior Detail", price: "$200", note: "Deep clean, vacuum, shampoo, panels, console" },
   { name: "Full Detail", price: "$350", note: "Complete inside and out" },
 ];
@@ -107,7 +107,7 @@ function buildLocationFaqs(name: string, slug: string): LocationFaq[] {
     },
     {
       q: `How much does mobile detailing cost in ${name}?`,
-      a: "Same pricing as anywhere in Bakersfield. Exterior Refresh starts at $80, Signature Wash at $150, Full Detail at $350. Larger vehicles add $20 to $40. No location upcharge inside our service area.",
+      a: "Same pricing as anywhere in Bakersfield. Exterior Refresh starts at $80, Signature Detail at $150, Full Detail at $350. Larger vehicles add $20 to $40. No location upcharge inside our service area.",
     },
     {
       q: `How soon can you get to ${name}?`,

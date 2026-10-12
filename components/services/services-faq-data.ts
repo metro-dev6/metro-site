@@ -13,11 +13,11 @@ export const SERVICES_FAQS: ServiceFaqItem[] = [
   },
   {
     q: "How long does the ceramic sealant last?",
-    a: "Signature Wash and Full Detail include a 3-month ceramic sealant. Clay n Seal includes a 6-month ceramic sealant, since the decontamination lets it bond longer. Exterior Refresh is finished with a spray wax for shine, which you can upgrade to the 3-month ceramic sealant for $30. Water beads off and the paint stays cleaner between washes.",
+    a: "Signature Detail and Full Detail include a 3-month ceramic sealant. Clay n Seal includes a 6-month ceramic sealant, since the decontamination lets it bond longer. Exterior Refresh is finished with a spray wax for shine, which you can upgrade to the 3-month ceramic sealant for $30. Water beads off and the paint stays cleaner between washes.",
   },
   {
     q: "How long does a detail take?",
-    a: "Exterior Refresh runs 30 to 45 minutes. A Signature Wash is about an hour. A Full Detail runs 4 to 6 plus hours. We confirm a time when we book.",
+    a: "Exterior Refresh runs 30 to 45 minutes. A Signature Detail is about an hour. A Full Detail runs 4 to 6 plus hours. We confirm a time when we book.",
   },
   {
     q: "Do you come to me?",

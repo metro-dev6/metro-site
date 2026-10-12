@@ -23,7 +23,7 @@ export const DEFAULT_FAQS: FAQItem[] = [
   },
   {
     q: "How long does a detail take?",
-    a: "Depends on the service and the condition of the vehicle. A Signature Wash takes about an hour. A Full Detail runs 4-6+ hours. We'll give you a time estimate when we confirm the booking.",
+    a: "Depends on the service and the condition of the vehicle. A Signature Detail takes about an hour. A Full Detail runs 4-6+ hours. We'll give you a time estimate when we confirm the booking.",
   },
   {
     q: "What areas do you service?",

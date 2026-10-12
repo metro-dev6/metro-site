@@ -5,7 +5,7 @@ import { FAQ } from "@/components/sections/FAQ";
 import { PageHeader } from "@/components/ui/section";
 import { DarkCard } from "@/components/ui/cards";
 import { ServicesInteractive } from "@/components/services/services-interactive";
-import { WhoDoesTheWork } from "@/components/services/who-does-the-work";
+// import { WhoDoesTheWork } from "@/components/services/who-does-the-work"; // re-enable when operator photo ready
 import { SERVICES } from "@/components/services/services-data";
 import { SERVICES_FAQS } from "@/components/services/services-faq-data";
 
@@ -80,8 +80,9 @@ export default function ServicesPage() {
       {/* Selector + Essentials + Add-Ons + Maintenance (size-reactive) */}
       <ServicesInteractive />
 
-      {/* Who does the work */}
-      <WhoDoesTheWork />
+      {/* Who does the work - HIDDEN FOR LAUNCH. Re-enable when the operator photo is ready.
+          who-does-the-work.tsx has a photo placeholder and an unfilled years tag. Operator experience = 5 years. */}
+      {/* <WhoDoesTheWork /> */}
 
       {/* Trust strip */}
       <section className="py-10">

@@ -31,9 +31,9 @@ export function ServicePackageCard({ service, index }: { service: Service; index
       {/* Proof photo (placeholder until operator supplies) */}
       {service.image ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={service.image} alt={`${service.name} result in Bakersfield, CA`} className="w-full h-44 object-cover" />
+        <img src={service.image} alt={`${service.name} result in Bakersfield, CA`} className="w-full h-52 object-cover" style={{ objectPosition: service.imagePosition ?? "center" }} />
       ) : (
-        <div className="w-full h-44 flex items-center justify-center bg-black/[0.06] text-black/35 text-xs tracking-wide uppercase">
+        <div className="w-full h-52 flex items-center justify-center bg-black/[0.06] text-black/35 text-xs tracking-wide uppercase">
           Photo: {service.name} (placeholder)
         </div>
       )}

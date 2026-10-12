@@ -17,9 +17,9 @@ const SERVICES: Record<string, {
     metaTitle: "Mobile Exterior Refresh in Bakersfield, CA | Metro Auto Detailing",
     metaDescription: "Exterior wash finished with a spray wax, upgradeable to a 3-month ceramic sealant. Mobile service — we come to you in Bakersfield, CA. Starting at $80.",
   },
-  "signature-wash": {
-    name: "Signature Wash",
-    metaTitle: "Mobile Signature Wash in Bakersfield, CA | Metro Auto Detailing",
+  "signature-detail": {
+    name: "Signature Detail",
+    metaTitle: "Mobile Signature Detail in Bakersfield, CA | Metro Auto Detailing",
     metaDescription: "Full wash, 3-month ceramic sealant, and interior blowout. Mobile service — we come to you in Bakersfield, CA. Starting at $150.",
   },
   "clay-n-seal": {
@@ -199,7 +199,7 @@ function ClayNSealPage() {
             </h2>
             <p className="text-lg text-white/80 leading-relaxed max-w-[48ch]">
               Paint feels rough. Water isn&apos;t beading. The car&apos;s been sitting. This goes deeper
-              than any wash can. If your paint is just dusty, a Signature Wash is enough.
+              than any wash can. If your paint is just dusty, a Signature Detail is enough.
             </p>
           </div>
         </div>
@@ -294,20 +294,20 @@ function ClayNSealPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-4 lg:gap-6 items-stretch">
             {/* Lighter tier */}
             <Link
-              href="/services/signature-wash"
+              href="/services/signature-detail"
               className="flex flex-col gap-3 rounded-xl border border-white/[0.08] bg-site-bg p-7 hover:border-white/20 transition-colors group"
             >
               <span className="inline-flex items-center self-start px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide border border-white/[0.12] text-white/40">
                 Lighter
               </span>
-              <h3 className="text-xl font-black uppercase text-white">Signature Wash</h3>
+              <h3 className="text-xl font-black uppercase text-white">Signature Detail</h3>
               <p className="font-black text-brand-yellow font-numeric">$150 <span className="text-sm font-medium text-white/40">$180 / $210 larger</span></p>
               <p className="text-sm text-white/55 leading-relaxed flex-1">
                 Full wash and a 3-month ceramic sealant, full interior blowout inside. The right call for
                 a car that&apos;s already maintained. No decontamination, no clay.
               </p>
               <span className="text-xs font-bold uppercase tracking-wide text-brand-yellow group-hover:underline mt-auto">
-                See Signature Wash &rarr;
+                See Signature Detail &rarr;
               </span>
             </Link>
 

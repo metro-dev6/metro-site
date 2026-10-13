@@ -56,9 +56,9 @@ export function ServicesInteractive() {
         <SectionLabel
           label="Maintenance Plans"
           heading="The longer you wait, the more work it takes."
-          sub="Prices below are per visit for the size you picked. No contracts, cancel anytime."
+          sub="Plans start after your first service. We keep that same service going on the schedule you choose, and the more often we come out, the less each visit costs. No contracts, cancel anytime."
         />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {MAINTENANCE_PLANS.map((plan) => (
             <LightCard key={plan.name} featured={plan.mostCommon} className="relative flex flex-col p-6">
               {plan.mostCommon && (
@@ -67,7 +67,6 @@ export function ServicesInteractive() {
                 </span>
               )}
               <h3 className="text-xl font-black uppercase tracking-tight text-brand-black">{plan.name}</h3>
-              <p className="text-[11px] font-bold uppercase tracking-wide text-black/45 mt-1">{plan.scope}</p>
               <div className="flex items-baseline gap-2 mt-4 mb-1">
                 <ServicePrice prices={plan.prices} className="text-3xl text-brand-black" />
                 <span className="text-sm text-black/40">/ visit</span>

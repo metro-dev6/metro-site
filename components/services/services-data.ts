@@ -32,7 +32,7 @@ export const SERVICES: Service[] = [
     slug: "exterior-refresh",
     name: "Exterior Refresh",
     description:
-      "A two-step exterior wash finished with a spray wax for shine, plus wheels, tires, and door jambs. For a maintained car that just needs the outside cleaned. Recommended every 2 to 4 weeks.",
+      "When your car just needs the outside cleaned up, this is the one. A two-step exterior wash finished with a spray wax for shine, plus your wheels, tires, and door jambs. Recommended every 2 to 4 weeks to stay ahead of the grime.",
     prices: { sedan: 80, suv5: 100, suv7: 120 },
     timeEstimate: { sedan: "30-45m", suv5: "45m-1h", suv7: "1h+" },
     features: [
@@ -53,7 +53,7 @@ export const SERVICES: Service[] = [
     slug: "signature-detail",
     name: "Signature Detail",
     description:
-      "A full exterior wash finished with a ceramic sealant that beads off water and keeps the paint slick and glossy for up to 3 months, plus a full interior clean inside.",
+      "Our entry-level detail, and where most people start. You get a two-step exterior wash finished with a ceramic sealant that beads off water and keeps your paint slick and glossy for up to 3 months, plus a full interior blowout and vacuum with every panel, compartment, and console cleaned.",
     prices: { sedan: 150, suv5: 180, suv7: 210 },
     timeEstimate: { sedan: "1h", suv5: "1h-1.5h", suv7: "1.5h+" },
     mostPopular: true,
@@ -79,7 +79,7 @@ export const SERVICES: Service[] = [
     slug: "clay-n-seal",
     name: "Clay n Seal",
     description:
-      "When your paint feels rough or looks hazy, this strips it clean. An iron and clay decontamination pulls bonded iron, tar, and road grime off the paint and leaves it smooth to the touch. Then a ceramic sealant goes on for a slick, high-gloss surface that lasts 6+ months.",
+      "If your paint feels rough, this service is for you! An iron and clay decontamination pulls bonded iron and road grime off the paint and leaves it smooth to the touch. Then a ceramic sealant is applied for a slick, high-gloss surface that lasts 6+ months.",
     prices: { sedan: 150, suv5: 180, suv7: 210 },
     timeEstimate: { sedan: "1h", suv5: "1.5h", suv7: "1.5h+" },
     features: [
@@ -102,7 +102,7 @@ export const SERVICES: Service[] = [
     slug: "interior-detail",
     name: "Interior Detail",
     description:
-      "A full reset for an interior worn down by kids, pets, or daily life. Seats and carpets are shampooed and extracted, every panel is deep cleaned, all surfaces are UV protected, and your interior is back to normal.",
+      "If your interior has taken a beating from kids, pets, or daily life, this brings it back. Your seats and carpets get shampooed and extracted, every panel deep cleaned, and all surfaces UV protected, so the inside feels normal again.",
     prices: { sedan: 200, suv5: 230, suv7: 260 },
     timeEstimate: { sedan: "2h", suv5: "2.5h", suv7: "3h+" },
     features: [
@@ -121,7 +121,7 @@ export const SERVICES: Service[] = [
     slug: "full-detail",
     name: "Full Detail",
     description:
-      "The complete reset, inside and out. A full exterior wash sealed with a 3-month ceramic sealant that beads off water and keeps the paint slick and glossy, plus a deep interior clean with carpets and seats shampooed and extracted. Our pick when a car hasn't been detailed in a while and needs attention everywhere.",
+      "When your car hasn't been detailed in a while and needs attention everywhere, this is the complete reset, inside and out. A two-step exterior wash sealed with a 3-month ceramic sealant that keeps your paint slick and glossy, plus a deep interior clean with carpets and seats shampooed and extracted.",
     prices: { sedan: 350, suv5: 380, suv7: 410 },
     timeEstimate: { sedan: "3h", suv5: "4h", suv7: "5h+" },
     features: [
@@ -144,7 +144,6 @@ export const SERVICES: Service[] = [
 
 export interface MaintenancePlan {
   name: string;
-  scope: string;
   prices: PriceSet;
   mostCommon?: boolean;
   note: string;
@@ -152,23 +151,25 @@ export interface MaintenancePlan {
 
 export const MAINTENANCE_PLANS: MaintenancePlan[] = [
   {
-    name: "Monthly",
-    scope: "Signature Detail scope",
-    prices: { sedan: 110, suv5: 140, suv7: 170 },
-    mostCommon: true,
+    name: "Every 2 Weeks",
+    prices: { sedan: 90, suv5: 120, suv7: 150 },
     note: "Light touch-up. The car hasn't had time to get dirty.",
   },
   {
+    name: "Monthly",
+    prices: { sedan: 110, suv5: 140, suv7: 170 },
+    mostCommon: true,
+    note: "A few weeks of dust and daily driving, brought back to clean.",
+  },
+  {
     name: "Every 2 Months",
-    scope: "Signature Detail to Full Detail",
-    prices: { sedan: 140, suv5: 170, suv7: 200 },
-    note: "Trends toward a Full Detail depending on how you drive.",
+    prices: { sedan: 150, suv5: 180, suv7: 210 },
+    note: "Two months of buildup, so each visit does a little more.",
   },
   {
     name: "Quarterly",
-    scope: "Full Detail scope",
-    prices: { sedan: 170, suv5: 200, suv7: 230 },
-    note: "Full Detail attention given three months of buildup.",
+    prices: { sedan: 190, suv5: 220, suv7: 250 },
+    note: "Three months of buildup. The deepest visit of the four.",
   },
 ];
 

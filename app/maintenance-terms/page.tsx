@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: { absolute: "Maintenance Plan Terms | Metro Auto Detailing" },
-  description: "Terms for Metro Auto Detailing's Maintenance Plan — fixed schedule and on-call. Pricing, cancellation, and how the recurring relationship works.",
+  description: "Terms for Metro Auto Detailing's Maintenance Plans. How a plan starts, what it maintains, pricing by schedule, cancellation, and how the recurring relationship works.",
   alternates: { canonical: "https://metroautodetailing.pro/maintenance-terms" },
 };
 
@@ -45,7 +45,7 @@ export default function MaintenanceTermsPage() {
               Maintenance Plan Terms
             </h1>
             <p className="text-white/50 text-sm mt-4">
-              Covers both plan structures — Fixed Schedule and On-Call. This is separate
+              How Metro&apos;s recurring Maintenance Plans work. This is separate
               from the Service Agreement you sign at your first visit, which covers
               per-appointment terms like payment and liability. Both apply.
             </p>
@@ -55,25 +55,22 @@ export default function MaintenanceTermsPage() {
 
             <Section title="What the Plan Is">
               <p>
-                Every Maintenance Plan visit restores your vehicle to like-new condition,
-                on a schedule you pick. Two structures:
+                A Maintenance Plan starts after your first service and keeps that same
+                service going on a schedule you pick. Whatever you first had done is what
+                we maintain. A Signature stays a Signature, an exterior wash stays exterior.
               </p>
               <p>
-                <strong className="text-white">Fixed Schedule</strong> — you hold a
-                recurring slot. Monthly ($110), Bimonthly ($180), or Quarterly ($225).
-                Billed per visit after the job is done, not up front.
+                You pick how often: every 2 weeks, monthly, every 2 months, or quarterly.
+                Price follows the schedule, because the longer between visits, the more the
+                car builds up and the more each visit takes. You&apos;re billed per visit
+                after the job is done, never up front, and nothing is charged automatically
+                between visits.
               </p>
               <p>
-                <strong className="text-white">On-Call</strong> — no fixed schedule, no
-                held slot. Call or text when you want the next detail. Price scales with
-                time since your last visit: $80 at 2 weeks, up to $225 at 3 months. Book
-                between two tiers and the price lands at the midpoint.
-              </p>
-              <p>
-                Both structures include protection product refresh (sealant or spray
-                coating) and spot correction on minor scuffs and scratches, every visit,
-                at no extra charge. Full multi-stage paint correction is never included —
-                that&apos;s quoted separately.
+                Every visit includes a protection product refresh (sealant or spray
+                coating) and spot correction on minor scuffs and scratches, at no extra
+                charge. Full multi-stage paint correction is never included, that&apos;s
+                quoted separately.
               </p>
             </Section>
 
@@ -82,9 +79,9 @@ export default function MaintenanceTermsPage() {
             <Section title="Signing Up">
               <p>
                 The Service Agreement is signed once, at your very first Metro service,
-                and covers every appointment after that — Fixed Schedule, On-Call, or
-                one-time. It is not resigned when you join a plan later or switch between
-                plan types.
+                and covers every appointment after that, whether you&apos;re on a plan
+                or booking one-time. It is not resigned when you join a plan later or
+                change your schedule.
               </p>
             </Section>
 
@@ -120,11 +117,10 @@ export default function MaintenanceTermsPage() {
               </p>
               <p>
                 Go silent around your expected visit with no notice at all, and that&apos;s
-                treated as the relationship ending — your slot isn&apos;t held or
-                re-offered. For On-Call clients, there&apos;s no fixed next visit to miss,
-                so if it&apos;s been more than 3 months since your last visit, your plan is
+                treated as the relationship ending, your slot isn&apos;t held or re-offered.
+                If it&apos;s been more than 3 months since your last visit, your plan is
                 considered inactive and the next booking is priced at standard one-time
-                rates instead of the plan scale.
+                rates instead of the plan rate.
               </p>
             </Section>
 
@@ -138,9 +134,8 @@ export default function MaintenanceTermsPage() {
                 discussed with you directly.
               </p>
               <p>
-                Changing your cadence — switching frequency, or moving between Fixed
-                Schedule and On-Call — is free and doesn&apos;t need approval. It&apos;s
-                your plan to loosen or tighten.
+                Changing your cadence, switching how often we come out, is free and
+                doesn&apos;t need approval. It&apos;s your plan to loosen or tighten.
               </p>
             </Section>
 
